@@ -1,6 +1,6 @@
 const prompt = require('prompt-sync')()
 // Arrays e matriz
-
+// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 // let listaCoisas = Array()
 // listaCoisas['Frutas'] = Array()
 // listaCoisas['Frutas'][0] = "Morango"
