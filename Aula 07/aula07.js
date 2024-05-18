@@ -1,5 +1,5 @@
 const prompt = require('prompt-sync')()
-// Arrays e matriz
+// Arrays e matrizes
 
 // let listaCoisas = Array()
 // listaCoisas['Frutas'] = Array()
