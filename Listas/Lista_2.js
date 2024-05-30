@@ -286,4 +286,259 @@ switch (parseInt(Exercício)){
         while (horários.length < 2)
         console.log(horários)
     break;
+
+    case 20: // NÃO ENTENDI OQ ESSA QUESTÃO TA QUERENDO
+    let reg = {
+        Matrícula: "",
+        Nome: "",
+        Bruto: "",
+        INSS: "12%",
+        Líquido: "",
+    }
+break;
+
+case 21:
+    function ideal (alt,sexo){
+        let peso 
+        if (sexo == "m"){
+            peso = 72.7 * alt -  58
+        } else {
+            peso = 62.1 * alt - 44.7
+        } return peso
+    }   
+    let height
+    let gend
+    do {
+        height = prompt(`Insira sua altura: `)
+    }  while (height % 1 != 0)
+    do {
+        gend = prompt(`Insira seu sexo (m ou f): `)
+    } while (gend != 'm' && gend != 'f')
+    console.log(ideal (height, gend))
+break
+
+case 22:
+    let rendas = Array()
+    let filhos = Array()
+    let rendaMenor = Array()
+    let somaRendas = 0
+    let somaFilhos = 0
+    let maior = 0
+    function citzen (yeld, family){
+        rendas.push(yeld)
+        filhos.push(family)
+        for (renda of rendas){
+            somaRendas = parseFloat(somaRendas) + parseFloat(renda)
+            if (parseFloat(maior) < parseFloat(renda)) {maior = renda}
+            
+        }  
+        if (parseFloat(renda) <= 350) {rendaMenor.push(renda)}
+        for (filho of filhos){
+            somaFilhos = parseFloat(somaFilhos) + parseFloat(filho)
+        }  
+        return console.log(`
+            Média Salarial: R$${(somaRendas/rendas.length)}
+            Média de filhos: ${somaFilhos/filhos.length}
+            Maior salário: R$${(maior)}
+            Percentual menor que R$350: ${(rendaMenor.length/rendas.length)*100}%
+            `)
+    }
+    do {
+        citzen (prompt(`Insira a renda do habitante: `), prompt(`Insira a quantidade de filhos do habitante: `))
+        // console.log (rendas)
+        // console.log (somaRendas)
+        somaRendas = 0
+        somaFilhos = 0
+        console.log(rendas)
+        console.log(rendaMenor)
+    } while (prompt('deseja inserir mais um? (s=sim): ') == "s")
+break;
+
+case 23: //Qual o tamanho máximo da matriz?
+    let Tamanho = prompt('Qual o tamanho da matriz: ')
+    let Ident = Array();
+    for (let i = 0; i < Tamanho ; i++) {
+        Ident[i] = [];
+        for (let j = 0; j < Tamanho; j++){
+        Ident[i].push([0]); 
+        }
+        Ident[i][i] = [1];
+    }
+    console.log(Ident)
+break
+
+case 24: // Fica estranho em 6x8 como foi pedido, vou fazer em 8x6
+ let Matriz = Array()
+ let neg = 0
+ let random
+ for(i=0;i<8;i++){
+    Matriz[i] = Array()
+    Matriz[i].push(Array())
+        for(j=0;j<6;j++){
+            if (j<5){
+                random = ((Math.round(Math.random())*2-1)*Math.floor(Math.random()*5))
+                Matriz[i][0].push(random)
+               if (random < 0) {neg ++}
+            } else {       
+                Matriz[i][0].push(`${neg}`)
+                neg = 0
+            }
+        }
+    }
+    console.log(Matriz)
+break;
+
+case 25:
+    let soMatriz = Array()
+    let columnSoma = 0
+    for (i=0;i<4;i++){
+        soMatriz[i] = Array()
+        soMatriz[i].push(Array())
+        for (j=0;j<5;j++){
+            soMatriz[i][0].push(Math.floor(Math.random()*5+1))
+        }
+    }
+    for (i=0;i<5;i++){
+        for (index of soMatriz){
+            if (soMatriz.indexOf(index) < 3){
+                columnSoma += index[0][i]
+            } else {
+                columnSoma += index[0][i]
+                console.log(`Soma da coluna ${i+1}: ${columnSoma}`)
+                columnSoma = 0
+            }
+            // console.log(`${index[0][i]} & ${soMatriz.indexOf(index)} & ${columnSoma}`)
+        }
+    }
+    console.log(soMatriz)
+break;
+
+case 26:
+    let Matriz1 = Array()
+    let Matriz2 = Array()
+    let MatrizP = Array()
+    for (i=0;i<5;i++){
+        Matriz1[i] = Array()
+        Matriz1[i].push(Array())
+        for (j=0;j<3;j++){
+            Matriz1[i][0].push(Math.floor(Math.random()*5+1))
+        }
+    }
+    for (i=0;i<5;i++){
+        Matriz2[i] = Array()
+        Matriz2[i].push(Array())
+        for (j=0;j<3;j++){
+            Matriz2[i][0].push(Math.floor(Math.random()*5+1))
+        }
+    }
+    for (i=0;i<(Matriz1.length);i++){
+        MatrizP[i] = Array()
+        MatrizP[i].push(Array())
+        for (j=0;j<(Matriz1[i][0].length);j++){
+            MatrizP[i][0].push(Matriz1[i][0][j] * Matriz2[i][0][j])
+        }      
+    }
+    console.log(Matriz1)
+    console.log(Matriz2)
+    console.log(MatrizP)
+break;
+
+case 27:
+    let multMatriz = Array()
+    let multVetor = Array()
+    let A = prompt("Insira o valor multiplicador: ")
+    for (i=0;i<6;i++){
+        multMatriz[i] = Array()
+        multMatriz[i].push(Array())
+        for (j=0;j<6;j++){
+            multMatriz[i][0].push(Math.floor(Math.random()*5+1))
+            multVetor.push(multMatriz[i][0][j] * A)
+        }
+    }
+    console.log (multMatriz)
+    console.log (multVetor)
+break;
+
+case 28:
+    let matriz10x10 = Array()
+    let itemA = 0
+    let itemB = 0
+    for (i=0;i<10;i++){
+        matriz10x10[i] = Array()
+        for (j=0;j<10;j++){
+            matriz10x10[i].push(Math.floor(Math.random()*5+1))
+        }
+    }
+    console.log(matriz10x10)
+    for (i=0;i<matriz10x10.length;i++){
+        if (i<matriz10x10.length-1){
+        itemA += matriz10x10[i][i+1]}
+        if (i>0){itemB += matriz10x10[i][i-1]}
+    }
+    console.log(`Soma dos elementos acima da diagonal principal ${itemA}`)
+    console.log(`Soma dos elementos abaixo da diagonal principal ${itemB}`)
+break;
+
+case 29:
+    let matriz29 = Array()
+    let somaLinha4 = 0
+    let somaColuna2 = 0
+    let somadiagP = 0
+    let somaTotalM24 = 0
+    for (i=0;i<5;i++){
+        matriz29[i] = Array()
+        for (j=0;j<5;j++){
+            matriz29[i].push(Math.floor(Math.random()*5+1))
+            if (i == 3){
+                somaLinha4 += matriz29[i][j]
+            }
+            if (j == 1){
+                somaColuna2 += matriz29[i][j]
+            }
+            if (i == j){
+                somadiagP += matriz29[i][j]
+            }
+            somaTotalM24 += matriz29[i][j]
+        }
+    }
+    console.log(matriz29)
+    console.log(somaLinha4)
+    console.log(somaColuna2)
+    console.log(somadiagP)
+    console.log(somaTotalM24)
+break;
+
+case 30:
+    let matriz30 = Array()
+    let SL = Array()
+    let SC = Array()
+    let rascunho = 0
+    for (i=0;i<5;i++){
+        matriz30[i] = Array()
+        for (j=0;j<5;j++){
+            matriz30[i].push(Math.floor(Math.random()*5+1))
+            rascunho += matriz30[i][j]
+        }
+        SL.push(rascunho)
+        rascunho = 0
+    }
+    console.log(`Matriz gerada:`)
+    console.log(matriz30)
+    for (i=0;i<matriz30.length;i++){
+       for (index of matriz30){
+        // console.log(index[i])
+        rascunho += index[i]
+       }
+       SC.push(rascunho)
+       rascunho = 0
+    }
+    console.log(`Vetor das somas das linhas:`)
+    console.log(SL)
+    console.log(`Vetor das somas das colunas:`)
+    console.log(SC)
+break;
+
+case 31:
+
+break;
 }
