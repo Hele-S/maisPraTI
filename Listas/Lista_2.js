@@ -539,6 +539,95 @@ case 30:
 break;
 
 case 31:
+        let intA = prompt('Insira um número inteiro')
+        let matriz31 = Array()
+        let intAmount = 0
+        let notAmatriz = Array()
+    for (i=0;i<30;i++){
+        matriz31[i] = Array()
+        notAmatriz[i] = Array()
+        for (j=0;j<30;j++){
+            matriz31[i].push(Math.floor(Math.random()*10))
+            if (matriz31[i][j] == intA){
+                intAmount ++
+            } else { if (notAmatriz[i].length < 30){
+                    notAmatriz[i].push(matriz31[i][j])
+                }   
+            }
+        } 
+    } 
+    
+    console.log(`Matriz gerada: `)
+    console.log(matriz31)
+    console.log("-----------------------------------")
+    console.log(`Quantidade de aparições de ${intA} na matriz: ${intAmount}`)
+    console.log(`Matriz gerada sem o número ${intA}: `)
+    console.log(notAmatriz)
 
 break;
+
+case 32:
+    let matriz32 = Array()
+    let matrizDiv32 = Array()
+    let DivDaLinha = 0
+    for (i=0;i<12;i++){
+        matriz32[i] = Array()
+        matrizDiv32[i] = Array()
+        for (j=0;j<13;j++){
+            matriz32[i].push(Math.floor(Math.random()*10+1))
+            if (DivDaLinha < matriz32[i][j]) {
+                DivDaLinha = matriz32[i][j]
+            }
+        }
+        for (j=0;j<matriz32[i].length; j++){
+            matrizDiv32[i].push(matriz32[i][j] / DivDaLinha)
+        }
+        DivDaLinha = 0
+    }
+    console.log(`Matriz gerada inicialmente:`)
+    console.log(matriz32)
+    console.log(`----------------------------`)
+    console.log(`Matriz gerada com a divisão:`)
+    console.log(matrizDiv32)
+break;
+
+case 33:
+    let matriz33 = Array()
+    let média33 = 0
+    console.log(`Matriz gerada:`)
+    for (i=0;i<3;i++){
+        matriz33[i] = Array()
+        for (j=0;j<3;j++){
+            matriz33[i].push(Math.floor(Math.random()*10+1))
+        }
+        média33 += matriz33[i][matriz33[i].length - i - 1]
+        console.log(matriz33[i])
+    }
+    console.log(`Média dos elementos da diagonal secundária: ${média33/matriz33.length}`)
+    for (i=0;i<matriz33.length;i++){
+        console.log(`${média33/matriz33.length} x ${matriz33[i][i]} = ${(média33/matriz33.length)* matriz33[i][i]}`)
+    }
+break;
+
+case 34:
+    let matriz34 = Array()
+    let multMatriz34 = Array()
+    let diagElement34
+    for (i=0;i<5;i++){
+        matriz34[i] = Array()
+        for (j=0;j<5;j++){
+            matriz34[i].push(Math.floor(Math.random()*10+1))
+            if (i == j) { diagElement34 = matriz34[i][j]}
+        }
+        multMatriz34[i] = Array()
+        for (j=0;j<matriz34[i].length;j++)  {
+            multMatriz34[i].push(diagElement34 * matriz34[i][j])
+        }
+    }
+    console.log("Matriz gerada inicialmente:")
+    console.log(matriz34)
+    console.log("Matriz produto:")
+    console.log(multMatriz34)
+break;
+
 }
