@@ -376,7 +376,7 @@ case 24: // Fica estranho em 6x8 como foi pedido, vou fazer em 8x6
     Matriz[i].push(Array())
         for(j=0;j<6;j++){
             if (j<5){
-                random = ((Math.round(Math.random())*2-1)*Math.floor(Math.random()*5))
+                random = ((Math.round(Math.random())*2-1)*Math.floor(Math.random()*5 + 1))
                 Matriz[i][0].push(random)
                if (random < 0) {neg ++}
             } else {       
@@ -660,8 +660,8 @@ case 36:
     let gabarito36 = String()
     let apostadores36 = Array()
     let cartão36 = Array()
-    let acertos = 0
-    while (gabarito36.length < 4){
+    let acertos36 = 0
+    while (gabarito36.length < 13){
         gabarito36 += Math.floor(Math.random()*5 + 1)
     }
     console.log(`GABARITO : ${gabarito36}`)
@@ -675,16 +675,259 @@ case 36:
         }
         apostadores36[i].CARTÃO = cartão36
         cartão36 = []
-        // console.log(apostadores36[i].CARTÃO[0])
-        for (index of gabarito36) {
-            if (index == apostadores36[i].CARTÃO[index]) {
-                console.log (`Apostador ${i} acertou a resposta ${index} na posição ${gabarito36[index]}`)
+        for (j=0;j<gabarito36.length;j++) {
+            if (gabarito36[j] == apostadores36[i].CARTÃO[j]) {
+                acertos36++
             }
         }
+        console.log(`${apostadores36[i].ID} obteve ${acertos36} acertos36 (${apostadores36[i].CARTÃO})`)
+        if (acertos36 == gabarito36.length) {
+          console.log(`Parabéns, tu foi o GANHADOR`)
+        }
+        acertos36 = 0
     }
-    // console.log(gabarito36)
-    // console.log(apostadores36[i].CARTÃO)
-    // console.log(gabarito36)
-    // console.log(apostadores36)
+break;
+
+case 37:
+    let gabarito37 = String()
+    let alunos37 = Array()
+    let provas37 = Array()
+    let acertos37 = 0
+    while (gabarito37.length < 20){
+        gabarito37 += Math.floor(Math.random()*2)
+    }
+    console.log(`GABARITO : ${gabarito37}`)
+    for (i=0;i<50;i++){
+        alunos37.push({
+            ID: `Aluno ${alunos37.length + 1}`,
+            RESULTADO: String()
+        })
+        for (j=0;j<gabarito37.length;j++){
+            provas37 += Math.floor(Math.random()*2)
+        }
+        alunos37[i].RESULTADO = provas37
+        provas37 = String()
+        for (j=0;j<gabarito37.length;j++) {
+            if (gabarito37[j] == alunos37[i].RESULTADO[j]) {
+                acertos37++
+            }
+        }
+        console.log(`${alunos37[i].ID} obteve ${acertos37} acertos (${alunos37[i].RESULTADO})`)
+        if (acertos37 >= 12) {
+          console.log(`APROVADO`)
+        } else {console.log(`REPROVADO`)}
+        acertos37 = 0
+    }
+break;
+
+case 38:
+    let vector38 = Array()
+    let identi38 
+    let aux38
+    while (vector38.length < 6){
+        vector38.push(Math.floor(Math.random()*5+1))
+    }
+    console.log(`Vetor gerado:`)
+    console.log(vector38)
+    do { identi38 = prompt('Insira um número de 1 a 5: ')
+    } while (!(identi38 > 0 && identi38 <= 5 && identi38 % 1 == 0))
+    switch (identi38){
+        case '1':
+            aux38 = 0
+            for (index of vector38){
+                aux38 += parseInt(index)
+            }
+            console.log(`Soma dos elementos: ${aux38}`)
+        break;
+        case '2':
+            for (index of vector38){
+                if (typeof(aux38) === 'undefined'){
+                    aux38 = index
+                } else {aux38 *= index}
+            }
+            console.log(`Produto dos elementos: ${aux38}`)
+        break;
+        case '3':
+            aux38 = 0    
+            for (index of vector38){
+                aux38 += parseInt(index)
+            }
+            console.log(`Média dos elementos: ${aux38/vector38.length}`)
+        break;
+        case '4':
+            for (i=0;i<vector38.length;i++){
+                for (j=0;j<vector38.length-1;j++){
+                    if (vector38[i]<vector38[j]){
+                        aux38 = vector38[i]
+                        vector38[i] = vector38[j]
+                        vector38[j] = aux38
+                    }
+                }
+            }
+            console.log(`Elementos em ordem crescente: ${vector38}`)
+        break;
+        case '5':
+            console.log(vector38)
+        break;
+    }
+break;
+
+case 39:
+    let vector39 = Array()
+    let posVector39 = Array()
+    let random39
+    for (i=0;i<100;i++){
+       random39 = ((Math.round(Math.random())*2-1)*Math.floor(Math.random()*5 + 1))
+       vector39.push(random39)
+    }
+    for (index of vector39){
+      if (index>0){
+        posVector39.push(index)
+      }
+    }
+    console.log(vector39)
+    console.log(posVector39)
+break;
+
+case 40:
+    let quina40 = Array(4,21,66,62,68) // Resultado oficial da Quina: Concurso 6455 (01/06/24)
+    let apostadores40 = Array()
+    let acertos40 = 0
+    for (i=0;i<50;i++){
+       apostadores40.push({
+         ID: `Apostador ${apostadores40.length + 1}`,
+         Aposta: Array()
+       })
+       for (j=0;j<quina40.length;j++){
+         apostadores40[i].Aposta.push(Math.floor(Math.random()*80+1))
+       }
+       for (j=0;j<quina40.length;j++){
+         if (apostadores40[i].Aposta[j] == quina40[j]){
+           acertos40++ 
+         }
+       }
+       console.log(`${apostadores40[i].ID} acertou ${acertos40} ${apostadores40[i].Aposta}`)
+       if (acertos40 == 5 ) {console.log(`Ganhador`)}
+       acertos40 = 0
+   }
+break;
+
+case 41: //É só isso mesmo?
+    let pessoa = {
+        Nome: "Marcelo",
+        Idade: "30"
+      }
+      console.log(pessoa.Idade + " anos")
+      pessoa.email = "Marcelinho@gmail.com"
+      console.log(pessoa)
+break;
+
+case 42:
+    let dados42 = {
+        String1: 'lorem',
+        Number1: 0,
+        Array1: Array("H","E","L","L","O"),
+        String2: 'ipsum',
+        Number2: 1,
+        Array2: Array("W","O","R","L","D")
+      }
+      let arrays42 = Object({})
+      for (index in dados42){
+        if (typeof(dados42[index]) === "object") {
+          arrays42[index] = dados42[index]
+        }
+      }
+      console.log(arrays42)
+break;
+
+case 43:
+    let obj1_43 = {
+        prioridade: "MENOR",
+        cor:"vermelho",
+        numero: 0,
+        dia:"segunda",
+        nome: "Objeto 1",
+        animal: "gato"
+    }
+    let obj2_43 = {
+        prioridade: "MAIOR",
+        nome: "Objeto 2",
+        pais: "Brasil",
+        cor:"azul",
+        hotel: "trivago"
+    }
+    let obj3_43 = {}
+    for (index in obj1_43) {
+        obj3_43[index] = obj1_43[index] 
+    }
+    for (index in obj2_43) {
+        obj3_43[index] = obj2_43[index] 
+    }
+    console.log("OBJETO 1")
+    console.log(obj1_43)
+    console.log("OBJETO 2")
+    console.log(obj2_43)
+    console.log("OBJETO 3")
+    console.log(obj3_43)
+break;
+
+case 44:
+    let obj44 = {
+        String1: 'lorem',
+        Number1: 0,
+        Array1: Array("H","E","L","L","O"),
+        String2: 'ipsum',
+        Number2: 1,
+        Array2: Array("W","O","R","L","D")
+    }
+    let strings44 = function (objeto) {
+        let result = 0
+        for (index in objeto){
+            if (typeof(objeto[index]) === "string") {
+                result ++
+            }
+        }
+        return result
+    }
+    console.log(strings44(obj44)) 
+break;
+
+case 45:
+    let array45 = Array("H","E","L","L","O","W","O","R","L","D")
+    let objeto45 = {}
+    for (index of array45){
+      if(objeto45[index] > 0){
+            objeto45[index] += 1
+        } 
+      else {
+            objeto45[index] = 1    
+        } 
+    }
+    console.log(array45)
+    console.log(objeto45)
+break;
+
+case 46: //É SÓ O NUMERO DE VENDAS OU TEM QUE USAR O VALOR TAMBÉM?????????????
+    let vendas46 = Array(
+        {Vendedor: "Arthur", 'Valor(R$)': 1000.00},
+        {Vendedor: "Tiago", 'Valor(R$)': 1200.00},
+        {Vendedor: "Arthur", 'Valor(R$)': 3000.00},
+        {Vendedor: "Arthur", 'Valor(R$)': 1700.00},
+        {Vendedor: "Tiago", 'Valor(R$)': 2500.00},
+        {Vendedor: "Arthur", 'Valor(R$)': 2100.00})
+    let sumario46 = Object()
+    for (index in vendas46){
+        if(sumario46[`Nº de vendas do ${vendas46[index]['Vendedor']}`] > 0){
+            sumario46[`Nº de vendas do ${vendas46[index]['Vendedor']}`] += 1
+        } 
+        else {
+            sumario46[`Nº de vendas do ${vendas46[index]['Vendedor']}`] = 1    
+        } 
+    }
+    console.log(sumario46) 
+break;
+
+case 47:
+
 break;
 }
