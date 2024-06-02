@@ -630,4 +630,61 @@ case 34:
     console.log(multMatriz34)
 break;
 
+case 35:
+    let valores35 = Array()
+    let impares35 = Array()
+    let pares35 = Array()
+    while (valores35.length<30){
+        valores35.push(Math.floor(Math.random()*9 + 1))
+    }
+    for (index of valores35) {
+        if (index % 2 == 0) {
+            pares35.push(index)
+            if (pares35.length == 5) {
+                console.log(`Vetor par:`)
+                console.log(pares35)
+                pares35 = []
+            }
+        } else {
+            impares35.push(index)
+            if (impares35.length == 5) {
+                console.log(`Vetor impar:`)
+                console.log(impares35)
+                impares35 = []
+            }
+        }
+    }
+break;
+
+case 36:
+    let gabarito36 = String()
+    let apostadores36 = Array()
+    let cartão36 = Array()
+    let acertos = 0
+    while (gabarito36.length < 4){
+        gabarito36 += Math.floor(Math.random()*5 + 1)
+    }
+    console.log(`GABARITO : ${gabarito36}`)
+    for (i=0;i<100;i++){
+        apostadores36.push({
+            ID: `Apostador ${apostadores36.length + 1}`,
+            CARTÃO: String()
+        })
+        for (j=0;j<gabarito36.length;j++){
+            cartão36 += Math.floor(Math.random()*5 + 1)
+        }
+        apostadores36[i].CARTÃO = cartão36
+        cartão36 = []
+        // console.log(apostadores36[i].CARTÃO[0])
+        for (index of gabarito36) {
+            if (index == apostadores36[i].CARTÃO[index]) {
+                console.log (`Apostador ${i} acertou a resposta ${index} na posição ${gabarito36[index]}`)
+            }
+        }
+    }
+    // console.log(gabarito36)
+    // console.log(apostadores36[i].CARTÃO)
+    // console.log(gabarito36)
+    // console.log(apostadores36)
+break;
 }

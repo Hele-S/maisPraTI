@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlapping elements</title>
+    <style type="text/css">
+        body, html{
+            background-color: #b3b3b3;
+            margin: 0;
+            height: 100%;
+        }
+        .conteudo1 {
+            border: 3px solid black;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            z-index: 1;
+            background-color: brown;
+            left: 300px;
+        }
+        .conteudo2{
+            border: 3px solid whitesmoke;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            background-color: aquamarine;
+            z-index: 2;
+            left: 400px;
+        }
+        .container{
+            position: relative;
+            top:250px;
+        }
+        .conteudo {
+            background-color: whitesmoke;
+            position:relative;
+            text-align: justify;
+            padding: 50px 80px;
+        }
+         .conteudo-titulo{
+            position:absolute;
+            left:0;
+            top:45%;
+            width: 100%;
+            text-align: center;
+         }
+         .conteudo-titulo span.titulo {
+            color: whitesmoke;
+            background-color: #111;
+            padding: 20px;
+            font-size: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+         }
+        h3 {
+            text-transform: uppercase;
+            color: #111;
+            text-align: center;
+        }
+        .caixa1 {
+            background-image: url(images/image1.jpg);
+        }
+        .caixa2 {
+            background-image: url(images/image2.jpg);
+        }
+    </style>
+</head>
+<body>
+<div class="conteudo1"> 
+    z-index = 1
+</div>
+<div class="conteudo2"> 
+    z-index = 2
+</div>
+<div class="container">
+    <div class="caixa1">
+        <div class="conteudo-titulo">
+            <span class="titulo">Balões</span>
+        </div>
+    </div>
+    <div class="conteudo">
+        <h1>Paralax</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime enim fuga error quis commodi sequi reprehenderit ducimus excepturi consectetur quod distinctio quisquam eveniet esse laboriosam modi molestias est sapiente magnam laborum ipsum, natus aliquid. Nam expedita sint omnis ducimus! Velit asperiores, soluta ut facilis at nemo unde iusto, doloribus illo aut nihil delectus vitae, ratione et consequuntur optio obcaecati libero nisi! Voluptates excepturi fuga alias eaque expedita autem modi delectus veritatis fugiat cumque minima, dolore itaque repellat porro, temporibus accusamus et quia quas, enim vel voluptate illum. Illo mollitia commodi quo tempore maiores sint ipsa ut? Sunt, nobis. Alias aut numquam cupiditate sapiente facilis doloribus quod et laborum ad iusto illum, iure error minima dignissimos quo voluptatem facere expedita. Maiores officiis enim quasi vel, cupiditate ad quo aut adipisci voluptatibus iure suscipit quaerat facilis vero asperiores quibusdam sapiente ut accusamus dolor deserunt culpa, earum ab soluta! Exercitationem, quo aperiam aliquam id modi dignissimos suscipit explicabo nihil ullam nobis, dolorum nam maiores beatae deserunt, atque iure architecto molestiae. Incidunt perspiciatis doloribus ea excepturi praesentium vitae sunt nobis magni culpa aspernatur voluptate expedita, consequuntur omnis quaerat enim ipsa laborum numquam necessitatibus animi cupiditate? Optio necessitatibus atque soluta dolore reiciendis quasi sed officiis?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime enim fuga error quis commodi sequi reprehenderit ducimus excepturi consectetur quod distinctio quisquam eveniet esse laboriosam modi molestias est sapiente magnam laborum ipsum, natus aliquid. Nam expedita sint omnis ducimus! Velit asperiores, soluta ut facilis at nemo unde iusto, doloribus illo aut nihil delectus vitae, ratione et consequuntur optio obcaecati libero nisi! Voluptates excepturi fuga alias eaque expedita autem modi delectus veritatis fugiat cumque minima, dolore itaque repellat porro, temporibus accusamus et quia quas, enim vel voluptate illum. Illo mollitia commodi quo tempore maiores sint ipsa ut? Sunt, nobis. Alias aut numquam cupiditate sapiente facilis doloribus quod et laborum ad iusto illum, iure error minima dignissimos quo voluptatem facere expedita. Maiores officiis enim quasi vel, cupiditate ad quo aut adipisci voluptatibus iure suscipit quaerat facilis vero asperiores quibusdam sapiente ut accusamus dolor deserunt culpa, earum ab soluta! Exercitationem, quo aperiam aliquam id modi dignissimos suscipit explicabo nihil ullam nobis, dolorum nam maiores beatae deserunt, atque iure architecto molestiae. Incidunt perspiciatis doloribus ea excepturi praesentium vitae sunt nobis magni culpa aspernatur voluptate expedita, consequuntur omnis quaerat enim ipsa laborum numquam necessitatibus animi cupiditate? Optio necessitatibus atque soluta dolore reiciendis quasi sed officiis?</p>
+    </div>
+    <div class="caixa2">
+        <div class="conteudo-titulo">
+            <span class="titulo">Imagem 2</span>
+        </div>
+    </div>
+    <div class="conteudo">
+        <h1>Paralax</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime enim fuga error quis commodi sequi reprehenderit ducimus excepturi consectetur quod distinctio quisquam eveniet esse laboriosam modi molestias est sapiente magnam laborum ipsum, natus aliquid. Nam expedita sint omnis ducimus! Velit asperiores, soluta ut facilis at nemo unde iusto, doloribus illo aut nihil delectus vitae, ratione et consequuntur optio obcaecati libero nisi! Voluptates excepturi fuga alias eaque expedita autem modi delectus veritatis fugiat cumque minima, dolore itaque repellat porro, temporibus accusamus et quia quas, enim vel voluptate illum. Illo mollitia commodi quo tempore maiores sint ipsa ut? Sunt, nobis. Alias aut numquam cupiditate sapiente facilis doloribus quod et laborum ad iusto illum, iure error minima dignissimos quo voluptatem facere expedita. Maiores officiis enim quasi vel, cupiditate ad quo aut adipisci voluptatibus iure suscipit quaerat facilis vero asperiores quibusdam sapiente ut accusamus dolor deserunt culpa, earum ab soluta! Exercitationem, quo aperiam aliquam id modi dignissimos suscipit explicabo nihil ullam nobis, dolorum nam maiores beatae deserunt, atque iure architecto molestiae. Incidunt perspiciatis doloribus ea excepturi praesentium vitae sunt nobis magni culpa aspernatur voluptate expedita, consequuntur omnis quaerat enim ipsa laborum numquam necessitatibus animi cupiditate? Optio necessitatibus atque soluta dolore reiciendis quasi sed officiis?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime enim fuga error quis commodi sequi reprehenderit ducimus excepturi consectetur quod distinctio quisquam eveniet esse laboriosam modi molestias est sapiente magnam laborum ipsum, natus aliquid. Nam expedita sint omnis ducimus! Velit asperiores, soluta ut facilis at nemo unde iusto, doloribus illo aut nihil delectus vitae, ratione et consequuntur optio obcaecati libero nisi! Voluptates excepturi fuga alias eaque expedita autem modi delectus veritatis fugiat cumque minima, dolore itaque repellat porro, temporibus accusamus et quia quas, enim vel voluptate illum. Illo mollitia commodi quo tempore maiores sint ipsa ut? Sunt, nobis. Alias aut numquam cupiditate sapiente facilis doloribus quod et laborum ad iusto illum, iure error minima dignissimos quo voluptatem facere expedita. Maiores officiis enim quasi vel, cupiditate ad quo aut adipisci voluptatibus iure suscipit quaerat facilis vero asperiores quibusdam sapiente ut accusamus dolor deserunt culpa, earum ab soluta! Exercitationem, quo aperiam aliquam id modi dignissimos suscipit explicabo nihil ullam nobis, dolorum nam maiores beatae deserunt, atque iure architecto molestiae. Incidunt perspiciatis doloribus ea excepturi praesentium vitae sunt nobis magni culpa aspernatur voluptate expedita, consequuntur omnis quaerat enim ipsa laborum numquam necessitatibus animi cupiditate? Optio necessitatibus atque soluta dolore reiciendis quasi sed officiis?</p>
+    </div>
+</div>
+</div>
+</body>
+</html>

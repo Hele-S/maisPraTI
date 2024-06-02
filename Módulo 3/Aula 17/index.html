@@ -39,6 +39,37 @@
         .clear{
             clear: both;
         }
+        h1 {
+            position:static;
+        }
+        p {
+            width: 450px;
+        }
+        #container {
+            background-color: #fff;
+            width: 800px;
+            margin: 10px auto;
+            padding: 10px;
+            position: absolute;
+        }
+        .destaque {
+            color: red;
+        }
+        .relative {
+            border: 3px solid red;
+            position: relative;
+            left: 200px;
+        }
+        .absolute {
+            position: absolute;
+            border: 3px solid green;
+            top: 400px;
+        }
+        .fixed {
+            border: 3px solid blue;
+            position: fixed;
+            bottom: 0px
+        }
     </style>
 </head>
 <body>
@@ -62,21 +93,29 @@
     <div class="clear"></div>
     <div id="galeria">
         <div class="imagens">
-            <img src="../../../+PraTI clone/maisPraTi/class01/unit03/lesson04/images/image1.png" alt="Imagem não encontrada">
+            <img src="../images/image1.png" alt="Imagem não encontrada">
         </div>
         <div class="imagens">
-            <img src="../../../+PraTI clone/maisPraTi/class01/unit03/lesson04/images/image2.png" alt="Imagem não encontrada">
+            <img src="../images/image2.png" alt="Imagem não encontrada">
         </div>
         <div class="imagens">
-            <img src="../../../+PraTI clone/maisPraTi/class01/unit03/lesson04/images/image3.png" alt="Imagem não encontrada">
+            <img src="../images/image3.png" alt="Imagem não encontrada">
         </div>
         <div class="imagens">
-            <img src="../../../+PraTI clone/maisPraTi/class01/unit03/lesson04/images/image4.png" alt="Imagem não encontrada">
+            <img src="../images/image4.png" alt="Imagem não encontrada">
         </div>
         <div class="imagens">
-            <img src="../../../+PraTI clone/maisPraTi/class01/unit03/lesson04/images/image5.png" alt="Imagem não encontrada">
+            <img src="../images/image5.png" alt="Imagem não encontrada">
         </div>
         <div class="clear"></div>
+    </div>
+    <div>
+        <div id="container">
+        <h1>Posicionamento: Absoluto, Estático, Relativo e Fixo</h1>
+        <p  class="absolute">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum dolores sunt expedita itaque reprehenderit voluptate corrupti blanditiis totam repellendus nihil possimus ex fugit ullam ipsum sed perferendis officiis soluta, laudantium, nobis vero? Minus repellat recusandae quaerat dolore nobis distinctio corrupti delectus, soluta illum fuga sequi cupiditate praesentium quo veniam nisi dicta reiciendis, libero ipsa necessitatibus. Dolore, doloribus provident reprehenderit quae adipisci similique saepe, dolor praesentium, tempora ea laboriosam porro et! Natus ullam necessitatibus, quia voluptatibus iusto velit sapiente voluptatem, dolores voluptas consectetur perferendis distinctio corporis architecto nisi. Illum, possimus cupiditate. Id consectetur odio, dolorem, quisquam fugiat eligendi quidem repudiandae nam amet similique unde doloremque commodi dicta hic temporibus possimus nemo numquam! Reiciendis totam beatae tempora minus in. Voluptatum ea eligendi est eum at consequuntur magni voluptas consectetur magnam cumque labore quasi cum ut exercitationem, quis sapiente sit officia laborum culpa ipsam, deleniti, blanditiis aperiam minus molestiae. Non nesciunt minus reiciendis! <span class="destaque"> TOP 400 PX </span></p>
+        <p class="relative">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis consequuntur sed dicta maxime optio laboriosam voluptas tempora, tenetur, laudantium aliquid voluptatem dolor atque maiores natus tempore neque libero fugit nostrum rerum autem beatae! Tenetur voluptate repellat velit et sint, enim consequatur unde ducimus qui minus ipsum nesciunt vitae laudantium at excepturi amet quis, fugiat cumque rem eos esse voluptatum? At eligendi et mollitia facere maxime iure eaque libero iste ut placeat inventore sint molestias adipisci est amet officiis magnam, molestiae quasi, natus eum explicabo exercitationem voluptatem sapiente? Maiores consequatur reprehenderit molestias labore, dolorum deleniti ab explicabo facere excepturi dolorem asperiores nesciunt. Earum nulla soluta animi molestias porro cumque vel dolore reiciendis fuga nostrum nemo consequatur ab labore expedita officiis itaque at quia autem, libero veniam velit optio. Voluptas debitis obcaecati et aliquid labore. Delectus, minus facilis. Distinctio accusamus obcaecati atque aut quasi harum saepe, fugit neque eligendi repudiandae beatae earum.<span class="destaque"> LEFT 200 PX</span></p>
+        <p class="fixed">Lorem ipsum dolor sit amet.</p>
+        </div>
     </div>
 </body>
 </html>
