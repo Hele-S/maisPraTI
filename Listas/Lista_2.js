@@ -33,9 +33,9 @@ switch (parseInt(Exercício)){
     break;
 
     case 4:
-    let LadoA = parseFloat(prompt('Insira o tamanho da primeira reta: '))
-    let LadoB = parseFloat(prompt('Insira o tamanho da segunda reta: '))
-    let LadoC = parseFloat(prompt('Insira o tamanho da terceira reta: '))
+    let LadoA = parse(prompt('Insira o tamanho da primeira reta: '))
+    let LadoB = parse(prompt('Insira o tamanho da segunda reta: '))
+    let LadoC = parse(prompt('Insira o tamanho da terceira reta: '))
     if (LadoA < LadoB + LadoC && LadoB < LadoA + LadoC && LadoC < LadoB + LadoA) {
         console.log('As retas podem furmar um triângulo!')
     }   else { console.log('As retas não podem formar um triângulo...')}
@@ -112,9 +112,9 @@ switch (parseInt(Exercício)){
         } while (prompt('Para adicionar mais um funcionário digite "S", caso contrário, digite qualquer outra coisa: ') == 'S')
         for (let employee of employees){
             if (employee.Sexo == "f"){
-                SumF += parseFloat(employee.Salario)
+                SumF += parse(employee.Salario)
             } else if (employee.Sexo == "m"){
-                SumM += parseFloat(employee.Salario)
+                SumM += parse(employee.Salario)
             }else {console.log(`Funcionário(a) "${employee.Nome}" recebeu um valor sexo inválido, Portanto não será incluido na soma`)
         }}
         console.log(`Total de pagamento às funcionárias do sexo feminino: R$${SumF.toFixed(2)}`)
@@ -128,11 +128,11 @@ switch (parseInt(Exercício)){
         let Arr = Array()
         let current 
         do { current = prompt(`Insira o valor Nº${Arr.length + 1}: `)
-        Sum += parseFloat(current)
+        Sum += parse(current)
         Arr.push(current)
         if (Arr.length == 1){
            Lowest = current
-        } else if (parseFloat(Lowest) > parseFloat(current)) {
+        } else if (parse(Lowest) > parse(current)) {
             Lowest = current
         }
         if (current % 2 == 0) {
@@ -147,13 +147,13 @@ switch (parseInt(Exercício)){
 
     case 11:
         let PA = Array()
-        let First = parseFloat(prompt('Qual o primeiro valor da PA? '))
+        let First = parse(prompt('Qual o primeiro valor da PA? '))
         let Raz = prompt('Qual a razão da PA? ')
         let Soma = 0
         PA.push(First)
         while (PA.length < 10){
             Soma += First
-            First += parseFloat(Raz)
+            First += parse(Raz)
             PA.push(First)
         }
         Soma += First
@@ -204,16 +204,15 @@ switch (parseInt(Exercício)){
         let nmbr
         let vector = Array()
         do {nmbr = prompt(`Insira números inteiros (${vector.length + 1}/10)`)
-            if (nmbr % 1 == 0) {
+            if (nmbr % 1 == 0 && nmbr >= 0) {
                 vector.push(nmbr)
             }   
-        } while (vector.length < 3)
-        for (element of vector){
-            if (element % 2 == 0) {
-                console.log(``)
-                console.log(`O valor ${element}, na posição ${vector.element} é par`) // Se colocar 2 pares iguais na array ele só localiza o primeiro!!!!!!!
-            }
-        }
+        } while (vector.length < 10)
+            vector.forEach((element, index) => {
+                if (element % 2 == 0) {
+                    console.log(`O valor ${element}, na posição ${index} é par`);
+                }
+            });
     break;
 
     case 16:
@@ -252,9 +251,9 @@ switch (parseInt(Exercício)){
     
     case 18:
         let register = {
-            Nome:"",
-            Cargo:"",
-            Salario:""
+            Nome:"Não informado",
+            Cargo:"Não informado",
+            Salario:"Não informado"
         }
         console.log(register)
         register.Nome = prompt('Nome: ')
@@ -278,12 +277,12 @@ switch (parseInt(Exercício)){
                 }
             }
                 if (aux == 8){
-                    if (newHor == prompt(`Por favor confirme o horário ${newHor}`))
+                    if (newHor == prompt(`Por favor confirme o horário ${newHor}: `))
                         {horários.push(newHor)}
                     aux = 0
                 }
             }    
-        while (horários.length < 2)
+        while (horários.length < 5)
         console.log(horários)
     break;
 
@@ -334,7 +333,7 @@ case 22:
         }  
         if (parseFloat(renda) <= 350) {rendaMenor.push(renda)}
         for (filho of filhos){
-            somaFilhos = parseFloat(somaFilhos) + parseFloat(filho)
+            somaFilhos = parseInt(somaFilhos) + parseInt(filho)
         }  
         return console.log(`
             Média Salarial: R$${(somaRendas/rendas.length)}
@@ -345,22 +344,20 @@ case 22:
     }
     do {
         citzen (prompt(`Insira a renda do habitante: `), prompt(`Insira a quantidade de filhos do habitante: `))
-        // console.log (rendas)
-        // console.log (somaRendas)
         somaRendas = 0
         somaFilhos = 0
-        console.log(rendas)
-        console.log(rendaMenor)
+        // console.log(rendas)
+        // console.log(rendaMenor)
     } while (prompt('deseja inserir mais um? (s=sim): ') == "s")
 break;
 
-case 23: //Qual o tamanho máximo da matriz?
-    let Tamanho = prompt('Qual o tamanho da matriz: ')
+case 23:
+    let Tamanho = 7
     let Ident = Array();
     for (let i = 0; i < Tamanho ; i++) {
         Ident[i] = [];
         for (let j = 0; j < Tamanho; j++){
-        Ident[i].push([0]); 
+        Ident[i].push([null]); 
         }
         Ident[i][i] = [1];
     }
@@ -371,11 +368,11 @@ case 24: // Fica estranho em 6x8 como foi pedido, vou fazer em 8x6
  let Matriz = Array()
  let neg = 0
  let random
- for(i=0;i<8;i++){
+ for(i=0;i<6;i++){
     Matriz[i] = Array()
     Matriz[i].push(Array())
-        for(j=0;j<6;j++){
-            if (j<5){
+        for(j=0;j<8;j++){
+            if (j<7){
                 random = ((Math.round(Math.random())*2-1)*Math.floor(Math.random()*5 + 1))
                 Matriz[i][0].push(random)
                if (random < 0) {neg ++}
@@ -391,16 +388,16 @@ break;
 case 25:
     let soMatriz = Array()
     let columnSoma = 0
-    for (i=0;i<4;i++){
+    for (i=0;i<15;i++){
         soMatriz[i] = Array()
         soMatriz[i].push(Array())
-        for (j=0;j<5;j++){
+        for (j=0;j<20;j++){
             soMatriz[i][0].push(Math.floor(Math.random()*5+1))
         }
     }
-    for (i=0;i<5;i++){
+    for (i=0;i<20;i++){
         for (index of soMatriz){
-            if (soMatriz.indexOf(index) < 3){
+            if (soMatriz.indexOf(index) < 14){
                 columnSoma += index[0][i]
             } else {
                 columnSoma += index[0][i]
@@ -502,10 +499,10 @@ case 29:
         }
     }
     console.log(matriz29)
-    console.log(somaLinha4)
-    console.log(somaColuna2)
-    console.log(somadiagP)
-    console.log(somaTotalM24)
+    console.log(`Soma da linha 4: ${somaLinha4}`)
+    console.log(`Soma da coluna 2: ${somaColuna2}`)
+    console.log(`Soma da diagonal principal: ${somadiagP}`)
+    console.log(`Soma de todos os elementos da matriz: ${somaTotalM24}`)
 break;
 
 case 30:
@@ -613,9 +610,9 @@ case 34:
     let matriz34 = Array()
     let multMatriz34 = Array()
     let diagElement34
-    for (i=0;i<5;i++){
+    for (i=0;i<50;i++){
         matriz34[i] = Array()
-        for (j=0;j<5;j++){
+        for (j=0;j<50;j++){
             matriz34[i].push(Math.floor(Math.random()*10+1))
             if (i == j) { diagElement34 = matriz34[i][j]}
         }
@@ -765,7 +762,8 @@ case 38:
                 }
             }
             console.log(`Elementos em ordem crescente: ${vector38}`)
-        break;
+            console.log(vector38)
+            break;
         case '5':
             console.log(vector38)
         break;
@@ -907,7 +905,7 @@ case 45:
     console.log(objeto45)
 break;
 
-case 46: //É SÓ O NUMERO DE VENDAS OU TEM QUE USAR O VALOR TAMBÉM?????????????
+case 46:
     let vendas46 = Array(
         {Vendedor: "Arthur", 'Valor(R$)': 1000.00},
         {Vendedor: "Tiago", 'Valor(R$)': 1200.00},
@@ -927,7 +925,188 @@ case 46: //É SÓ O NUMERO DE VENDAS OU TEM QUE USAR O VALOR TAMBÉM????????????
     console.log(sumario46) 
 break;
 
-case 47:
+case 47: // Não entendi direito bora perguntar no final
+break;
 
+case 48:
+let inventárioLojaA = {
+    canetas: 500,
+    borrachas: 300,
+    lapis: 800,
+    tesouras: 400
+}
+let inventárioLojaB = {
+    canetas: 150,
+    lapiseiras: 300,
+    lapis: 250,
+    reguas: 600
+}
+function somaInvent (loja1, loja2){
+    let soma = {}
+    for (index in loja1) {
+        soma[index] = loja1[index]
+    }
+    for (index in loja2) {
+        if (soma[index] > 0){
+            soma[index] += loja2[index]
+        } else {
+            soma[index] = loja2[index]
+        }
+    } return soma
+} 
+console.log(somaInvent(inventárioLojaA,inventárioLojaB))
+break;
+
+case 49:
+    let transações49 = {
+        'ID':Array("a","b","c","d","e","f"),
+        'Valor(R$)': Array(100,350,260,400,290,180),
+        'Data':Array("03/06/2024","02/06/2024","01/06/2024","31/05/2024","30/05/2024","29/05/2024"),
+        'Categoria':Array("Q","W","Q","E","E","W")
+    }
+    let porCategoria49 = Object()
+    let soma49 = 0
+    for (i=0;i<transações49.Categoria.length;i++){
+        if (typeof(porCategoria49[transações49.Categoria[i]]) === "object" ){
+            porCategoria49[transações49.Categoria[i]].push(transações49['Valor(R$)'][i])
+        } else {
+            porCategoria49[transações49.Categoria[i]] = Array()
+            porCategoria49[transações49.Categoria[i]].push(transações49['Valor(R$)'][i])
+        }
+    }
+    console.log(`Novo objeto:`)
+    console.log(porCategoria49)
+    for (i in porCategoria49){
+        for (j of porCategoria49[i]){
+            soma49 += j
+        }
+        console.log(`Soma do total Categoria ${i}: ${soma49}`)
+        soma49 = 0
+    }
+    break;
+//---------------------------------------------------------------------------------------------------------------------------------------
+    case 50:
+        let lastHotelID = 0
+        let lastReservID = 0
+        let Hotéis50 = [{
+            ID: 0,
+            Nome: `Hotel principal`,
+            Cidade: `NH`,
+            Quartos_totais: 20,
+            Quartos_disponiveis: 2,
+            Avaliação: ``
+        }]
+        let Reservas50 = [{
+            IDreserva: 0,
+            IDhotel: 0,
+            nomeCliente: `Gerivaldo`
+        }]
+        do {funcionalidade = prompt('Qual funcinalidade deseja acesar? (1 = Adicionar hotel) (2 = Buscar hotéis por cidade) (3 = Fazer reserva) (4 = Cancelar reserva) (5 = Listar reservas) (6 = Finalizar correção do exercício): ')
+            switch (parseInt(funcionalidade)) {
+                case 1: //Criar Hotel
+                    Hotéis50.push({
+                    ID: lastHotelID + 1,
+                    Nome: prompt('Nome do Hotel: '),
+                    Cidade: prompt('Cidade do Hotel: '),
+                    Quartos_totais: parseInt(prompt('Quartos totais: ')),
+                    // Quartos_disponíveis: Quartos_totais,
+                    })
+                    while (!(Hotéis50[Hotéis50.length-1].Quartos_totais % 1 == 0 && Hotéis50[Hotéis50.length-1].Quartos_totais > 0 )){
+                        Hotéis50[Hotéis50.length-1].Quartos_totais = parseInt(prompt('Quantidade de quartos inválida, por favor insira outro valor: '))
+                    }
+                    Hotéis50[Hotéis50.length-1]['Quartos_disponiveis'] = Hotéis50[Hotéis50.length-1].Quartos_totais
+                    console.log("Novo hotel adicionado com sucesso!!!")
+                    console.log(Hotéis50[Hotéis50.length-1])
+                    lastHotelID ++
+                break
+                //-------------------------------
+                case 2: //Pesquisar Hotel por Cidade
+                    cidade50 = prompt('Qual cidade deseja buscar? ')
+                    hotelPresente = false
+                    for (hotel of Hotéis50){
+                        if (hotel.Cidade == cidade50){
+                            console.log(hotel)
+                            hotelPresente = true
+                        }
+                    }
+                    if (hotelPresente === false){
+                        console.log(`___________________________________________________________________________________________`)
+                        console.log(`Desculpe, parece que não temos hotéis na cidade de "${cidade50}". Por favor verique se escreveu corretamente.`)
+                        console.log(`___________________________________________________________________________________________`)
+                    }
+                break;
+                //-------------------------------
+                case 3: // Criar reserva
+                    console.log(`Hotéis disponíveis:`)
+                    for (hotel of Hotéis50){
+                        console.log(`ID: ${hotel.ID}; Nome: ${hotel.Nome}; Cidade: ${hotel.Cidade}; Quartos disponíveis: ${hotel.Quartos_disponiveis}`)
+                    }
+                    let IDalvo = parseInt(prompt('Insira o ID do hotel que deseja realizar sua reserva: '))
+                    let IDpresente = false
+                    for (hotel of Hotéis50){
+                        if (hotel.ID == IDalvo){
+                            IDpresente = true
+                            if (hotel.Quartos_disponiveis>0){
+                                Reservas50.push({
+                                    IDreserva: lastReservID + 1,
+                                })
+                                hotel.Quartos_disponiveis -= 1
+                                Reservas50[Reservas50.length -1]['IDhotel'] = IDalvo
+                                Reservas50[Reservas50.length -1]['nomeCliente'] = prompt('Insira seu nome para finalizar a operação: ')
+                                console.log("Nova reserva criada com sucesso!!!")
+                                console.log(Reservas50[Reservas50.length -1])
+                                lastReservID++
+                            } else {
+                                console.log('_________________________________________________________________________________')
+                                console.log(`Desculpe, atualmente o hotel de ID ${hotel.ID} (${hotel.Nome}) Não possui quartos disponíveis. Reinicie a operação e escolha um hotel diferente.`)
+                                console.log('_________________________________________________________________________________')
+                            }
+                        }
+                    }
+                    if (IDpresente === false){
+                        console.log('_________________________________________________________________________________')
+                        console.log(`Parece que não temos um hotel com este ID, Você pode verificar nossos hotéis disponíveis e seus IDs com a funcionalidade "2" do menu anteior.`)
+                        console.log('_________________________________________________________________________________')
+                    }
+                    break;
+                    //-------------------------------
+                    case 4: // Remover reserva
+                    console.log(`Reservas disponíveis:`)
+                    for (reserva of Reservas50){
+                        console.log(`ID da Reserva: ${reserva.IDreserva}; ID do Hotel: ${reserva.IDhotel};  Nome do cliente: ${reserva.nomeCliente}`)
+                }
+                let IDremoção = prompt('Insira o ID da RESERVA que deseja cancelar: ')
+                let IDdisponiv = false
+                for (reserva of Reservas50){
+                    if (IDremoção == reserva.IDreserva){
+                        IDdisponiv = true 
+                        Hotéis50[reserva.IDhotel].Quartos_disponiveis += 1
+                        Reservas50.splice(Reservas50.indexOf(reserva),1)
+                        console.log(Reservas50)
+                    }
+                }
+                if (IDdisponiv == false){
+                    console.log('_________________________________________________________________________________')
+                    console.log(`Parece que não temos uma reserva com o ID inserido, tente novamente.`)
+                    console.log('_________________________________________________________________________________')
+                }
+                break;
+                //-------------------------------
+                case 5: //DETALHES DO HOTEL E DO C L I E N T E??????
+                    console.log(`Reservas disponíveis:`)
+                    for (reserva of Reservas50){
+                        console.log(`ID da Reserva: ${reserva.IDreserva}; ID do Hotel: ${reserva.IDhotel};  Nome do cliente: ${reserva.nomeCliente}`)
+                        console.log(`Hotel Relacionado: Nome: ${Hotéis50[reserva.IDhotel].Nome}; Cidade: ${Hotéis50[reserva.IDhotel].Cidade}; ID: ${Hotéis50[reserva.IDhotel].ID}; Quartos disponívei: ${Hotéis50[reserva.IDhotel].Quartos_disponiveis}`)
+                        console.log('_________________________________________________________________________________')
+                    }
+                break;
+                // case 6:
+                //     let nota
+                //     do {nota = parseInt(prompt('Inira sua nota de 0 a 5: '))} while (!(nota >= 0 && nota <=5))
+                //     Hotéis50
+                //     console.log(nota)
+                // break
+            }
+        } while (funcionalidade >= 1 && funcionalidade < 6)
 break;
 }
