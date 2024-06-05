@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+}
+@font-face {
+    font-family: "Road Rage";
+    src: url(./fonts/RoadRage.woff)
+}
+body {
+    background-color: #b3b3b3;
+    /* height: 100%; */
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.conteudo {
+    margin: 10px;
+    color: whitesmoke;
+}
+.footer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 12%;
+    background-color: cadetblue;
+}
+div.sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    float: bottom;
+    width: 10%;
+    background-color: black;
+    margin: 0%;
+    z-index: 1;
+}
+.botao {
+    color: white;
+    text-align: center;
+    padding: 1px;
+    background-color: cadetblue;
+}
+ul.lista {
+    display: block;
+    list-style:none;
+    /* line-height: 1.9em; */
+}
+ul.lista li {
+    border: 1px solid #000;
+    border-radius: 10px;
+    width: 60%;
+    background-color: cadetblue;
+    text-align: center;
+    float:left;
+    position: relative;
+    top:0;
+    margin: 0 0 .5em 1.2em;
+    right: 2.5em;
+    font-size: 15px;
+    text-decoration: none;
+    padding: .7em;
+    
+    
+}
+
+#home ul.lista li.home, #news ul.lista .news,  ul.lista li:hover {
+    background-color: goldenrod;
+    color: #000;
+}
+
+.login li {
+    list-style: none;
+    float: right;
+    font-size: 20px;
+    background-color: #b3b3b3;
+    margin: 1em;
+    padding: .4em;
+    width: 10em;
+    border: 2px solid ;
+    border-radius: 10px;
+    z-index: 2;
+    text-align: center;
+    text-transform: uppercase;
+}
+.login li:hover {
+    background-color: goldenrod;
+    font-family: "Road Rage";
+}
