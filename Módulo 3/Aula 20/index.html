@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 20</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- <script src="script.js"></script> -->
+
+</head>
+<body>
+<div style="background-color: aquamarine; width: 100px; height: 100px;" onclick="evento()" >
+</div>
+<select name="" id="" onmouseup="evento()">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+</select>
+<hr>
+<form id="calculadora" name ='calculadora' class="dia">
+    <input type="text" disabled id="display" placeholder="0" name="display">
+    <table>
+    <tr><td><input type="button" value="7" onclick="inserir(value)"></td>
+        <td><input type="button" value="8" onclick="inserir(value)"></td>
+        <td><input type="button" value="9" onclick="inserir(value)"></td></tr>
+    <tr><td><input type="button" value="4" onclick="inserir(value)"></td>
+        <td><input type="button" value="5" onclick="inserir(value)"></td>
+        <td><input type="button" value="6" onclick="inserir(value)"></td></tr>
+    <tr><td><input type="button" value="1" onclick="inserir(value)"></td>
+        <td><input type="button" value="2" onclick="inserir(value)"></td>
+        <td><input type="button" value="3" onclick="inserir(value)"></td></tr>
+    <tr>
+        <td><input id="delete" type="button" value="DEL" onclick="deletar()"></td>
+        <td><input type="button" value="0" onclick="inserir(value)"></td>
+        <td><input type="button" value="/" onclick="inserir(value)"></td>
+        <tr><td><input type="button" value="-" onclick="inserir(value)"></td>
+        <td><input type="button" value="+" onclick="inserir(value)"></td>
+        <td><input type="button" value="*" onclick="inserir(value)"></td></tr>
+    <tr>
+        <td><input type="button" id="clima" value="🌞" onclick="noturno(this)"></td>
+        <td><input type="button" value="c" onclick="limpar()"></td>
+        <td><input type="button" value="=" onclick="calcular()"></td></tr>
+    </tr>
+</table>
+</form>
+<script src="script.js"></script>
+
+</body>
+</html>

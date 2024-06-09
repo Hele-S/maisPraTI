@@ -1,0 +1,43 @@
+#calculadora{
+    border: 1px black solid;
+    width:max-content;
+    height:max-content;
+    align-items: center;
+    border-radius: 30px;
+}
+#calculadora tr { 
+    align-items: center;
+}
+#calculadora tr td input{
+    font-size: 50px;
+    border: black solid 1px;
+    padding:45px;
+    margin: 10px;
+    width: 3em;
+    border-radius: 30px;
+}
+#calculadora tr td input:hover{
+background-color: #b3b3b3;
+}
+#display{
+    height: 100px;
+    width: 99%;
+    font-size: 40px;
+    text-align: right;
+}
+#calculadora tr td input#delete{
+    width: inherit;
+    font-size: 2em;
+}
+.noite tr td input{
+    background-color: #ffffff79;
+    color: #fff;
+}
+.noite #display{
+    background-color: #000;
+    color: #b3b3b3;
+    border-color: #b3b3b3;
+}
+.noite{
+    background-color: black;
+}
