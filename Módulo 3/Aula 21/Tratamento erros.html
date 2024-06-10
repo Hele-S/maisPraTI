@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let video = Array()
+        video[1] = Array()
+        video[1]['Nome'] = 'Exemplo de nome'
+        video[1]['Categoria'] = 'Exemplo de categoria'
+
+        function tratarErro(erro){
+            console.log('O erro é: '+ erro)
+        }
+        function getVideo(){
+            try {
+                console.log(video[0]['Nome'])
+                console.log('A aplicação não morreu')
+            } catch (error) {
+                tratarErro(error)
+                console.log('Houve um problema externo.')
+
+                throw new Error('Houve um erro bla bla bla')
+            } finally{
+                console.log("Sempre passa por aqui")
+            }
+        }
+        getVideo(video)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

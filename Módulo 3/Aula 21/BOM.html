@@ -7,16 +7,24 @@
     <script>
         let janela
         function popUp(){
-            janela = window.open('https://github.com/Hele-S/Landing-Page/tree/develop', 'nova_janela', 'width=200')
+            janela = window.open('https://github.com/Hele-S/Landing-Page/tree/develop', 'nova_janela', `width=200,height=200`)
             }
         function closePopUp(){
             janela.close()
         }
+        function timer(){ i = 10
+        let x = window.setInterval(()=>{
+            document.write(i + "</br>")
+            if (i==0){clearInterval(x); document.write('Acabou :)')}
+            i--
+        },1000)}
     </script>
 </head>
 <body>
     <button onclick="popUp()" >Abrir janela</button>
     <button onclick="closePopUp()">Fechar  janela</button>
     <button onclick="print()">Imprimir a página</button>
+    <button onclick="timer()">Temporizador 10s</button>
+
 </body>
 </html>
