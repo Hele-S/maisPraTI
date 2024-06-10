@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript aplicando CSS</title>
+    <style>
+        .Modo1{
+            border-radius: 0;
+            background-color: #000;
+            scale: .8;
+            }
+        .Modo2{
+            border-radius: 50px;
+            background-color: purple;
+            scale: 1.2;
+        }
+        .Modo3{
+            border-radius: 999px;
+            background-color: blue;
+            scale: .4;
+        }
+    </style>
+    <script>
+        function trocaEstilo(classe){
+            document.getElementById("alvo").className = classe;
+        }
+    </script>
+</head> 
+<body>
+    <div style="width: 200px; height: 200px; border: #000 1px solid;" id="alvo" >
+    </div> <hr>
+    <input type="button" value="Preto"  onclick="trocaEstilo('Modo1')" id="inout"></input>
+    <input type="button" value="roxo"  onclick="trocaEstilo('Modo2')" id="inout"></input>
+    <input type="button" value="Azul"  onclick="trocaEstilo('Modo3')" id="inout"></input>
+</body>
+</html>
