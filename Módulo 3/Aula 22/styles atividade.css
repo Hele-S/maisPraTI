@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    list-style: none;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    }
+body {
+    background-color: #b3b3b3;
+        
+}
+#topo{
+    border: 1px black solid;
+    height: 80px;
+    margin: 0;
+    background-color:goldenrod;
+}
+
+#topo nav ul li a{
+    float: left;
+    background-color:rgb(223, 225, 73);
+    padding: 10px;
+    border: 1px #000 solid;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 20px;
+    margin-right: 3em;
+    text-decoration: none;
+    color:black;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+#topo nav ul li a:hover{
+    background-color: rgb(192, 150, 54);
+    color: aliceblue;
+}
+#container {
+    height: 1000px;
+    width: 1200px;
+    margin: 1em auto;
+    background-color: rgba(0, 0, 0, 0.331);
+    text-align: center;
+
+    padding: 30px 0;
+}
+#container h1{
+    width: fit-content;
+    padding: 10px;
+    margin: 100px auto;
+    background-color: rgb(192, 150, 54);
+    text-transform: uppercase;
+    border: #000 3px solid;
+    border-radius: 20px;
+    font-size: 40px;
+}
+#Padrão2{
+ width: 600px;
+ height: fit-content;
+ margin: 1em auto;
+ border: #000 5px solid;
+ padding: 5px;
+ border-radius: 5px;
+ background-color: aliceblue;
+}
+#container  li{
+ /* float: left; */
+ margin: 1em;
+ border: #000 1px solid;
+ padding: 5px;
+ border-radius: 5px;
+ font-size: 30px;
+ background-color: goldenrod;
+ }
+ #container  li>input{
+ font-size: 20px;
+ padding: 5px;
+ float: right;
+ margin-left: 20px;
+ background: rgb(223, 225, 73);
+ color: #000;
+ border: 1px solid;
+ text-transform: none;
+ text-decoration: none;
+ font-weight: bold;
+ /* text-: none; */
+ /* text-align: ; */
+ }
+#metodo{
+ 
+ padding: 10px 78px;
+ float: right;
+ margin-left: 20px;
+ background: rgb(223, 225, 73);
+ color: #000;
+ border: 1px solid;
+ text-transform: none;
+ text-decoration: none;
+ font-weight: bold;
+ 
+}
+#submit{    
+ /* position: relative;
+ top: 100px; */
+ 
+ margin: 0 auto;
+ font-size: 40px;
+ background: goldenrod;
+ color: #000;
+ border: 1px solid;
+ border-radius: 20px;
+ padding: 10px;
+} 
+#submit:hover{
+ background-color: rgb(223, 225, 73);
+ font-weight: bold;
+ width: fit-content;
+ margin: 0 auto;
+}
+/* ALTERAÇÕES NA LISTAGEM */
+div.Filtro{
+    text-align: left;
+    justify-content: right;
+}
+
+ div.Filtro ul{
+    width: fit-content;
+    padding-left: 0;
+    margin: 0;
+} 
+
+#container ul li.Filtro{
+    /* margin: ;
+padding: auto; */
+width: fit-content;
+height: max-content;
+right: 0;
+all: calc();
+font-size: 20px;
+font-weight: bold;
+}
+
+#container div.Filtro ul li>input, #metodo{
+position: relative;
+bottom: 3px;
+font-size: 15px;
+background: rgb(223, 225, 73);
+color: #000;
+border: 1px solid;
+text-transform: none;
+text-decoration: none;
+font-weight: bold;
+/* text-: none; */
+/* text-align: ; */
+}
+hr{
+    border: #000 2px solid;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
