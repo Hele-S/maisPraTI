@@ -286,13 +286,26 @@ switch (parseInt(Exercício)){
         console.log(horários)
     break;
 
-    case 20: // NÃO ENTENDI OQ ESSA QUESTÃO TA QUERENDO
-    let reg = {
-        Matrícula: "",
-        Nome: "",
-        Bruto: "",
-        INSS: "12%",
-        Líquido: "",
+    case 20: 
+    let id20 = 0
+    let equipe = Array()
+    while (equipe.length < 80) {
+        equipe.push({
+        Matrícula: id20+1,
+        Nome: "Funcionário " + (id20+1) ,
+        'Bruto(R$)': ((Math.floor(Math.random()*10)*100)+1500).toFixed(2),
+        })
+        id20++
+    }
+    for (i=0; i<equipe.length;i++){
+        console.log(`
+            Matrícula: ${equipe[i].Matrícula}
+            Nome: ${equipe[i].Nome}
+            Salário bruto: ${equipe[i]['Bruto(R$)']}
+            Dedução INSS: R$${(equipe[i]['Bruto(R$)']*.12).toFixed(2)}
+            Salário Líquido: R$${(equipe[i]['Bruto(R$)']*.88).toFixed(2)}
+            `
+        )
     }
 break;
 
@@ -925,7 +938,17 @@ break;
         console.log(sumario46) 
     break;
 
-    case 47: // Não entendi direito bora perguntar no final
+    case 47: 
+    let itensEstoque = {
+        TV : 2000,
+        Radio : 100,
+        Geladeira : 900,
+    }
+    Object.entries(itensEstoque).forEach(item => {
+        let [produto, preço] = item
+        itensEstoque[produto] = `R$${(preço *.90).toFixed(2)}`
+    })
+    console.log(itensEstoque)
     break;
 
     case 48:
@@ -989,23 +1012,25 @@ break;
         let verificação50
         let lastHotelID = 0
         let lastReservID = 0
+        let lastCheckInID = 0
         let Hotéis50 = [{
             ID: 0,
             Nome: `Hotel principal`,
             Cidade: `NH`,
-            Registro: "Hotel criado com sucesso!\n--------------------------------------------\n",
+            Registro: "Hotel criado com sucesso!\n--------------------------------------------\nReserva realizada em nome de: Helenaldo (ID: 0)\n--------------------------------------------\n",
             Avaliacoes: Array(),
             Quartos_totais: 20,
-            Quartos_disponiveis: 2,
+            Quartos_disponiveis: 1,
         }]
         Object.defineProperty(Hotéis50[0], "Registro", {enumerable: false})
         let Reservas50 = [{
             IDreserva: 0,
             IDhotel: 0,
-            nomeCliente: `Gerivaldo`
+            nomeCliente: `Helenaldo`
         }]
-        do {
-            funcionalidade = prompt('Qual funcinalidade deseja acesar? (1 = Adicionar hotel) (2 = Buscar hotéis por cidade) (3 = Fazer reserva) (4 = Cancelar reserva) (5 = Listar reservas) (6 = Visualizar relatórios de ocupação) (7 = Adicionar uma avaliação) (outro = Encerrar algoritmo): ')
+        let checkInArray = Array()
+        do { console.log('___________________________________________________________________________________________')
+            funcionalidade = prompt('Qual funcinalidade deseja acesar? (1 = Adicionar hotel) (2 = Buscar hotéis por cidade) (3 = Fazer reserva) (4 = Cancelar reserva) (5 = Listar reservas) (6 = Visualizar relatórios de ocupação) (7 = Adicionar uma avaliação) (8 = Realizar Check-in ou Check-out) (outro = Encerrar algoritmo): ')
             verificação50 = false
             switch (parseInt(funcionalidade)) {
                 case 1: //Criar Hotel
@@ -1028,7 +1053,6 @@ break;
                 //-------------------------------
                 case 2: //Pesquisar Hotel por Cidade
                     cidade50 = prompt('Qual cidade deseja buscar? ')
-                    verificação50 = false
                     for (hotel of Hotéis50){
                         if (hotel.Cidade == cidade50){
                             console.log(`ID: ${hotel.ID}; Nome: ${hotel.Nome}; Cidade: ${hotel.Cidade}; Quartos disponíveis: ${hotel.Quartos_disponiveis}`)
@@ -1077,7 +1101,6 @@ break;
                                 Reservas50[Reservas50.length -1]['IDhotel'] = IDalvo
                                 Reservas50[Reservas50.length -1]['nomeCliente'] = prompt('Insira seu nome para finalizar a operação: ')
                                 console.log("Nova reserva criada com sucesso!!!")
-                                console.log(Reservas50[Reservas50.length -1])
                                 lastReservID++
                                 hotel.Registro +=  `Reserva realizada em nome de: ${Reservas50[Reservas50.length -1]['nomeCliente']} (ID: ${Reservas50[Reservas50.length -1]['IDreserva']})\n--------------------------------------------\n`;
                             } else {
@@ -1106,23 +1129,29 @@ break;
                                 verificação50 = true 
                                 Hotéis50[reserva.IDhotel].Quartos_disponiveis += 1
                                 Reservas50.splice(Reservas50.indexOf(reserva),1)
-                                console.log(`Reserva cancelada com sucesso!\nReservas restantes:`)
-                            console.log(Reservas50)
+                                Hotéis50[reserva.IDhotel].Registro +=  `Reserva ID: ${reserva.IDreserva}, de "${reserva.nomeCliente}" cancelada.\n--------------------------------------------\n`;
+                                if (Reservas50.length>0){
+                                    console.log(`Reserva cancelada com sucesso!\nReservas restantes:`)
+                                    console.log(Reservas50)
+                                } else {
+                                    console.log(`Reserva cancelada com sucesso!\nNenhuma reserva restante!`)
+                                        
+                                }
+                            }  
                         }
+                        if (verificação50 == false){
+                            console.log('_________________________________________________________________________________')
+                            console.log(`Parece que não temos uma reserva com o ID inserido, tente novamente.`)
+                            console.log('_________________________________________________________________________________')
+                        }  
+                    } else {
+                        console.log('_________________________________________________________________________________')
+                        console.log(`Atualmente não temos nenhuma reserva agendada!`)    
+                        console.log('_________________________________________________________________________________')
                     }
-                    if (verificação50 == false){
-                        console.log('_________________________________________________________________________________')
-                        console.log(`Parece que não temos uma reserva com o ID inserido, tente novamente.`)
-                        console.log('_________________________________________________________________________________')
-                    }  
-                } else {
-                    console.log('_________________________________________________________________________________')
-                    console.log(`Atualmente não temos nenhuma reserva agendada!`)    
-                    console.log('_________________________________________________________________________________')
-                }
                 break;
                 //-------------------------------
-                case 5:
+                case 5: //Listar reservas
                 if (Reservas50.length == 0) {
                     console.log('_________________________________________________________________________________')
                         console.log(`Atualmente não temos nenhuma reserva agendada!`)    
@@ -1131,7 +1160,7 @@ break;
                         console.log(`Reservas disponíveis:\n--------------------------------------------`)
                         for (reserva of Reservas50){
                             console.log(`ID da Reserva: ${reserva.IDreserva}; ID do Hotel: ${reserva.IDhotel};  Nome do cliente: ${reserva.nomeCliente}`)
-                            console.log(`Hotel Relacionado: Nome: ${Hotéis50[reserva.IDhotel].Nome}; Cidade: ${Hotéis50[reserva.IDhotel].Cidade}; ID: ${Hotéis50[reserva.IDhotel].ID}; Quartos disponívei: ${Hotéis50[reserva.IDhotel].Quartos_disponiveis}`)
+                            console.log(`Hotel Relacionado: Nome: ${Hotéis50[reserva.IDhotel].Nome}; Cidade: ${Hotéis50[reserva.IDhotel].Cidade}; ID: ${Hotéis50[reserva.IDhotel].ID}; Quartos disponíveis: ${Hotéis50[reserva.IDhotel].Quartos_disponiveis}`)
                             console.log('--------------------------------------------')
                         }
                     }
@@ -1142,7 +1171,7 @@ break;
                     for (hotel of Hotéis50){
                         console.log(`Nome: ${hotel.Nome} ; ID ${hotel.ID}\n--------------------------------------------`)
                     }
-                    let registerID = prompt('Qual o ID do hotel que deseja verificar o registro?: ')
+                    let registerID = parseInt(prompt('Qual o ID do hotel que deseja verificar o registro?: '))
                     for (hotel of Hotéis50){
                         if (registerID == hotel.ID){
                         console.log(`Registro do ${hotel.Nome}`)
@@ -1155,35 +1184,136 @@ break;
                         console.log(`Desculpe, parece que não temos um hotel com o ID inserido (${registerID})`)
                         console.log('_________________________________________________________________________________')
                     }
-                    break;
-                    //-------------------------------
-                    case 7: //Adicionar avaliação
-                    console.log('Lista de hotéis\n--------------------------------------------')
-                    for (hotel of Hotéis50){
-                        console.log(`Nome: ${hotel.Nome} ; ID ${hotel.ID}\n--------------------------------------------`)
+                break;
+                //-------------------------------
+                case 7: //Adicionar avaliação
+                console.log('Lista de hotéis\n--------------------------------------------')
+                for (hotel of Hotéis50){
+                    console.log(`Nome: ${hotel.Nome} ; ID ${hotel.ID}\n--------------------------------------------`)
+                }
+                avaliaID = prompt('Qual o ID do hotel que deseja avaliar?: ')
+                for (hotel of Hotéis50){
+                    if (avaliaID == hotel.ID){
+                        nome = prompt('Qual o seu nome?: ')
+                        do {
+                            nota = parseFloat(prompt(`Insira uma nota de 0 a 5 para o hotel ${hotel.Nome}: `))
+                            if (!(nota >= 0 && nota <= 5)) {
+                                console.log(`"${nota}" é uma nota inválida. Insira outro valor: `)
+                            }
+                        } while (!(nota >= 0 && nota <= 5))
+                        hotel.Avaliacoes.push([nota, nome])
+                        console.log(`Nota ${nota} adicionada com sucesso!`)
+                        verificação50 = true
                     }
-                    avaliaID = prompt('Qual o ID do hotel que deseja avaliar?: ')
-                    for (hotel of Hotéis50){
-                        if (avaliaID == hotel.ID){
-                            nome = prompt('Qual o seu nome?: ')
-                            do {
-                                nota = parseFloat(prompt(`Insira uma nota de 0 a 5 para o hotel ${hotel.Nome}: `))
-                                if (!(nota >= 0 && nota <= 5)) {
-                                    console.log(`"${nota}" é uma nota inválida. Insira outro valor: `)
+                }
+                if (verificação50 == false){
+                    console.log('_________________________________________________________________________________')
+                    console.log(`Desculpe, parece que não temos um hotel com o ID inserido (${avaliaID})`)
+                    console.log('_________________________________________________________________________________')
+                }
+                break;
+                //-------------------------------
+                case 8: //check-in ou check-out
+                let pedido = prompt('O que deseja fazer? (i = Check-in) (o = Check-out) (outro = voltar para o menu): ')
+                 if ( pedido === 'i'){
+                    pedido = prompt('Já possui uma reserva? (s = sim) (n = não): ')
+                    if (pedido == "s") {
+                        if (Reservas50.length > 0){
+                            console.log(`Lista de reservas:`)
+                            for (reserva of Reservas50){
+                                console.log(`ID da Reserva: ${reserva.IDreserva}; ID do Hotel: ${reserva.IDhotel};  Nome do cliente: ${reserva.nomeCliente}`)
+                            }
+                            pedido = prompt('Insira o ID da sua reserva: ')
+                            for (reserva of Reservas50){
+                                if (pedido == reserva.IDreserva){
+                                    verificação50 = true 
+                                    console.log(`Check-in efetuado com sucesso! (Reserva ${reserva.IDreserva} removida do banco de dados)`)
+                                    checkInArray.push({
+                                        "Nome do cliente" :reserva.nomeCliente, 
+                                        "ID do hotel": Hotéis50[reserva.IDhotel].ID,
+                                        "ID do Check-In": lastCheckInID
+                                        })
+                                    Hotéis50[reserva.IDhotel].Registro +=  `Check-in de "${reserva.nomeCliente}" (Antiga reserva de ID: ${reserva.IDreserva}) efetuado com sucesso! (ID:${lastCheckInID}).\n--------------------------------------------\n`;
+                                    lastCheckInID++
+                                    Reservas50.splice(Reservas50.indexOf(reserva),1)
+                                }  
+                            }
+                            if (verificação50 == false){
+                                console.log('_________________________________________________________________________________')
+                                console.log(`Parece que não temos uma reserva com o ID inserido, tente novamente.`)
+                                console.log('_________________________________________________________________________________')
+                            }  
+                        } else {
+                            console.log('_________________________________________________________________________________')
+                            console.log(`Atualmente não temos nenhuma reserva agendada!`)    
+                            console.log('_________________________________________________________________________________')
+                        }
+                    } else if (pedido == 'n') {
+                        let pedido
+                        do {
+                            for (hotel of Hotéis50){
+                                if (hotel.Quartos_disponiveis>0){
+                                    if (verificação50 == false) {
+                                        console.log(`Lista de hotéis com quartos disponíveis:`)                                      
+                                    }
+                                    verificação50 = true
+                                    console.log(`ID: ${hotel.ID}; Nome: ${hotel.Nome}; Cidade: ${hotel.Cidade}; Quartos disponíveis: ${hotel.Quartos_disponiveis}`)
+                                    if (hotel.Avaliacoes.length > 0){
+                                        let somaNotas = 0
+                                        for (nota of hotel.Avaliacoes){
+                                            somaNotas += nota[0]
+                                        }
+                                        console.log(`Avaliação média : ★ ${(somaNotas/hotel.Avaliacoes.length).toFixed(2)}\n--------------------------------------------`)
+                                    } else {
+                                        console.log(`Ainda não possui avaliações\n--------------------------------------------`)
+                                    }
                                 }
-                            } while (!(nota >= 0 && nota <= 5))
-                            hotel.Avaliacoes.push([nota, nome])
-                            console.log(`Nota ${nota} adicionada com sucesso!`)
-                            verificação50 = true
+                            }
+                            if (verificação50 == false){
+                                console.log('Desculpe, atualmente não temos nenhum hotel com um quarto disponível...')
+                                break;
+                            }
+                            pedido = parseInt(prompt('Insira o ID do hotel que deseja realizar seu Check-in: '))
+                        if (Hotéis50[pedido] == undefined || !(Hotéis50[pedido].Quartos_disponiveis>0)) {console.log('O valor inserido é inválido, por favor tente novamente: ')
+                            prompt('Insira qulaquer valor para prosseguir.')
+                        }
+                        } while (Hotéis50[pedido] == undefined || !(Hotéis50[pedido].Quartos_disponiveis>0))
+                        for (hotel of Hotéis50){
+                            if (hotel.ID == pedido){
+                                hotel.Quartos_disponiveis -= 1
+                                checkInArray.push({
+                                    "Nome do cliente" : prompt('Insira seu nome para concluir o Check-In: '), 
+                                    "ID do hotel": Hotéis50[hotel.ID].ID,
+                                    "ID do Check-In": lastCheckInID
+                                    })
+                                console.log(`Check-in efetuado com sucesso!!! ID: ${lastCheckInID}`)
+                                hotel.Registro +=  `Check-in de "${checkInArray[checkInArray.length-1]['Nome do cliente']}" efetuado com sucesso! (ID:${lastCheckInID}).\n--------------------------------------------\n`;
+                                lastCheckInID++
+                            }
                         }
                     }
+                 } else if (pedido == "o"){
+                    checkInArray.forEach(checkIn => {
+                        console.log(`Check-in número ${checkInArray.indexOf(checkIn) + 1}`)
+                        console.log(`Nome do cliente: ${checkIn['Nome do cliente']}; ID: ${checkIn['ID do Check-In']}\n--------------------------------------------`)
+                    })
+                    pedido = prompt('Identifique-se com o ID do Check-in para fazer o Check-out: ')
+                    checkInArray.forEach(checkIn => {
+                        if (pedido == checkIn['ID do Check-In']){
+                            verificação50 = true
+                            console.log('Check-out realizado com sucesso!')
+                            hotel.Registro +=  `${checkIn['Nome do cliente']} efetuou seu Check-out (ID: ${checkIn['ID do Check-In']}).\n--------------------------------------------\n`;
+                            checkInArray.splice(checkInArray.indexOf(checkIn),1)
+                        } 
+                    })
                     if (verificação50 == false){
                         console.log('_________________________________________________________________________________')
-                        console.log(`Desculpe, parece que não temos um hotel com o ID inserido (${avaliaID})`)
+                        console.log(`Parece que não temos um Check-in com o ID inserido, tente novamente.`)
                         console.log('_________________________________________________________________________________')
-                    }
+                    }  
+                }
                 break;
             }
-        } while (funcionalidade >= 1 && funcionalidade < 8)
+        } while (funcionalidade >= 1 && funcionalidade < 9)
     break;
 }

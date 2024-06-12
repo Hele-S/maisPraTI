@@ -26,10 +26,12 @@ function registerTask(){
     const movie = new movie(titulo, sinopse, metodo, data)
     if(movie.validateData()){
         Database.addMovie(movie)
-    }
+    } 
 }
 
 
 class Database {
-
+    addMovie(movie){
+        localStorage.setItem(id, JSON.stringify(movie))
+    }
 }
