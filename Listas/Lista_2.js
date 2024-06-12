@@ -1191,10 +1191,18 @@ break;
                 for (hotel of Hotéis50){
                     console.log(`Nome: ${hotel.Nome} ; ID ${hotel.ID}\n--------------------------------------------`)
                 }
-                avaliaID = prompt('Qual o ID do hotel que deseja avaliar?: ')
+                avaliaID = parseInt(prompt('Qual o ID do hotel que deseja avaliar?: '))
                 for (hotel of Hotéis50){
                     if (avaliaID == hotel.ID){
-                        nome = prompt('Qual o seu nome?: ')
+                        hotel.Avaliacoes.forEach(Avaliacao => {
+                            if (verificação50 == false && hotel.Avaliacoes.length > 0){
+                                console.log("Avaliações anteriores:")
+                            } 
+                            console.log(`${Avaliacao[1]}: ${Avaliacao[0]} ★`)
+                            verificação50 = true
+                            })
+                        verificação50 = true
+                        let nome = prompt('Qual o seu nome?: ')
                         do {
                             nota = parseFloat(prompt(`Insira uma nota de 0 a 5 para o hotel ${hotel.Nome}: `))
                             if (!(nota >= 0 && nota <= 5)) {
@@ -1203,7 +1211,6 @@ break;
                         } while (!(nota >= 0 && nota <= 5))
                         hotel.Avaliacoes.push([nota, nome])
                         console.log(`Nota ${nota} adicionada com sucesso!`)
-                        verificação50 = true
                     }
                 }
                 if (verificação50 == false){
