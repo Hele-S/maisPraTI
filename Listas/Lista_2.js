@@ -33,9 +33,9 @@ switch (parseInt(Exercício)){
     break;
 
     case 4:
-    let LadoA = parse(prompt('Insira o tamanho da primeira reta: '))
-    let LadoB = parse(prompt('Insira o tamanho da segunda reta: '))
-    let LadoC = parse(prompt('Insira o tamanho da terceira reta: '))
+    let LadoA = parseFloat(prompt('Insira o tamanho da primeira reta: '))
+    let LadoB = parseFloat(prompt('Insira o tamanho da segunda reta: '))
+    let LadoC = parseFloat(prompt('Insira o tamanho da terceira reta: '))
     if (LadoA < LadoB + LadoC && LadoB < LadoA + LadoC && LadoC < LadoB + LadoA) {
         console.log('As retas podem furmar um triângulo!')
     }   else { console.log('As retas não podem formar um triângulo...')}
@@ -112,11 +112,11 @@ switch (parseInt(Exercício)){
         } while (prompt('Para adicionar mais um funcionário digite "S", caso contrário, digite qualquer outra coisa: ') == 'S')
         for (let employee of employees){
             if (employee.Sexo == "f"){
-                SumF += parse(employee.Salario)
+                SumF += parseInt(employee.Salario)
             } else if (employee.Sexo == "m"){
-                SumM += parse(employee.Salario)
-            }else {console.log(`Funcionário(a) "${employee.Nome}" recebeu um valor sexo inválido, Portanto não será incluido na soma`)
-        }}
+                SumM += parseInt(employee.Salario)
+            }   
+        }
         console.log(`Total de pagamento às funcionárias do sexo feminino: R$${SumF.toFixed(2)}`)
         console.log(`Total de pagamento aos funcionários do sexo masculino: R$${SumM.toFixed(2)}`)
     break;
@@ -128,11 +128,11 @@ switch (parseInt(Exercício)){
         let Arr = Array()
         let current 
         do { current = prompt(`Insira o valor Nº${Arr.length + 1}: `)
-        Sum += parse(current)
+        Sum += parseFloat(current)
         Arr.push(current)
         if (Arr.length == 1){
            Lowest = current
-        } else if (parse(Lowest) > parse(current)) {
+        } else if (parseFloat(Lowest) > parseFloat(current)) {
             Lowest = current
         }
         if (current % 2 == 0) {
@@ -147,13 +147,13 @@ switch (parseInt(Exercício)){
 
     case 11:
         let PA = Array()
-        let First = parse(prompt('Qual o primeiro valor da PA? '))
+        let First = parseFloat(prompt('Qual o primeiro valor da PA? '))
         let Raz = prompt('Qual a razão da PA? ')
         let Soma = 0
         PA.push(First)
         while (PA.length < 10){
             Soma += First
-            First += parse(Raz)
+            First += parseFloat(Raz)
             PA.push(First)
         }
         Soma += First
