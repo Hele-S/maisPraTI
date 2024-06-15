@@ -1,0 +1,14 @@
+#box {
+    width: 200px;
+    height: 200px;
+    background: #b9c941;
+    /* padding: 10px; */
+    margin: 10px;
+    border-radius: 10px 50px;
+    box-sizing: border-box;
+    box-shadow:  0px 0px 20px #000000 ;
+    }
+#box p{
+    
+    text-shadow: 0px 0px 2px #000000 ;;
+}

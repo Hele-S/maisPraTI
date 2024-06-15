@@ -1,0 +1,9 @@
+#box{
+    width: 400px;
+    height: 400px;
+    background: url(../../../../clone/unit03/lesson10/boxSizing-BorderRadius/Pica-Pau-post.jpg);
+}
+#box h1{
+background: linear-gradient(to left,red,blue);
+
+}

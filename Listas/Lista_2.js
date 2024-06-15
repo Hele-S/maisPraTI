@@ -965,6 +965,7 @@ break;
         reguas: 600
     }
     function somaInvent (loja1, loja2){
+        
         let soma = {}
         for (index in loja1) {
             soma[index] = loja1[index]

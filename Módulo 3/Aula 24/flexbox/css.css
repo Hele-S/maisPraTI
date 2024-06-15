@@ -1,0 +1,16 @@
+#content{
+ background-color: #daa520;
+ height: 300px;
+ display: flex;
+ /* flex-direction: ; */
+ flex-wrap: wrap-reverse
+
+}
+
+.item{
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    background-color: aquamarine;
+    border: 3px solid blue
+}

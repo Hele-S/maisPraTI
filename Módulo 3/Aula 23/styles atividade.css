@@ -127,7 +127,7 @@ div.Filtro{
     margin: 0;
 } 
 
-#container ul li.Filtro{
+#container ul li.Filtro, #library{
     /* margin: ;
 padding: auto; */
 width: fit-content;
