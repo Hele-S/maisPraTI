@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generators</title>
+
+    <script>
+      function* chat(){
+        let opcao = yield 'Olá, tudo bem?'
+
+        if(opcao === 'Sim') {
+            yield 'Ótimo'
+
+            opcao = yield 'Como eu posso te ajudar? Quer uma piada?'
+
+            if(opcao === 'Sim'){
+                fetch('./piadas.json').then(resposta => resposta.json()).then(piadas => {
+                    let piada = piadas[Math.floor((Math.random() * piadas.length))]
+                    console.log(piada.piada)
+
+                    setTimeout(() => {
+                        console.log(piada.resposta)
+                    } , 4000)
+                })
+            }
+        }
+      }
+
+      let conversa = chat();
+
+      function iniciarChat(){
+        let resposta = document.getElementById('resposta').value;
+        let iteracao = conversa.next(resposta);
+        console.log(iteracao.value);
+      }
+    </script>
+</head>
+<body>
+    <input type="button" value="passo um" onclick="iniciarChat()">
+    Resposta <input type="text" id="resposta">
+</body>
+</html>
