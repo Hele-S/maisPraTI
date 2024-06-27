@@ -11,24 +11,21 @@
 <body>
     <header>
         <ul class="lista">
-            <li id="aba1" ><a relatedGif="gif1" class="itemLista" href="#">Aba 1</a></li>
-            <li id="aba2" ><a relatedGif="gif2" class="itemLista" href="#">Aba 2</a></li>
-            <li id="aba3" ><a relatedGif="gif3" class="itemLista" href="#">Aba 3</a></li>
+            <li id="aba1"><a relatedGif="gif1" class="itemLista" href="#">Aba 1</a></li>
+            <li id="aba2"><a relatedGif="gif2" class="itemLista" href="#">Aba 2</a></li>
+            <li id="aba3"><a relatedGif="gif3" class="itemLista" href="#">Aba 3</a></li>
         </ul>
     </header>
     <main>
-        <section>
-            <div>
-                <p id="titulo">Aba 1 </p>
+        <div id="centro">
+            <p id="titulo">Aba 1 </p>
 
-                <img class='gif' id='gif1' src="https://media1.giphy.com/media/FcuiZUneg1YRAu1lH2/200w.gif"
-                    alt="gif aba1">
-                <img class='gif' id='gif2'
-                    src="https://i.pinimg.com/originals/0c/64/9a/0c649a17ec1e5f5ca340248b4ef4e4be.gif" alt="gif aba2">
-                <img class='gif' id='gif3' src="https://i.gifer.com/origin/a6/a66549661840b17271352a06e710001b_w200.gif"
-                    alt="gif aba1">
-                <p></p>
-        </section>
+            <img class='gif' id='gif1' src="https://media1.giphy.com/media/FcuiZUneg1YRAu1lH2/200w.gif" alt="gif aba1">
+            <img class='gif' id='gif2'
+                src="https://i.pinimg.com/originals/0c/64/9a/0c649a17ec1e5f5ca340248b4ef4e4be.gif" alt="gif aba2">
+            <img class='gif' id='gif3' src="https://i.gifer.com/origin/a6/a66549661840b17271352a06e710001b_w200.gif"
+                alt="gif aba1">
+        </div>
     </main>
     <script>
         const abas = document.querySelectorAll('.itemLista');
@@ -39,14 +36,14 @@
             abas.forEach(aba => aba.classList.remove('active'));
             aba.classList.add('active');
 
-            document.querySelectorAll('.gif').forEach(content => content.style.display='none')
-            document.getElementById(aba.getAttribute('relatedGif')).style.display='flex'
+            document.querySelectorAll('.gif').forEach(content => content.style.display = 'none')
+            document.getElementById(aba.getAttribute('relatedGif')).style.display = 'flex'
 
             document.getElementById('titulo').innerHTML = aba.innerHTML;
         }
 
         addEventListener("DOMContentLoaded", buttonHighlight(document.querySelector('.itemLista')));
-        
+
     </script>
 </body>
 
