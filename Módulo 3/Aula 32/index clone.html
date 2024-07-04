@@ -50,10 +50,11 @@
     <main>
         <section id="seção-1">
             <div class="arrows">
-                <div id="prev"><a class="link-button" href="#" onclick="previous()">&lt;</a></div>
-                <div id="nex"><a class="link-button" href="#" onclick="next()">></a></div>
+                <div id="prev"><a id='prev-a'class="link-button" href="#" onclick="previous()">&lt;</a></div>
+                <div id="nex"><a id='nex-a'class="link-button" href="#" onclick="next()">></a></div>
             </div>
             <div class="meio">
+                
                 <div class="recheio" id="0">
                     <h1 class="display-1 font-weight-bold text-light text-center">Música para todos</h1>
                     <div class="d-flex justify-content-center pt-5">
@@ -103,26 +104,23 @@
 
             if (direction === 'right') {
                 newIndex = (currentIndex + 1) % content.length;
-            } else {
-                newIndex = (currentIndex - 1 + content.length) % content.length;
-            }
-
-            if (direction === 'right') {
                 content[currentIndex].style.transform = 'translateX(-100%)';
             } else {
+                newIndex = (currentIndex - 1 + content.length) % content.length;
                 content[currentIndex].style.transform = 'translateX(100%)';
             }
 
-            setTimeout(() => {
+            
                 content[newIndex].style.transition = 'none';
                 content[newIndex].style.transform = direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
+                setTimeout(() => {
                 requestAnimationFrame(() => {
                     content[newIndex].style.transition = 'transform 1s';
                     content[newIndex].style.transform = 'translateX(0)';
                 })
-            }, "300")
-                ;
-
+            }, "500")
+            // console.log(direction)
+            console.log(`Atual ${currentIndex} Novo ${newIndex}`)
             currentIndex = newIndex;
         }
 
