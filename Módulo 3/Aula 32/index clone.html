@@ -49,10 +49,9 @@
     </header>
     <main>
         <section id="seção-1">
-            <div class="setas">
-                <div class="arrow" id="ant"><a class="link-button" href="#" onclick="previous()">&lt;</a>
-                </div>
-                <div class="arrow" id="prox"><a class="link-button" href="#" onclick="next()">></a></div>
+            <div class="arrows">
+                <div id="prev"><a class="link-button" href="#" onclick="previous()">&lt;</a></div>
+                <div id="nex"><a class="link-button" href="#" onclick="next()">></a></div>
             </div>
             <div class="meio">
                 <div class="recheio" id="0">
@@ -83,7 +82,7 @@
                     <div class="col"><img src="./imagens/img4.jpg" alt=""></div>
                 </div>
             </div>
-            <div id="conteudo">
+            <div id="content">
                 <h1><span>O que o Spotfy tem? </span></h1>
                 <h1>Músicas</h1>
                 <p>O Spotfy tem milhões de músicas. Escute seus sons favoritos, descubra novas músicas e reúna seeus
@@ -97,52 +96,53 @@
         </section>
     </main>
     <script>
-        let newIndex = 0
+        let currentIndex = 0;
+
         function carousel(direction) {
-            let conteudo = document.getElementsByClassName("recheio")
-            // console.log(conteudo.length)
-            
-            // console.log(conteudo[0].children)
-            if (newIndex == conteudo.length) {
-                newIndex = 0
-            }
-            if (newIndex == -1) {
-                newIndex = conteudo.length - 1
-            }
-            console.log(newIndex)
-            // for (clear of conteudo) {
-            //     document.getElementById(clear.id).style.display = 'none'
-            // }
-            // for (i of conteudo) {
-            //     if (i.id == conteudo[index].id) {
-            //         document.getElementById(conteudo[index].id).style.display = 'block';
-            //     }
-            // }
-            if (newIndex == 1) {
-                conteudo[newIndex].style.left = '60em'
+            let content = document.getElementsByClassName("recheio");
+
+            if (direction === 'right') {
+                newIndex = (currentIndex + 1) % content.length;
             } else {
-                conteudo[newIndex].style.left = '-60em'
-            }
-            for (div of conteudo) {
-                if (newIndex == 1) {
-                    div.style.transform = 'translatex(60em)'
-                } else {
-                    div.style.transform = 'translatex(-60em)'
-                }
-                // div.style.background = '#000'
+                newIndex = (currentIndex - 1 + content.length) % content.length;
             }
 
+            if (direction === 'right') {
+                content[currentIndex].style.transform = 'translateX(-100%)';
+            } else {
+                content[currentIndex].style.transform = 'translateX(100%)';
+            }
+
+            setTimeout(() => {
+                content[newIndex].style.transition = 'none';
+                content[newIndex].style.transform = direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
+                requestAnimationFrame(() => {
+                    content[newIndex].style.transition = 'transform 1s';
+                    content[newIndex].style.transform = 'translateX(0)';
+                })
+            }, "300")
+                ;
+
+            currentIndex = newIndex;
         }
+
         function next() {
-            newIndex++;
-            carousel("right")
-        }
-        function previous() {
-            newIndex--;
-            carousel("left")
+            carousel("right");
         }
 
-        // document.addEventListener('DOMContentLoaded', carousel())
+        function previous() {
+            carousel("left");
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            let content = document.getElementsByClassName("recheio");
+            for (i = 0; i < content.length; i++) {
+                if (i > 0) {
+                    content[i].style.transition = 'none'
+                    content[i].style.transform = 'translatex(100%)'
+                }
+            };
+        });
     </script>
 </body>
 
