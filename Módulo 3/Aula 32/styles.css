@@ -22,18 +22,18 @@ main section#seção-1 {
 }
 main section#seção-1 .arrows {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     top: 38%;
-    left: 9%;
+    left: 19vw;
     position: relative;
     align-items: center;
     color: #f0f8ffb6;
     font-size: 3em;
     font-weight: bold;
-    width: 80vw;
+    width: 60vw;
 }
 #prev-a, #nex-a {
-    position: absolute;
+    position: relative;
     z-index: 1;
 }
 main section#seção-1 div.meio {
