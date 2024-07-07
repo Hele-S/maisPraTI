@@ -50,11 +50,11 @@
     <main>
         <section id="seção-1">
             <div class="arrows">
-                <div id="prev"><a id='prev-a'class="link-button" href="#" onclick="previous()">&lt;</a></div>
-                <div id="nex"><a id='nex-a'class="link-button" href="#" onclick="next()">></a></div>
+                <div id="prev"><a id='prev-a' class="link-button" href="#" onclick="previous()">&lt;</a></div>
+                <div id="nex"><a id='nex-a' class="link-button" href="#" onclick="next()">></a></div>
             </div>
             <div class="meio">
-                
+
                 <div class="recheio" id="0">
                     <h1 class="display-1 font-weight-bold text-light text-center">Música para todos</h1>
                     <div class="d-flex justify-content-center pt-5">
@@ -95,6 +95,25 @@
                 <p>Escute os novos lançamentos de singles e àlbuns da semana e veja o que está bombando no Top 50.</p>
             </div>
         </section>
+        <section id="seção-3" class="d-flex justify-content-center">
+            <div id="text">
+                <h1>Fácil</h1>
+                <h2>Buscar</h2>
+                <p>Já sabe o que quer escutar? É só procurar e apertar o play.</p>
+                <h2>Navegar</h2>
+                <p>Veja os novos lançamentos, o que está bombando nas paradas e as melhores playlists para o seu
+                    momento.</p>
+                <h2>Descobrir</h2>
+                <p>Curta músicas novas toda segunda-feira com uma playlist personalizada pra voçê. Ou relaxe e curta uma
+                    das rádios.</p>
+            </div>
+            <div id="angle">
+                <div id="Iphones">
+                    <img src="./imagens/iphone1.png" class="img" alt="">
+                    <img src="./imagens/iphone2.png" class="img" alt="">
+                </div>
+            </div>
+        </section>
     </main>
     <script>
         let currentIndex = 0;
@@ -110,15 +129,15 @@
                 content[currentIndex].style.transform = 'translateX(100%)';
             }
 
-            
-                content[newIndex].style.transition = 'none';
-                content[newIndex].style.transform = direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
-                setTimeout(() => {
+
+            content[newIndex].style.transition = 'none';
+            content[newIndex].style.transform = direction === 'right' ? 'translateX(100%)' : 'translateX(-100%)';
+            setTimeout(() => {
                 requestAnimationFrame(() => {
                     content[newIndex].style.transition = 'transform 1s';
                     content[newIndex].style.transform = 'translateX(0)';
                 })
-            }, "500")
+            }, "300")
             // console.log(direction)
             console.log(`Atual ${currentIndex} Novo ${newIndex}`)
             currentIndex = newIndex;

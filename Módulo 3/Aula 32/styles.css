@@ -99,7 +99,41 @@ main section#seção-2 div#content h1{
     font-size: 2rem;
     font-weight: bold;
 }
+
 main section#seção-2 div#content h1 span{
     font-weight: bold;
     font-size: 3rem;
 }
+
+main section#seção-3 div#angle {
+    position: relative;
+    top: .5em;
+    left: 5em;
+    rotate: 30deg;
+
+}
+
+main section#seção-3 div#Iphones {
+    height: fit-content;
+    position: relative;
+    scale: .9;
+}
+
+main section#seção-3 img {
+    margin: 0 20px;
+}
+
+main section#seção-3 div#text {
+    height: fit-content;
+    width: 21em;
+    color: aliceblue;
+    font-size: 1em;
+    margin-left: 3em;
+    font-weight: bold;
+}
+
+main section#seção-3 div#text h2 {
+    color: #9BEFE2;
+}
+
+/* 9CF0B1*/
