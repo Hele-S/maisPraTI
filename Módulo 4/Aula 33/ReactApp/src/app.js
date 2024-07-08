@@ -1,10 +1,10 @@
 import React from 'react'
 
-const app = () => {
-    return (
-        <h1>
+const App = () => {
+    return(
+       <h1>
             Olá, Mundo!
-        </h1>
+       </h1>
     )
 }
 

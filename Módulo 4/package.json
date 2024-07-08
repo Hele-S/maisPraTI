@@ -1,9 +1,10 @@
 {
   "description": "",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "cd \"C:\\Users\\Helenaldo\\Desktop\\Coisas do VSCode\\+PraTI\\Módulo 4\\Aula 33\\ReactApp\" && webpack-dev-server",
+    "build": "webpack"
   },
-  "dependencies": {
+  "devDependencies": {
     "@babel/cli": "^7.24.7",
     "@babel/core": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
