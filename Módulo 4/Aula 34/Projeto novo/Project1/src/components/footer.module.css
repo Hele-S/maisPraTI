@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+}
+.rodape1 {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: black;
+    color: antiquewhite;
+    font-size: 2em;
+}
+.rodape2 {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color:antiquewhite ;
+    color: black;
+    font-size: 2.5em;
+}
