@@ -4,7 +4,7 @@
     "start": "cd \"C:\\Users\\Helenaldo\\Desktop\\Coisas do VSCode\\+PraTI\\Módulo 4\\Aula 33\\ReactApp\" && webpack-dev-server",
     "build": "webpack"
   },
-  "devDependencies": {
+  "Dependencies": {
     "@babel/cli": "^7.24.7",
     "@babel/core": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
