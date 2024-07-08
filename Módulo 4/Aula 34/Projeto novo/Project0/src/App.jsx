@@ -1,6 +1,6 @@
-import HelloWorld from "./components/HelloWorld";
+import HeaderAttempt from "./components/HeaderAttempt";
 function App() {
-    return <HelloWorld/>
+    return <HeaderAttempt/>
   }
   
     export default App

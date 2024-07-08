@@ -1,7 +1,8 @@
+import classe from './Header.module.css'
 function HeaderAttempt(){
     return(
         <header>
-            <h1>Navbar</h1>
+            <h1 className={classe.titulo}>Navbar</h1>
             <ul>
                 <li><a href="">Login</a></li>
                 <li><a href="">Home</a></li>
