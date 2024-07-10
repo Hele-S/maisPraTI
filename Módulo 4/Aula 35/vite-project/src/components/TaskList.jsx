@@ -11,7 +11,7 @@ function TaskList() {
     }
     return(
         <div>
-            <input type="text" onChange={(e) => setInputValue(e.target.value)} />
+            <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
             <button onClick={addTask}>Adcionar Tarefa</button>
 
             <ul>

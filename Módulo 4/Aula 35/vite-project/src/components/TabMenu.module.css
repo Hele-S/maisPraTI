@@ -1,0 +1,22 @@
+.btns {
+    display: flex;
+    flex-direction: row;   
+    z-index: 1;
+}
+
+.btns>button {
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+.content {
+    margin: 0;
+    background-color: rgba(0, 85, 255, 0.278);
+    border-radius:10px;
+    width: 100%;
+    /* padding-top: 1em; */
+    /* transform: translateY(-1em); */
+}
+.content>ul {
+    margin: 0;
+}

@@ -4,7 +4,7 @@ function Counter() {
     const [text, newText] = useState();
     
     return(
-        <div>
+        <div id="mirror">
             <textarea id="texto" onChange={() => newText(document.getElementById("texto").value)}></textarea>
             <p>{text}</p>
             {/* <button onClick={() => setCount(count + 1)}> Clique aqui </button> */}

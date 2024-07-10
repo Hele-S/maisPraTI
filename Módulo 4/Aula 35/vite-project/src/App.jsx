@@ -1,12 +1,12 @@
-// import Counter from './components/counter'
+import Counter from './components/counter'
 import TaskList from './components/TaskList'
-// import './App.css'
-
+import TabMenu from './components/TabMenu'
 function App() {
   return(
     <>
+    <Counter />
     <TaskList />
-    {/* <Counter /> */}
+    <TabMenu />
     </>
   )
 }
