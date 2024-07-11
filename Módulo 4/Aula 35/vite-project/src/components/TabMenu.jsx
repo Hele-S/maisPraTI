@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import style from './TabMenu.module.css'
 function TabMenu() {
-    const [tab, setTab] = useState()
     const tab1 =
-        <ul>
+    <ul>
             <li>React é muito confuso</li>
             <li>Não to entendendo nada</li>
             <li>Vai ficar uma bunda</li>
@@ -20,8 +19,10 @@ function TabMenu() {
             <li>Não sei se é assim que faz</li>
             <li>Depois tem que colocar estilo ainda</li>
         </ul>;
+            const [tab, setTab] = useState(tab1)
     return (
         <div>
+            <h2>Menu de abas</h2>
             <div className= {style.btns}>
                 <button onClick={() => setTab(tab1)}>Home</button>
                 <button onClick={() => setTab(tab2)}>Login</button>

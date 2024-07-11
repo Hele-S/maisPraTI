@@ -1,10 +1,12 @@
-import Counter from './components/counter'
+// import Counter from './components/counter'
+import MirrorText from './components/MirrorText'
 import TaskList from './components/TaskList'
 import TabMenu from './components/TabMenu'
 function App() {
   return(
     <>
-    <Counter />
+    {/* <Counter /> */}
+    <MirrorText />
     <TaskList />
     <TabMenu />
     </>

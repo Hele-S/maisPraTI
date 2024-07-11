@@ -1,14 +1,16 @@
 .btns {
     display: flex;
     flex-direction: row;   
-    z-index: 1;
 }
 
 .btns>button {
     padding-left: 3em;
     padding-right: 3em;
 }
-
+h2 {
+display: flex;
+justify-content: center;
+}
 .content {
     margin: 0;
     background-color: rgba(0, 85, 255, 0.278);
@@ -19,4 +21,8 @@
 }
 .content>ul {
     margin: 0;
+}
+
+ul {
+    list-style-position: inside;
 }

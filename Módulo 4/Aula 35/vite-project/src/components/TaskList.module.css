@@ -1,0 +1,30 @@
+.TESTE {
+    display: flex;
+    flex-direction: column;
+}
+ul {
+    list-style-position:inside ;
+    background-color: rgba(0, 85, 255, 0.278);
+    border-radius: 10px;   
+    padding: 0.4em;
+    min-height: 1.5em;
+}
+button {
+    margin-bottom:1em;
+}
+
+.delete {
+    position: absolute;
+    transform: translateX(11em);
+    padding: 5px;
+    margin-bottom: 100px;
+    /* background:none; */
+    color: rgba(255, 0, 0, 0.6);
+}
+
+hr {
+    border:none;
+    padding: 1px;
+    background: radial-gradient(white,rgba(0, 85, 255, 0.1) 90%);
+    opacity: .4;
+}

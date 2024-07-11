@@ -1,0 +1,14 @@
+p {
+    background-color: rgba(0, 85, 255, 0.278);
+    line-break:strict;
+    overflow-x: auto;
+    width: 10em;
+    padding: 0.4em;
+    border-radius: 10px;
+    min-height: 1.5em;
+}
+
+textarea {
+    height: 15em;
+    padding: 0.5em;
+}
