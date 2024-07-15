@@ -1,0 +1,8 @@
+* {
+    margin-top: .5rem
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
