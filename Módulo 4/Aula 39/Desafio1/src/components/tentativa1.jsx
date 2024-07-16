@@ -22,7 +22,7 @@ function Desafio1() {
         <>
             <PreferencesContext.Provider value={{ preferences, toggleTheme, changeLanguage }}>
 
-                <div style={{ backgroundColor: preferences.theme === 'light' ? 'white' : 'black', color: preferences.theme === 'light' ? 'black' : 'white' }}>
+                <div style={{ backgroundColor: preferences.theme === 'light' ? 'white' : 'black' , color: preferences.theme === 'light' ? 'black' : 'white' }}>
                     <Toolbar />
                     <button onClick={toggleTheme}>Trocar o Tema</button>
                     <button onClick={() => changeLanguage('pt-br')}>PT-BR</button>
