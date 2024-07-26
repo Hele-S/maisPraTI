@@ -2,7 +2,7 @@ import axios from 'axios'
 
 function GetUser() {
     const ShowUser = () =>{
-    axios.get(`https:reqres.in/api/users/${2}`).then(response => {console.log(`Dados o usuário: `, response.data)
+    axios.get(`https:reqres.in/api/users/2`).then(response => {console.log(`Dados o usuário: `, response.data.data.first_name)
     alert('Usuário recuperado:' + JSON.stringify(response.data) )})
     .catch(error => {
         console.log('Erro ao recuperar usuário: ', error)
