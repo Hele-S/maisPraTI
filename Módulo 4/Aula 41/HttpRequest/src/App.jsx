@@ -1,6 +1,7 @@
 import Form from './components/Form'
 import GetUser from './components/GetUser'
 import PutUser from './components/PutUser'
+import DeleteRequest from './components/DeleteRequest'
 function App() {
 
   return (
@@ -8,6 +9,7 @@ function App() {
       <Form />
       <GetUser />
       <PutUser />
+      <DeleteRequest />
     </>
   )
 }
