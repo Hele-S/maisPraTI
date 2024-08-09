@@ -8,11 +8,13 @@ const Container = styled.div`
     align-items:center;
     flex-direction:column;
     background-color: #b3b3b3;
-    margin: 0 auto;
+    margin: auto;
     padding: 15px;
     width: fit-content;
     max-height:30em;
     margin-bottom: 1em;
+    vertical-align: middle;
+
 `
 const Title = styled.h2`
     color: #333;
@@ -43,9 +45,7 @@ const Button = styled.button`
 const IPAddressFinder = () => {
     const [text, setText] = useState('')
     const [IP, setIP] = useState(null)
-    // const ipAddress = "{IP-ADDRESS}";
-    // const url = `https://freeipapi.com/api/json/${ipAddress}`; // to get specific ip's info
-    // const url = `https://freeipapi.com/api/json/${text}`; // to get current request's ip info
+   
     const HandleSearch = async () => {
         try {
             const response = await axios.get(`https://freeipapi.com/api/json/${text}`)
@@ -54,17 +54,6 @@ const IPAddressFinder = () => {
         } catch (error) {
             console.error(error)
         }
-        // axios.get(`https://freeipapi.com/api/json/${ip}`)
-        // .then(response => {
-        //     const data = response.data;
-        //     console.log(data);
-            
-        //     return()
-        // })
-        // .catch(error => {
-        //     return(console.error(error))
-
-        // });
         
     }
 
@@ -77,6 +66,7 @@ const IPAddressFinder = () => {
                 type='text'
                 value={text}
                 onChange={(event) => setText(event.target.value)}
+                placeholder='Insira o Endereço de IP'
             />
             {IP && (
                 <Board>
