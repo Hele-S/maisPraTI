@@ -3,10 +3,16 @@ import axios from 'axios'
 import styled from 'styled-components'
 
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background-color: #b3b3b3;
+    margin: 0 auto;
+    padding: 15px;
+    width: fit-content;
+    max-height:30em;
+    margin-top: 1em;
 `
 
 const Title = styled.h2`
