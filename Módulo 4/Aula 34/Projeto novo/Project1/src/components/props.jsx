@@ -1,4 +1,4 @@
-function props({props}) {
+function Props({props}) {
     return (
         <div>
             <p>{props.author}</p>
@@ -8,4 +8,4 @@ function props({props}) {
 
 }
 
-export default props
+export default Props
