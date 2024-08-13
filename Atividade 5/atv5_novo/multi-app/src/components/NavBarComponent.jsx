@@ -80,27 +80,27 @@ const NavBarComponent = ( {/*Redirect*/ logOut} ) => {
         <FaBars size={24} color="#2C3E50" />
       </NavBarToggle>
       <NavBar open={isNavBarOpen}>
-        <StyledLink to="/qr-code-generator" >{/*onClick={() => Redirect([0, "QRCodeGenerator"])}>*/}
+        <StyledLink to="/qr-code-generator" >
           <FaQrcode />
           QR Code Generator
         </StyledLink>
-        <StyledLink to="/ip-address-finder" >{/*onClick={() => Redirect([1, "IPAddressFinder"])}>*/}
+        <StyledLink to="/ip-address-finder" >
           <FaNetworkWired />
           IP Address Finder
         </StyledLink>
-        <StyledLink to="/movie-search-engine" >{/*onClick={() => Redirect([2, "MovieSearchEngine"])}>*/}
+        <StyledLink to="/movie-search-engine" >
           <FaSearch />
           Movie Search
         </StyledLink>
-        <StyledLink to="/to-do-app" >{/*onClick={() => Redirect([3, "TodoApp"])}>*/}
+        <StyledLink to="/to-do-app" >
           <FaTasks />
           Todo App
         </StyledLink>
-        <StyledLink to="/quiz-app" >{/*onClick={() => Redirect([4, "QuizApp"])}>*/}
+        <StyledLink to="/quiz-app" >
           <FaRegQuestionCircle />
           Quiz App
         </StyledLink>
-        <StyledLink to="/language-translator" >{/*onClick={() => Redirect([5, "LanguageTranslator"])}>*/}
+        <StyledLink to="/language-translator" >
           <FaGlobeAmericas />
           Translator
         </StyledLink>
