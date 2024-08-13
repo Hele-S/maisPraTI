@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import {
   Route,
   Routes,
-  Navigate,
+  // Navigate,
   useNavigate,
   // useLocation,
   Link,
@@ -151,12 +151,12 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isNavBarOpen, setIsNavBarOpen] = useState(false);
   const [currentComponent, setCurrentComponent] = useState(null);
-  
+
   //NOVO função para atualizar o componente lá do CarouselComponent
   const updateComponent = (component) => {
     setCurrentComponent(component)
   }
-  
+
   const navigate = useNavigate(); // Hook para navegação.
 
   // Efeito colateral que redireciona para a página de login se não estiver autenticado.
@@ -171,6 +171,7 @@ const App = () => {
     setIsAuthenticated(true);
     renderComponent;
   };
+
 
   // Função para simular logout e redirecionar para a página de login.
   const handleLogout = () => {
@@ -210,7 +211,7 @@ const App = () => {
       case "LanguageTranslator":
         return <LanguageTranslator />;
       case null:
-        return <CarouselComponent componentSelected={updateComponent}/>;
+        return <CarouselComponent componentSelected={updateComponent} />;
       default:
         return null;
     }
@@ -219,15 +220,16 @@ const App = () => {
   // Renderiza o componente principal.
   return (
     <AppContainer>
-      <NavBarToggle onClick={toggleNavBar}>
-        <FaBars size={24} color="#2C3E50" />
-      </NavBarToggle>
+
       {!isAuthenticated ? (
         <MainContent>
           <Login onLogin={handleLogin} />
         </MainContent>
       ) : (
         <>
+          <NavBarToggle onClick={toggleNavBar}>
+            <FaBars size={24} color="#2C3E50" />
+          </NavBarToggle>
           <NavBar open={isNavBarOpen}>
             <StyledLink onClick={() => handleAccess("QRCodeGenerator")}>
               <FaQrcode />
@@ -274,7 +276,7 @@ const App = () => {
                     <FaArrowLeft /> Return
                   </ReturnButton>
                 </>
-              }/>
+              } />
               {/* {currentComponent ? (
                 <>
                   {renderComponent()}
@@ -283,7 +285,7 @@ const App = () => {
                   </ReturnButton>
                 </>
               ) : ( */}
-                
+
               {/* )} */}
             </Routes>
             <Footer>© 2024 Your Company | All rights reserved</Footer>
