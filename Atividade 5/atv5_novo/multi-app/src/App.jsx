@@ -5,10 +5,10 @@ import {
   Routes,
   Navigate,
   useNavigate,
-  useLocation,
+  // useLocation,
   Link,
 } from "react-router-dom";
-import { Carousel } from "react-responsive-carousel";
+
 import styled from "styled-components";
 import {
   FaQrcode,
@@ -27,6 +27,7 @@ import TodoApp from "./components/TodoApp";
 import QuizApp from "./components/QuizApp";
 import LanguageTranslator from "./components/LanguageTranslator";
 import Login from "./components/Login";
+import CarouselComponent from "./components/CarouselComponent";
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -51,19 +52,7 @@ const MainContent = styled.div`
   overflow: hidden;
 `;
 
-// Estiliza o contêiner do carrossel.
-const CarouselContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 80%;
-  height: 70%;
-  margin: auto;
-  background-color: #2c3e50;
-  border-radius: 20px;
-  padding: 20px;
-`;
+
 
 // Estiliza a barra de navegação.
 const NavBar = styled.div`
@@ -133,47 +122,7 @@ const Footer = styled.div`
   }
 `;
 
-// Estiliza os itens individuais do carrossel.
-const CarouselItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #ff7e5f, #feb47b);
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
-  height: 100%;
-  width: 100%;
 
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  }
-
-  h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: white;
-  }
-
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 16px;
-
-    &:hover {
-      background-color: #0056b3;
-    }
-  }
-`;
 
 // Estiliza o botão de retorno.
 const ReturnButton = styled.button`
@@ -193,13 +142,8 @@ const ReturnButton = styled.button`
   }
 `;
 
-// Estiliza o carrossel personalizado.
-const CustomCarousel = styled(Carousel)`
-  width: 100%;
-  .carousel-status {
-    display: none;
-  }
-`;
+
+
 
 // Define o componente principal do aplicativo.
 const App = () => {
@@ -207,7 +151,12 @@ const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isNavBarOpen, setIsNavBarOpen] = useState(false);
   const [currentComponent, setCurrentComponent] = useState(null);
-  const [carouselIndex, setCarouselIndex] = useState(0);
+  
+  //NOVO função para atualizar o componente lá do CarouselComponent
+  const updateComponent = (component) => {
+    setCurrentComponent(component)
+  }
+  
   const navigate = useNavigate(); // Hook para navegação.
 
   // Efeito colateral que redireciona para a página de login se não estiver autenticado.
@@ -220,7 +169,7 @@ const App = () => {
   // Função para simular login e redirecionar para o gerador de QR code.
   const handleLogin = () => {
     setIsAuthenticated(true);
-    navigate("/qrcode-generator");
+    renderComponent;
   };
 
   // Função para simular logout e redirecionar para a página de login.
@@ -235,8 +184,8 @@ const App = () => {
   };
 
   // Função para definir o componente atual a ser exibido e atualizar o índice do carrossel.
-  const handleAccess = (index, component) => {
-    setCarouselIndex(index);
+  const handleAccess = (component) => {
+    // setCarouselIndex(index);
     setCurrentComponent(component);
   };
 
@@ -260,6 +209,8 @@ const App = () => {
         return <QuizApp />;
       case "LanguageTranslator":
         return <LanguageTranslator />;
+      case null:
+        return <CarouselComponent componentSelected={updateComponent}/>;
       default:
         return null;
     }
@@ -277,28 +228,28 @@ const App = () => {
         </MainContent>
       ) : (
         <>
-          <NavBar open = {isNavBarOpen}>
-            <StyledLink onClick={() => handleAccess(0, "QRCodeGenerator")}>
+          <NavBar open={isNavBarOpen}>
+            <StyledLink onClick={() => handleAccess("QRCodeGenerator")}>
               <FaQrcode />
               QR Code Generator
             </StyledLink>
-            <StyledLink onClick={() => handleAccess(1, "IPAddressFinder")}>
+            <StyledLink onClick={() => handleAccess("IPAddressFinder")}>
               <FaNetworkWired />
               IP Address Finder
             </StyledLink>
-            <StyledLink onClick={() => handleAccess(2, "MovieSearchEngine")}>
+            <StyledLink onClick={() => handleAccess("MovieSearchEngine")}>
               <FaSearch />
               Movie Search
             </StyledLink>
-            <StyledLink onClick={() => handleAccess(3, "TodoApp")}>
+            <StyledLink onClick={() => handleAccess("TodoApp")}>
               <FaTasks />
               Todo App
             </StyledLink>
-            <StyledLink onClick={() => handleAccess(4, "QuizApp")}>
+            <StyledLink onClick={() => handleAccess("QuizApp")}>
               <FaRegQuestionCircle />
               Quiz App
             </StyledLink>
-            <StyledLink onClick={() => handleAccess(5, "LanguageTranslator")}>
+            <StyledLink onClick={() => handleAccess("LanguageTranslator")}>
               <FaGlobeAmericas />
               Translator
             </StyledLink>
@@ -315,67 +266,26 @@ const App = () => {
             </button>
           </NavBar>
           <MainContent>
-            {currentComponent ? (
-              <>
-                {renderComponent()}
-                <ReturnButton onClick={handleReturn}>
-                  <FaArrowLeft /> Return
-                </ReturnButton>
-              </>
-            ) : (
-              <CarouselContainer>
-                <CustomCarousel
-                  showArrows={true}
-                  showThumbs={false}
-                  infiniteLoop={true}
-                  autoPlay={true}
-                  interval={5000}
-                  selectedItem={carouselIndex}
-                  onChange={(index) => setCarouselIndex(index)}
-                >
-                  <CarouselItem>
-                    <h2>QR Code Generator</h2>
-                    <button onClick={() => handleAccess(0, "QRCodeGenerator")}>
-                      Acessar
-                    </button>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <h2>IP Address Finder</h2>
-                    <button onClick={() => handleAccess(1, "IPAddressFinder")}>
-                      Acessar
-                    </button>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <h2>Movie Search Engine</h2>
-                    <button
-                      onClick={() => handleAccess(2, "MovieSearchEngine")}
-                    >
-                      Acessar
-                    </button>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <h2>Todo App</h2>
-                    <button onClick={() => handleAccess(3, "TodoApp")}>
-                      Acessar
-                    </button>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <h2>Quiz App</h2>
-                    <button onClick={() => handleAccess(4, "QuizApp")}>
-                      Acessar
-                    </button>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <h2>Language Translator</h2>
-                    <button
-                      onClick={() => handleAccess(5, "LanguageTranslator")}
-                    >
-                      Acessar
-                    </button>
-                  </CarouselItem>
-                </CustomCarousel>
-              </CarouselContainer>
-            )}
+            <Routes>
+              <Route path="/" element={
+                <>
+                  {renderComponent()}
+                  <ReturnButton onClick={handleReturn}>
+                    <FaArrowLeft /> Return
+                  </ReturnButton>
+                </>
+              }/>
+              {/* {currentComponent ? (
+                <>
+                  {renderComponent()}
+                  <ReturnButton onClick={handleReturn}>
+                    <FaArrowLeft /> Return
+                  </ReturnButton>
+                </>
+              ) : ( */}
+                
+              {/* )} */}
+            </Routes>
             <Footer>© 2024 Your Company | All rights reserved</Footer>
           </MainContent>
         </>
