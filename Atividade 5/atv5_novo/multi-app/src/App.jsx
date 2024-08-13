@@ -8,8 +8,6 @@ import {
   // useLocation,
   // Link,
 } from "react-router-dom";
-
-import styled from "styled-components";
 import {
   FaArrowLeft,
 } from "react-icons/fa";
@@ -22,63 +20,9 @@ import LanguageTranslator from "./components/LanguageTranslator";
 import Login from "./components/Login";
 import CarouselComponent from "./components/CarouselComponent";
 import NavBarComponent from "./components/NavBarComponent";
+import { AppContainer, MainContent, Footer, ReturnButton } from "./assets/App-styling";
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
-// Estiliza o contêiner principal do aplicativo.
-const AppContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 100vh;
-  background-color: #f0f0f0;
-`;
-
-// Estiliza o conteúdo principal do aplicativo.
-const MainContent = styled.div`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
-`;
-
-// Estiliza o rodapé do aplicativo.
-const Footer = styled.div`
-  width: 100%;
-  background-color: #2c3e50;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  position: absolute;
-  bottom: 0;
-
-  @media (max-width: 768px) {
-    padding: 5px 0;
-    font-size: 12px;
-  }
-`;
-
-// Estiliza o botão de retorno.
-const ReturnButton = styled.button`
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
 
 // Define o componente principal do aplicativo.
 const App = () => {
@@ -124,11 +68,11 @@ const App = () => {
 
   // Função para retornar ao carrossel principal.
   const handleReturn = () => {
-    setCurrentComponent(["x",'Carousel']);
+    setCurrentComponent(["",'Carousel']);
   };
 
   
-
+// Efeito colateral para manter o index do Carousel atualizado conforme o último componente acessado
   useEffect(() => {
     setCarouselIndex(currentComponent[0])
   }, [currentComponent])
@@ -138,7 +82,7 @@ const App = () => {
   const renderComponent = () => {
     switch (currentComponent[1]) {
       case "QRCodeGenerator":
-        return <QRCodeGenerator />;
+        return <QRCodeGenerator path="/qr-code-generator"/>
       case "IPAddressFinder":
         return <IPAddressFinder />;
       case "MovieSearchEngine":
@@ -159,7 +103,6 @@ const App = () => {
   // Renderiza o componente principal.
   return (
     <AppContainer>
-
       {!isAuthenticated ? (
         <MainContent>
           <Login onLogin={handleLogin} />
