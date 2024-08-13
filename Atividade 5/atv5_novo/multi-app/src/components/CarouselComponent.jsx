@@ -1,5 +1,9 @@
+// Importando a lib para desenvolvimento do carousel e o hook para navegar entre os diferentes paths
 import { Carousel } from "react-responsive-carousel";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom"; 
+
+
 
 // Estiliza o contêiner do carrossel.
 const CarouselContainer = styled.div`
@@ -64,15 +68,20 @@ const CarouselItem = styled.div`
     }
   }
 `;
+  
 /* eslint-disable react/prop-types */
 //Componente Caroousel trazendo a função "handleAccess" do App.jsx com nome de "componentSelected"
-const CarouselComponent = ({ componentSelected, newIndex }) => {
+const CarouselComponent = ({ newIndex }) => {
 
+  const navigate = useNavigate(); //Atribuindo o hook para navegação
+
+  //Conteúdo que será renderizado no App
   return (
     <CarouselContainer>
       <CustomCarousel
         showArrows={true}
         showThumbs={false}
+        showIndicators={true}
         infiniteLoop={true}
         autoPlay={true}
         interval={5000}
@@ -80,53 +89,37 @@ const CarouselComponent = ({ componentSelected, newIndex }) => {
       >
         <CarouselItem>
           <h2>QR Code Generator</h2>
-          <button onClick={() => {
-            componentSelected([0, "QRCodeGenerator"])
-          }}>
+          <button onClick={() => navigate('/qr-code-generator')}>
             Acessar
           </button>
         </CarouselItem>
         <CarouselItem>
           <h2>IP Address Finder</h2>
-          <button onClick={() => {
-            componentSelected([1, "IPAddressFinder"])
-          }}>
+          <button onClick={() => navigate('/ip-address-finder')}>
             Acessar
           </button>
         </CarouselItem>
         <CarouselItem>
           <h2>Movie Search Engine</h2>
-          <button
-            onClick={() => {
-              componentSelected([2, "MovieSearchEngine"])
-            }}
-          >
+          <button onClick={() => navigate('/movie-search-engine')}>
             Acessar
           </button>
         </CarouselItem>
         <CarouselItem>
           <h2>Todo App</h2>
-          <button onClick={() => {
-            componentSelected([3, "TodoApp"])
-          }}>
+          <button onClick={() => navigate('/to-do-app')}>
             Acessar
           </button>
         </CarouselItem>
         <CarouselItem>
-          <h2>Quiz App</h2>
-          <button onClick={() => {
-            componentSelected([4, "QuizApp"])
-          }}>
+        <h2>Quiz App</h2>
+        <button onClick={() => navigate('/quiz-app')}>
             Acessar
           </button>
         </CarouselItem>
         <CarouselItem>
           <h2>Language Translator</h2>
-          <button
-            onClick={() => {
-              componentSelected([5, "LanguageTranslator"])
-            }}
-          >
+          <button onClick={() => navigate('/language-translator')}>
             Acessar
           </button>
         </CarouselItem>
@@ -134,4 +127,6 @@ const CarouselComponent = ({ componentSelected, newIndex }) => {
     </CarouselContainer>
   )
 }
+
+//Exporta o componente "CarouselComponent" para ser usado em App.jsx
 export default CarouselComponent

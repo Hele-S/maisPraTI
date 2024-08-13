@@ -5,7 +5,7 @@ import {
   Routes,
   // Navigate,
   useNavigate,
-  // useLocation,
+  useLocation,
   // Link,
 } from "react-router-dom";
 import {
@@ -24,17 +24,21 @@ import { AppContainer, MainContent, Footer, ReturnButton } from "./assets/App-st
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+  //Lista de rotas do app
+  const routeMap = {
+    0:"/qr-code-generator",
+    1:"/ip-address-finder",
+    2:"/movie-search-engine",
+    3:"/to-do-app",
+    4:"/quiz-app",
+    5:"/language-translator",
+    6:"/carousel"
+  }
 // Define o componente principal do aplicativo.
 const App = () => {
-  // Cria estados para autenticação, visibilidade da barra de navegação, componente atual e novo index do carousel
+  // Cria estados para autenticação, componente atual e novo index do carousel
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
-  const [currentComponent, setCurrentComponent] = useState([0, "QRCodeGenerator"]);
-
-  //NOVO função para atualizar o componente lá do CarouselComponent
-  const updateComponent = (component) => {
-    setCurrentComponent(component)
-  }
 
   const navigate = useNavigate(); // Hook para navegação.
 
@@ -48,9 +52,8 @@ const App = () => {
   // Função para simular login e redirecionar para o gerador de QR code.
   const handleLogin = () => {
     setIsAuthenticated(true);
-    setCurrentComponent([0,"QRCodeGenerator"])
+    navigate("/qr-code-generator");
   };
-
 
   // Função para simular logout e redirecionar para a página de login.
   const handleLogout = () => {
@@ -58,47 +61,24 @@ const App = () => {
     navigate("/");
   };
 
-
-  // Função para definir o componente atual a ser exibido e atualizar o índice do carrossel.
-  const handleAccess = ( component ) => {
-    // setCarouselIndex(index);
-    setCurrentComponent(component);
-    renderComponent
-  };
-
-  // Função para retornar ao carrossel principal.
+   // Função para retornar ao carrossel principal.
   const handleReturn = () => {
-    setCurrentComponent(["",'Carousel']);
+    return(
+      navigate("/carousel")
+    )
   };
 
-  
-// Efeito colateral para manter o index do Carousel atualizado conforme o último componente acessado
+  //Atribuição do hook useLocation para localizar o endereço atual
+  const location = useLocation();
+
+// Efeito colateral para manter o index do Carousel atualizado conforme o último endereço acessado
   useEffect(() => {
-    setCarouselIndex(currentComponent[0])
-  }, [currentComponent])
-
-
-  // Função para renderizar o componente atual com base no estado.
-  const renderComponent = () => {
-    switch (currentComponent[1]) {
-      case "QRCodeGenerator":
-        return <QRCodeGenerator path="/qr-code-generator"/>
-      case "IPAddressFinder":
-        return <IPAddressFinder />;
-      case "MovieSearchEngine":
-        return <MovieSearchEngine />;
-      case "TodoApp":
-        return <TodoApp />;
-      case "QuizApp":
-        return <QuizApp />;
-      case "LanguageTranslator":
-        return <LanguageTranslator />;
-      case "Carousel":
-        return <CarouselComponent componentSelected={updateComponent} newIndex={carouselIndex} />;
-      default:
-        return null;
+    for (let i in routeMap) {
+      if (routeMap[i] === location.pathname) {
+        setCarouselIndex(i)
+      }
     }
-  };
+  }, [location])
 
   // Renderiza o componente principal.
   return (
@@ -109,17 +89,67 @@ const App = () => {
         </MainContent>
       ) : (
         <>
-          <NavBarComponent Redirect={handleAccess} logOut={handleLogout}/>
+          <NavBarComponent logOut={handleLogout}/>
           <MainContent>
             <Routes>
-              <Route path="/" element={
+              <Route path={routeMap['0']} element={
                 <>
-                  {renderComponent()}
+                  <QRCodeGenerator/>
                   <ReturnButton onClick={handleReturn}>
                     <FaArrowLeft /> Return
                   </ReturnButton>
                 </>
               } />
+              <Route path={routeMap['1']} element={
+                <>
+                  <IPAddressFinder />
+                  <ReturnButton onClick={handleReturn}>
+                    <FaArrowLeft /> Return
+                  </ReturnButton>
+                </>
+              } />
+              <Route path={routeMap['2']} element={
+                <>
+                  <MovieSearchEngine />
+                  <ReturnButton onClick={handleReturn}>
+                    <FaArrowLeft /> Return
+                  </ReturnButton>
+                </>
+              } />
+              <Route path={routeMap['3']} element={
+                <>
+                  <TodoApp />
+                  <ReturnButton onClick={handleReturn}>
+                    <FaArrowLeft /> Return
+                  </ReturnButton>
+                </>
+              } />
+              <Route path={routeMap['4']} element={
+                <>
+                  <QuizApp />
+                  <ReturnButton onClick={handleReturn}>
+                    <FaArrowLeft /> Return
+                  </ReturnButton>
+                </>
+              } />
+              <Route path={routeMap['5']} element={
+                <>
+                  <LanguageTranslator />;
+                  <ReturnButton onClick={handleReturn}>
+                    <FaArrowLeft /> Return
+                  </ReturnButton>
+                </>
+              } />
+              <Route path={routeMap['6']} element={
+                <>
+                <CarouselComponent newIndex={carouselIndex} />;
+                <ReturnButton onClick={handleReturn}>
+                    <FaArrowLeft /> Return
+                  </ReturnButton>
+                </>
+              }>
+
+              </Route>
             </Routes>
             <Footer>© 2024 Your Company | All rights reserved</Footer>
           </MainContent>

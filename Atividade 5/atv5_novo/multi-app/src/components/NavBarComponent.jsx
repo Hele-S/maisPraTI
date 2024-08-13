@@ -1,3 +1,4 @@
+//Importando a lib styled para estilização de componentes, e outros componentes e hooks necessários para atribuição de constantes, links e ícones
 import styled from "styled-components";
 import { useState } from "react";
 import { Link } from "react-router-dom"
@@ -64,40 +65,42 @@ const StyledLink = styled(Link)`
 `;
 
 /* eslint-disable react/prop-types */
-const NavBarComponent = ( {Redirect, logOut} ) => {
+const NavBarComponent = ( {/*Redirect*/ logOut} ) => {
+  //Constante que retorna o estado da barra de navegação
     const [isNavBarOpen, setIsNavBarOpen] = useState(false);
     
     // Alterna a visibilidade da barra de navegação.
     const toggleNavBar = () => {
         setIsNavBarOpen(!isNavBarOpen);
       };
+      //Conteúdo que será renderizado no App
     return(
         <>
         <NavBarToggle onClick={toggleNavBar}>
         <FaBars size={24} color="#2C3E50" />
       </NavBarToggle>
       <NavBar open={isNavBarOpen}>
-        <StyledLink onClick={() => Redirect([0, "QRCodeGenerator"])}>
+        <StyledLink to="/qr-code-generator" >{/*onClick={() => Redirect([0, "QRCodeGenerator"])}>*/}
           <FaQrcode />
           QR Code Generator
         </StyledLink>
-        <StyledLink onClick={() => Redirect([1, "IPAddressFinder"])}>
+        <StyledLink to="/ip-address-finder" >{/*onClick={() => Redirect([1, "IPAddressFinder"])}>*/}
           <FaNetworkWired />
           IP Address Finder
         </StyledLink>
-        <StyledLink onClick={() => Redirect([2, "MovieSearchEngine"])}>
+        <StyledLink to="/movie-search-engine" >{/*onClick={() => Redirect([2, "MovieSearchEngine"])}>*/}
           <FaSearch />
           Movie Search
         </StyledLink>
-        <StyledLink onClick={() => Redirect([3, "TodoApp"])}>
+        <StyledLink to="/to-do-app" >{/*onClick={() => Redirect([3, "TodoApp"])}>*/}
           <FaTasks />
           Todo App
         </StyledLink>
-        <StyledLink onClick={() => Redirect([4, "QuizApp"])}>
+        <StyledLink to="/quiz-app" >{/*onClick={() => Redirect([4, "QuizApp"])}>*/}
           <FaRegQuestionCircle />
           Quiz App
         </StyledLink>
-        <StyledLink onClick={() => Redirect([5, "LanguageTranslator"])}>
+        <StyledLink to="/language-translator" >{/*onClick={() => Redirect([5, "LanguageTranslator"])}>*/}
           <FaGlobeAmericas />
           Translator
         </StyledLink>
@@ -116,5 +119,5 @@ const NavBarComponent = ( {Redirect, logOut} ) => {
       </>
     )
 }
-//aaaaaaaAAAAAAAAAAAAAAAA
+//Exportnado o compnente "NavBarComponent" para ser usado em App.jsx
 export default NavBarComponent
