@@ -1,0 +1,8 @@
+Lembretes:
+O botão "Return" fica escondido atrás do rodapé
+Talvez usar Navigate nos StyledLink do Carousel???
+
+Dúvidas:
+É obrigado a usar o navigate? tem problema todos os componentes no mesmo path?
+Que tipo de situação poderia usar o useLocation?
+Como estabelecer um "processo de revisão de código"?
