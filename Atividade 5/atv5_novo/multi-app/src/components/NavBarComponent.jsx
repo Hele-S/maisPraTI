@@ -116,5 +116,5 @@ const NavBarComponent = ( {Redirect, logOut} ) => {
       </>
     )
 }
-
+//aaaaaaaAAAAAAAAAAAAAAAA
 export default NavBarComponent
