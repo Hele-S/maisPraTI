@@ -1,5 +1,4 @@
 import { Carousel } from "react-responsive-carousel";
-import { useState } from "react";
 import styled from "styled-components";
 
 // Estiliza o contêiner do carrossel.
@@ -66,70 +65,73 @@ const CarouselItem = styled.div`
   }
 `;
 /* eslint-disable react/prop-types */
-const CarouselComponent = ( { componentSelected }) => {
+//Componente Caroousel trazendo a função "handleAccess" do App.jsx com nome de "componentSelected"
+const CarouselComponent = ({ componentSelected, newIndex }) => {
 
-  const [carouselIndex, setCarouselIndex] = useState(0);
-  
-
-  const handleAccess = (index, component) => {
-    setCarouselIndex(index);
-    componentSelected(component);
-
-  };
-
-    return (
-        <CarouselContainer>
-        <CustomCarousel
-          showArrows={true}
-          showThumbs={false}
-          infiniteLoop={true}
-          autoPlay={true}
-          interval={5000}
-          selectedItem={carouselIndex}
-          onChange={(index) => setCarouselIndex(index)}
-        >
-          <CarouselItem>
-            <h2>QR Code Generator</h2>
-            <button onClick={() => handleAccess(0, "QRCodeGenerator")}>
-              Acessar
-            </button>
-          </CarouselItem>
-          <CarouselItem>
-            <h2>IP Address Finder</h2>
-            <button onClick={() => handleAccess(1, "IPAddressFinder")}>
-              Acessar
-            </button>
-          </CarouselItem>
-          <CarouselItem>
-            <h2>Movie Search Engine</h2>
-            <button
-              onClick={() => handleAccess(2, "MovieSearchEngine")}
-            >
-              Acessar
-            </button>
-          </CarouselItem>
-          <CarouselItem>
-            <h2>Todo App</h2>
-            <button onClick={() => handleAccess(3, "TodoApp")}>
-              Acessar
-            </button>
-          </CarouselItem>
-          <CarouselItem>
-            <h2>Quiz App</h2>
-            <button onClick={() => handleAccess(4, "QuizApp")}>
-              Acessar
-            </button>
-          </CarouselItem>
-          <CarouselItem>
-            <h2>Language Translator</h2>
-            <button
-              onClick={() => handleAccess(5, "LanguageTranslator")}
-            >
-              Acessar
-            </button>
-          </CarouselItem>
-        </CustomCarousel>
-      </CarouselContainer>
-    )
+  return (
+    <CarouselContainer>
+      <CustomCarousel
+        showArrows={true}
+        showThumbs={false}
+        infiniteLoop={true}
+        autoPlay={true}
+        interval={5000}
+        selectedItem={newIndex}
+      >
+        <CarouselItem>
+          <h2>QR Code Generator</h2>
+          <button onClick={() => {
+            componentSelected([0, "QRCodeGenerator"])
+          }}>
+            Acessar
+          </button>
+        </CarouselItem>
+        <CarouselItem>
+          <h2>IP Address Finder</h2>
+          <button onClick={() => {
+            componentSelected([1, "IPAddressFinder"])
+          }}>
+            Acessar
+          </button>
+        </CarouselItem>
+        <CarouselItem>
+          <h2>Movie Search Engine</h2>
+          <button
+            onClick={() => {
+              componentSelected([2, "MovieSearchEngine"])
+            }}
+          >
+            Acessar
+          </button>
+        </CarouselItem>
+        <CarouselItem>
+          <h2>Todo App</h2>
+          <button onClick={() => {
+            componentSelected([3, "TodoApp"])
+          }}>
+            Acessar
+          </button>
+        </CarouselItem>
+        <CarouselItem>
+          <h2>Quiz App</h2>
+          <button onClick={() => {
+            componentSelected([4, "QuizApp"])
+          }}>
+            Acessar
+          </button>
+        </CarouselItem>
+        <CarouselItem>
+          <h2>Language Translator</h2>
+          <button
+            onClick={() => {
+              componentSelected([5, "LanguageTranslator"])
+            }}
+          >
+            Acessar
+          </button>
+        </CarouselItem>
+      </CustomCarousel>
+    </CarouselContainer>
+  )
 }
 export default CarouselComponent

@@ -6,18 +6,11 @@ import {
   // Navigate,
   useNavigate,
   // useLocation,
-  Link,
+  // Link,
 } from "react-router-dom";
 
 import styled from "styled-components";
 import {
-  FaQrcode,
-  FaSearch,
-  FaTasks,
-  FaRegQuestionCircle,
-  FaGlobeAmericas,
-  FaNetworkWired,
-  FaBars,
   FaArrowLeft,
 } from "react-icons/fa";
 import QRCodeGenerator from "./components/QRCodeGenarator";
@@ -28,6 +21,7 @@ import QuizApp from "./components/QuizApp";
 import LanguageTranslator from "./components/LanguageTranslator";
 import Login from "./components/Login";
 import CarouselComponent from "./components/CarouselComponent";
+import NavBarComponent from "./components/NavBarComponent";
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -52,60 +46,6 @@ const MainContent = styled.div`
   overflow: hidden;
 `;
 
-
-
-// Estiliza a barra de navegação.
-const NavBar = styled.div`
-  width: 240px;
-  background-color: #2c3e50;
-  color: white;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.3);
-
-  @media (max-width: 768px) {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: ${({ open }) => (open ? "flex" : "none")};
-  }
-`;
-
-// Estiliza o botão de alternância da barra de navegação.
-const NavBarToggle = styled.div`
-  display: none;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  z-index: 1000;
-
-  @media (max-width: 768px) {
-    display: block;
-  }
-`;
-
-// Estiliza os links na barra de navegação.
-const StyledLink = styled(Link)`
-  color: white;
-  text-decoration: none;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  transition: background-color 0.3s, color 0.3s;
-
-  &:hover {
-    background-color: #34495e;
-    color: #ecf0f1;
-  }
-`;
-
 // Estiliza o rodapé do aplicativo.
 const Footer = styled.div`
   width: 100%;
@@ -121,8 +61,6 @@ const Footer = styled.div`
     font-size: 12px;
   }
 `;
-
-
 
 // Estiliza o botão de retorno.
 const ReturnButton = styled.button`
@@ -142,15 +80,12 @@ const ReturnButton = styled.button`
   }
 `;
 
-
-
-
 // Define o componente principal do aplicativo.
 const App = () => {
-  // Cria estados para autenticação, visibilidade da barra de navegação, componente atual, e índice do carrossel.
+  // Cria estados para autenticação, visibilidade da barra de navegação, componente atual e novo index do carousel
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isNavBarOpen, setIsNavBarOpen] = useState(false);
-  const [currentComponent, setCurrentComponent] = useState(null);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [currentComponent, setCurrentComponent] = useState([0, "QRCodeGenerator"]);
 
   //NOVO função para atualizar o componente lá do CarouselComponent
   const updateComponent = (component) => {
@@ -169,7 +104,7 @@ const App = () => {
   // Função para simular login e redirecionar para o gerador de QR code.
   const handleLogin = () => {
     setIsAuthenticated(true);
-    renderComponent;
+    setCurrentComponent([0,"QRCodeGenerator"])
   };
 
 
@@ -179,25 +114,29 @@ const App = () => {
     navigate("/");
   };
 
-  // Alterna a visibilidade da barra de navegação.
-  const toggleNavBar = () => {
-    setIsNavBarOpen(!isNavBarOpen);
-  };
 
   // Função para definir o componente atual a ser exibido e atualizar o índice do carrossel.
-  const handleAccess = (component) => {
+  const handleAccess = ( component ) => {
     // setCarouselIndex(index);
     setCurrentComponent(component);
+    renderComponent
   };
 
   // Função para retornar ao carrossel principal.
   const handleReturn = () => {
-    setCurrentComponent(null);
+    setCurrentComponent(["x",'Carousel']);
   };
+
+  
+
+  useEffect(() => {
+    setCarouselIndex(currentComponent[0])
+  }, [currentComponent])
+
 
   // Função para renderizar o componente atual com base no estado.
   const renderComponent = () => {
-    switch (currentComponent) {
+    switch (currentComponent[1]) {
       case "QRCodeGenerator":
         return <QRCodeGenerator />;
       case "IPAddressFinder":
@@ -210,8 +149,8 @@ const App = () => {
         return <QuizApp />;
       case "LanguageTranslator":
         return <LanguageTranslator />;
-      case null:
-        return <CarouselComponent componentSelected={updateComponent} />;
+      case "Carousel":
+        return <CarouselComponent componentSelected={updateComponent} newIndex={carouselIndex} />;
       default:
         return null;
     }
@@ -227,46 +166,7 @@ const App = () => {
         </MainContent>
       ) : (
         <>
-          <NavBarToggle onClick={toggleNavBar}>
-            <FaBars size={24} color="#2C3E50" />
-          </NavBarToggle>
-          <NavBar open={isNavBarOpen}>
-            <StyledLink onClick={() => handleAccess("QRCodeGenerator")}>
-              <FaQrcode />
-              QR Code Generator
-            </StyledLink>
-            <StyledLink onClick={() => handleAccess("IPAddressFinder")}>
-              <FaNetworkWired />
-              IP Address Finder
-            </StyledLink>
-            <StyledLink onClick={() => handleAccess("MovieSearchEngine")}>
-              <FaSearch />
-              Movie Search
-            </StyledLink>
-            <StyledLink onClick={() => handleAccess("TodoApp")}>
-              <FaTasks />
-              Todo App
-            </StyledLink>
-            <StyledLink onClick={() => handleAccess("QuizApp")}>
-              <FaRegQuestionCircle />
-              Quiz App
-            </StyledLink>
-            <StyledLink onClick={() => handleAccess("LanguageTranslator")}>
-              <FaGlobeAmericas />
-              Translator
-            </StyledLink>
-            <button
-              onClick={handleLogout}
-              style={{
-                marginTop: "20px",
-                color: "white",
-                backgroundColor: "transparent",
-                border: "none",
-              }}
-            >
-              Logout
-            </button>
-          </NavBar>
+          <NavBarComponent Redirect={handleAccess} logOut={handleLogout}/>
           <MainContent>
             <Routes>
               <Route path="/" element={
@@ -277,16 +177,6 @@ const App = () => {
                   </ReturnButton>
                 </>
               } />
-              {/* {currentComponent ? (
-                <>
-                  {renderComponent()}
-                  <ReturnButton onClick={handleReturn}>
-                    <FaArrowLeft /> Return
-                  </ReturnButton>
-                </>
-              ) : ( */}
-
-              {/* )} */}
             </Routes>
             <Footer>© 2024 Your Company | All rights reserved</Footer>
           </MainContent>
