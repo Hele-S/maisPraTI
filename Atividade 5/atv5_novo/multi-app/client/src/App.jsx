@@ -32,7 +32,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
     3:"/to-do-app",
     4:"/quiz-app",
     5:"/language-translator",
-    6:"/carousel"
+    6:"/"
   }
 // Define o componente principal do aplicativo.
 const App = () => {
@@ -64,7 +64,7 @@ const App = () => {
    // Função para retornar ao carrossel principal.
   const handleReturn = () => {
     return(
-      navigate("/carousel")
+      navigate(routeMap['6'])
     )
   };
 
@@ -74,7 +74,7 @@ const App = () => {
 // Efeito colateral para manter o index do Carousel atualizado conforme o último endereço acessado
   useEffect(() => {
     for (let i in routeMap) {
-      if (routeMap[i] === location.pathname) {
+      if (routeMap[i] === location.pathname && location.pathname != routeMap['6']) {
         setCarouselIndex(i)
       }
     }
