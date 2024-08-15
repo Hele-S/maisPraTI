@@ -1,6 +1,6 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
-// import axios from 'axios';
+import axios from 'axios';
 
 // Define o estilo do container principal do login
 const LoginContainer = styled.div`
@@ -53,12 +53,26 @@ const Login = ({ onLogin }) => {
   const [password, setPassword] = useState(''); // Define o estado para a senha
 
   // Função para lidar com o envio do formulário
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Previne o comportamento padrão do formulário
-    if (username === 'admin' && password === 'password') {
-      onLogin(); // Chama a função onLogin passada como prop se as credenciais estiverem corretas
-    } else {
-      alert('Invalid credentials'); // Exibe um alerta se as credenciais estiverem incorretas
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Faz a requisição POST ao servidor Express
+      const response = await axios.post('http://localhost:3000/login', {
+        username,
+        password
+      });
+
+      // Se a resposta for bem-sucedida, chama a função onLogin
+      if (response.status === 200) {
+        const { token } = response.data;
+        console.log(response, response.data)
+        sessionStorage.setItem('token', token); // Armazena o token no sessionStorage
+        onLogin(); // Chama a função onLogin
+      }
+    } catch (error) {
+      // Exibe um alerta se as credenciais estiverem incorretas
+      alert(`Erro encontrado: ${error}`);
     }
   };
 

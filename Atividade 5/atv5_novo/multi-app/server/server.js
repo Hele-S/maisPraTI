@@ -1,11 +1,17 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const bodyParser = require('body-parser')
-
-
+const cors = require('cors')
 const app = express();
 const PORT = 3000
+
 app.use(bodyParser.json());
+
+app.use(cors({
+    origin: 'http://localhost:5173', // Permite acesso do frontend em localhost:5173
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'] // Cabeçalhos permitidos
+}))
 
 const SECRET_KEY = "+Prati_2024";
 
@@ -20,6 +26,7 @@ app.post('/login', (req, res) => {
 
     if (user) {
         const token = jwt.sign({id: user.id, username: user.username}, SECRET_KEY, { expiresIn: '30s'});
+        console.log(token)
         res.json({message: 'Login successful', token});
     }   else {
         res.status(401).json({message: 'Invalid username or password'});
@@ -40,7 +47,7 @@ function authenticateToken(req, res, next) {
     })
 }
 
-app.get('/protected', authenticateToken, (req, res) => {
+app.get('/check', authenticateToken, (req, res) => {
     res.json({ message: 'This is a protected route', user: req.user});
 });
 

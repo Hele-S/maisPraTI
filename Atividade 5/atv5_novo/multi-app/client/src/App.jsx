@@ -45,6 +45,7 @@ const App = () => {
   // Efeito colateral que redireciona para a página de login se não estiver autenticado.
   useEffect(() => {
     if (!isAuthenticated) {
+      sessionStorage.removeItem('token')
       navigate("/");
     }
   }, [isAuthenticated, navigate]);
@@ -58,6 +59,7 @@ const App = () => {
   // Função para simular logout e redirecionar para a página de login.
   const handleLogout = () => {
     setIsAuthenticated(false);
+    sessionStorage.removeItem('token')
     navigate("/");
   };
 
@@ -79,7 +81,6 @@ const App = () => {
       }
     }
   }, [location])
-
   // Renderiza o componente principal.
   return (
     <AppContainer>
