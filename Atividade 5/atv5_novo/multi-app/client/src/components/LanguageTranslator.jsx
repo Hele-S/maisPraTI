@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react'; // Importa o hook useState do React
+import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
+import useVerifyJWT from '../assets/hooks/useVerifyJWT';
 
 // Define o estilo do container principal
 const Container = styled.div`
@@ -95,67 +96,38 @@ const TranslatedText = styled.p`
 
 // Componente principal LanguageTranslator
 // eslint-disable-next-line react/prop-types
-const LanguageTranslator = ({ handleLogout }) => {
-  const [text, setText] = useState(''); // Define o estado para o texto a ser traduzido
-  const [translatedText, setTranslatedText] = useState(''); // Define o estado para o texto traduzido
-  const [sourceLang, setSourceLang] = useState('en'); // Define o estado para a língua de origem
-  const [targetLang, setTargetLang] = useState('es'); // Define o estado para a língua de destino
-  const [check, setCheck] = useState(null)// Define o estado referente à validade do JWT atual
-  const [token, setToken] = useState('')
-  const [pageLoaded, setPageLoaded] = useState(false)
 
-  //Função para verificar a validade do JWT atual
-  const checkToken = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/check', token)
-      setCheck(response.data);
-    } catch (error) {
-      alert('Token expired or invalid. Please Login again.')
-      handleLogout()
-    }
-  }
-  //Efeito colateral para executar a verificação do JWT atual
-  useEffect(() => {
-    if (token !== null && pageLoaded) {
-      checkToken()
-    }
-  }, [token])
-  //Efeito colateral para requisitar a API depois da validação bem sucedida do JWT
-  useEffect(() => {
-    if (check !== null) {
-      translateLanguage()
-    }
-  }, [check])
 
-  // Função para traduzir o texto
+const LanguageTranslator = () => {
+  const verifyJWT = useVerifyJWT(); // Recebe a função updateToken do hook
+  const [text, setText] = useState('');
+  const [translatedText, setTranslatedText] = useState('');
+  const [sourceLang, setSourceLang] = useState('en');
+  const [targetLang, setTargetLang] = useState('es');
+
   const translateLanguage = async () => {
-    try {
-      if (check) {
-        const response = await axios.get('https://api.mymemory.translated.net/get', {
-          params: {
-            q: text, // Texto a ser traduzido
-            langpair: `${sourceLang}|${targetLang}`, // Par de línguas para tradução
-          },
-        });
+    const tokenStatus = await verifyJWT(); // Verifica o token
 
-        if (response.data.matches === "") {
-          setTranslatedText('*No text inserted*'); //Armazena a mensagem de "nenhum texto inserido" no estado translatedText
-        } else {
-          setTranslatedText(response.data.responseData.translatedText); // Armazena o texto traduzido no estado translatedText
-        }
-        console.log(response.data)
+    if (tokenStatus !== true) {location.reload()} // Se o token for inválido, não procede com a tradução
+
+    try {
+      const response = await axios.get('https://api.mymemory.translated.net/get', {
+        params: {
+          q: text,
+          langpair: `${sourceLang}|${targetLang}`,
+        },
+      });
+
+      if (response.data.matches === "") {
+        setTranslatedText('*No text inserted*');
+      } else {
+        setTranslatedText(response.data.responseData.translatedText);
       }
     } catch (error) {
-      console.error("Error translating text:", error); // Exibe um erro no console em caso de falha
+      console.error("Error translating text:", error);
     }
-    setCheck(null) //Reseta o estado da validação
-    setToken(null) //Reseta o estado do token atual
   };
 
-  //Efeito colateral para estabelecer o estado de página carregada
-  useEffect(() => {
-    setPageLoaded(true)
-  }, [])
 
   //Conteúdo principal da página
   return (
@@ -189,11 +161,7 @@ const LanguageTranslator = ({ handleLogout }) => {
         onChange={(e) => setText(e.target.value)} // Atualiza o estado text conforme o usuário digita
         placeholder="Enter text to translate" // Placeholder do campo de entrada
       />
-      <Button onClick={() => {
-        setToken({
-          headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }// Formata os JWT enviados para validação
-        });
-      }}>Translate</Button> {/* Botão que chama a função translateText quando clicado */}
+      <Button onClick={translateLanguage}>Translate</Button> {/* Botão que chama a função translateText quando clicado */}
       {translatedText && <TranslatedText>{translatedText}</TranslatedText>} {/* Condicional que exibe o texto traduzido se translatedText não for vazio */}
     </Container>
   );

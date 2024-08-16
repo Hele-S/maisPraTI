@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // Importa hooks e componentes do React e bibliotecas externas.
 import { useState, useEffect } from "react";
 import {
@@ -11,6 +12,7 @@ import {
 import {
   FaArrowLeft,
 } from "react-icons/fa";
+import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import QRCodeGenerator from "./components/QRCodeGenarator";
 import IPAddressFinder from "./components/IPAddressFinder";
 import MovieSearchEngine from "./components/MovieSearchEngine";
@@ -24,16 +26,59 @@ import { AppContainer, MainContent, Footer, ReturnButton } from "./assets/App-st
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-  //Lista de rotas do app
-  const routeMap = {
-    0:"/qr-code-generator",
-    1:"/ip-address-finder",
-    2:"/movie-search-engine",
-    3:"/to-do-app",
-    4:"/quiz-app",
-    5:"/language-translator",
-    6:"/"
+const VerifyJWT = () => {
+  const [pageLoaded, setPageLoaded] = useState(false) // Define o estado atual de carregamento da página
+  
+  const [check, setCheck] = useState(null) // Define o estado referente à validade do JWT atual
+  const [token, setToken] = useState({ // Define o estado equivalente à última leitura do JWT
+    headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }// Formata os JWT enviados para validação
+  });
+
+  //Efeito colateral para executar a verificação do JWT atual
+  useEffect(() => {
+    if (token !== null && pageLoaded) {
+      checkToken()
+    }}, [token])
+
+  //Função para verificar a validade do JWT atual
+  const checkToken = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/check', token)
+      setCheck(response.data);
+    } catch (error) {
+      alert('Token expired or invalid. Please Login again.')
+      // handleLogout()
+    }
   }
+
+  
+  //Efeito colateral para requisitar a API depois da validação bem sucedida do JWT
+  useEffect(() => {
+    if (check !== null) {
+      setToken(null)
+      return check
+      // translateLanguage()
+    }
+  }, [check])
+
+  //Efeito colateral para estabelecer o estado de página carregada
+  useEffect(() => {
+    setPageLoaded(true)
+  }, [])
+
+}
+
+
+//Lista de rotas do app
+const routeMap = {
+  0: "/qr-code-generator",
+  1: "/ip-address-finder",
+  2: "/movie-search-engine",
+  3: "/to-do-app",
+  4: "/quiz-app",
+  5: "/language-translator",
+  6: "/"
+}
 // Define o componente principal do aplicativo.
 const App = () => {
   // Cria estados para autenticação, componente atual e novo index do carousel
@@ -63,18 +108,18 @@ const App = () => {
     navigate("/");
   };
 
-   // Função para retornar ao carrossel principal.
+  // Função para retornar ao carrossel principal.
   const handleReturn = () => {
-    return(
+    return (
       navigate(routeMap['6'])
-      
+
     )
   };
 
   //Atribuição do hook useLocation para localizar o endereço atual
   const location = useLocation();
 
-// Efeito colateral para manter o index do Carousel atualizado conforme o último endereço acessado
+  // Efeito colateral para manter o index do Carousel atualizado conforme o último endereço acessado
   useEffect(() => {
     for (let i in routeMap) {
       if (routeMap[i] === location.pathname && location.pathname != routeMap['6']) {
@@ -91,12 +136,12 @@ const App = () => {
         </MainContent>
       ) : (
         <>
-          <NavBarComponent logOut={handleLogout}/>
+          <NavBarComponent logOut={handleLogout} />
           <MainContent>
             <Routes>
               <Route path={routeMap['0']} element={
                 <>
-                  <QRCodeGenerator/>
+                  <QRCodeGenerator />
                   <ReturnButton onClick={handleReturn}>
                     <FaArrowLeft /> Return
                   </ReturnButton>
@@ -136,7 +181,7 @@ const App = () => {
               } />
               <Route path={routeMap['5']} element={
                 <>
-                  <LanguageTranslator handleLogout={handleLogout} />;
+                  <LanguageTranslator VerifyJWT={VerifyJWT} />;
                   <ReturnButton onClick={handleReturn}>
                     <FaArrowLeft /> Return
                   </ReturnButton>
@@ -144,8 +189,8 @@ const App = () => {
               } />
               <Route path={routeMap['6']} element={
                 <>
-                <CarouselComponent newIndex={carouselIndex} />;
-                <ReturnButton onClick={handleReturn}>
+                  <CarouselComponent newIndex={carouselIndex} />;
+                  <ReturnButton onClick={handleReturn}>
                     <FaArrowLeft /> Return
                   </ReturnButton>
                 </>
