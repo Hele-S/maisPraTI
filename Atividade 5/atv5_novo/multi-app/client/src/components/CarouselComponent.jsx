@@ -2,6 +2,7 @@
 import { Carousel } from "react-responsive-carousel";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"; 
+import useVerifyJWT from "../assets/hooks/useVerifyJWT"; // Importando o Hook para verificar o JWT
 
 
 
@@ -72,9 +73,18 @@ const CarouselItem = styled.div`
 /* eslint-disable react/prop-types */
 //Componente Caroousel trazendo a função "handleAccess" do App.jsx com nome de "componentSelected"
 const CarouselComponent = ({ newIndex }) => {
-
+  const verifyJWT = useVerifyJWT(); // Recebe a função updateToken do hook
   const navigate = useNavigate(); //Atribuindo o hook para navegação
 
+  const redirect = async (path) => {
+    const tokenStatus = await verifyJWT(); // Verifica o token
+
+    if (tokenStatus !== true) {
+       location.reload() // Se o token for inválido, não procede com a tradução
+      } else {
+        navigate(path)
+      }
+  }
   //Conteúdo que será renderizado no App
   return (
     <CarouselContainer>
@@ -89,37 +99,37 @@ const CarouselComponent = ({ newIndex }) => {
       >
         <CarouselItem>
           <h2>QR Code Generator</h2>
-          <button onClick={() => navigate('/qr-code-generator')}>
+          <button onClick={() => redirect('/qr-code-generator')}>
             Acessar
           </button>
         </CarouselItem>
         <CarouselItem>
           <h2>IP Address Finder</h2>
-          <button onClick={() => navigate('/ip-address-finder')}>
+          <button onClick={() => redirect('/ip-address-finder')}>
             Acessar
           </button>
         </CarouselItem>
         <CarouselItem>
           <h2>Movie Search Engine</h2>
-          <button onClick={() => navigate('/movie-search-engine')}>
+          <button onClick={() => redirect('/movie-search-engine')}>
             Acessar
           </button>
         </CarouselItem>
         <CarouselItem>
           <h2>Todo App</h2>
-          <button onClick={() => navigate('/to-do-app')}>
+          <button onClick={() => redirect('/to-do-app')}>
             Acessar
           </button>
         </CarouselItem>
         <CarouselItem>
         <h2>Quiz App</h2>
-        <button onClick={() => navigate('/quiz-app')}>
+        <button onClick={() => redirect('/quiz-app')}>
             Acessar
           </button>
         </CarouselItem>
         <CarouselItem>
           <h2>Language Translator</h2>
-          <button onClick={() => navigate('/language-translator')}>
+          <button onClick={() => redirect('/language-translator')}>
             Acessar
           </button>
         </CarouselItem>
