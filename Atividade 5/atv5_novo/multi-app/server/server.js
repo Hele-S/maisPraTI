@@ -5,15 +5,9 @@ const cors = require('cors')
 const app = express();
 const PORT = 3000
 
+
 app.use(bodyParser.json());
 
-// Middleware para desabilitar cache
-app.use((req, res, next) => {
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
-    res.setHeader('Pragma', 'no-cache'); // Para compatibilidade com HTTP 1.0
-    res.setHeader('Expires', '0'); // Para compatibilidade com HTTP 1.0
-    next();
-});
 
 app.use(cors({
     origin: 'http://localhost:5173', // Permite acesso do frontend em localhost:5173
@@ -62,3 +56,16 @@ app.get('/check', authenticateToken, (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://Localhost:${PORT}`);
 });
+
+// Requisições do TodoAPP
+let tasks = []
+
+app.get('/tasks', (req, res) => {
+    res.json(tasks)
+});
+
+app.post('/tasks', (req, res) => {
+    tasks.push(req.body)
+    console.log(tasks)
+});
+
