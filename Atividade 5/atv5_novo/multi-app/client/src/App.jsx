@@ -12,7 +12,6 @@ import {
 import {
   FaArrowLeft,
 } from "react-icons/fa";
-import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import QRCodeGenerator from "./components/QRCodeGenarator";
 import IPAddressFinder from "./components/IPAddressFinder";
 import MovieSearchEngine from "./components/MovieSearchEngine";
@@ -22,51 +21,9 @@ import LanguageTranslator from "./components/LanguageTranslator";
 import Login from "./components/Login";
 import CarouselComponent from "./components/CarouselComponent";
 import NavBarComponent from "./components/NavBarComponent";
-import { AppContainer, MainContent, Footer, ReturnButton } from "./assets/App-styling";
+import { AppContainer, MainContent, Footer, ReturnButton } from "./assets/styles/App-styling";
 import "./App.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-
-const VerifyJWT = () => {
-  const [pageLoaded, setPageLoaded] = useState(false) // Define o estado atual de carregamento da página
-  
-  const [check, setCheck] = useState(null) // Define o estado referente à validade do JWT atual
-  const [token, setToken] = useState({ // Define o estado equivalente à última leitura do JWT
-    headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }// Formata os JWT enviados para validação
-  });
-
-  //Efeito colateral para executar a verificação do JWT atual
-  useEffect(() => {
-    if (token !== null && pageLoaded) {
-      checkToken()
-    }}, [token])
-
-  //Função para verificar a validade do JWT atual
-  const checkToken = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/check', token)
-      setCheck(response.data);
-    } catch (error) {
-      alert('Token expired or invalid. Please Login again.')
-      // handleLogout()
-    }
-  }
-
-  
-  //Efeito colateral para requisitar a API depois da validação bem sucedida do JWT
-  useEffect(() => {
-    if (check !== null) {
-      setToken(null)
-      return check
-      // translateLanguage()
-    }
-  }, [check])
-
-  //Efeito colateral para estabelecer o estado de página carregada
-  useEffect(() => {
-    setPageLoaded(true)
-  }, [])
-
-}
 
 
 //Lista de rotas do app
@@ -181,7 +138,7 @@ const App = () => {
               } />
               <Route path={routeMap['5']} element={
                 <>
-                  <LanguageTranslator VerifyJWT={VerifyJWT} />;
+                  <LanguageTranslator />;
                   <ReturnButton onClick={handleReturn}>
                     <FaArrowLeft /> Return
                   </ReturnButton>
