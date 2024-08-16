@@ -1,6 +1,7 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
+import useVerifyJWT from '../assets/hooks/useVerifyJWT';
 
 // Define o estilo do container principal
 const Container = styled.div`
@@ -71,15 +72,21 @@ const ResultsContainer = styled.div`
 const IPAddressFinder = () => {
   const [ip, setIp] = useState(''); // Define o estado para o IP digitado pelo usuário
   const [ipData, setIpData] = useState(null); // Define o estado para armazenar os dados do IP
-
+  const verifyJWT = useVerifyJWT()
   // Função para buscar os dados do IP
   const findIP = async () => {
-    try {
-      const url = `https://ipinfo.io/${ip}/json`
-      const response = await axios.get(url); // Faz uma requisição GET para a API ipinfo.io
-      setIpData(response.data); // Armazena os dados da resposta no estado ipData
-    } catch (error) {
-      console.error("Error fetching IP address data:", error); // Exibe um erro no console em caso de falha
+    const tokenStatus = await verifyJWT();
+
+    if (tokenStatus !== true) {
+      location.reload() // Se o token for inválido, não procede com a tradução
+    } else {
+      try {
+        const url = `https://ipinfo.io/${ip}/json`
+        const response = await axios.get(url); // Faz uma requisição GET para a API ipinfo.io
+        setIpData(response.data); // Armazena os dados da resposta no estado ipData
+      } catch (error) {
+        console.error("Error fetching IP address data:", error); // Exibe um erro no console em caso de falha
+      }
     }
   };
 
