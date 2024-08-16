@@ -67,6 +67,7 @@ const App = () => {
   const handleReturn = () => {
     return(
       navigate(routeMap['6'])
+      
     )
   };
 
@@ -135,7 +136,7 @@ const App = () => {
               } />
               <Route path={routeMap['5']} element={
                 <>
-                  <LanguageTranslator />;
+                  <LanguageTranslator handleLogout={handleLogout} />;
                   <ReturnButton onClick={handleReturn}>
                     <FaArrowLeft /> Return
                   </ReturnButton>

@@ -1,4 +1,5 @@
-import { useState } from 'react'; // Importa o hook useState do React
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
 
@@ -93,27 +94,70 @@ const TranslatedText = styled.p`
 `;
 
 // Componente principal LanguageTranslator
-const LanguageTranslator = () => {
+// eslint-disable-next-line react/prop-types
+const LanguageTranslator = ({ handleLogout }) => {
   const [text, setText] = useState(''); // Define o estado para o texto a ser traduzido
   const [translatedText, setTranslatedText] = useState(''); // Define o estado para o texto traduzido
   const [sourceLang, setSourceLang] = useState('en'); // Define o estado para a língua de origem
   const [targetLang, setTargetLang] = useState('es'); // Define o estado para a língua de destino
+  const [check, setCheck] = useState(null)// Define o estado referente à validade do JWT atual
+  const [token, setToken] = useState('')
+  const [pageLoaded, setPageLoaded] = useState(false)
+
+  //Função para verificar a validade do JWT atual
+  const checkToken = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/check', token)
+      setCheck(response.data);
+    } catch (error) {
+      alert('Token expired or invalid. Please Login again.')
+      handleLogout()
+    }
+  }
+  //Efeito colateral para executar a verificação do JWT atual
+  useEffect(() => {
+    if (token !== null && pageLoaded) {
+      checkToken()
+    }
+  }, [token])
+  //Efeito colateral para requisitar a API depois da validação bem sucedida do JWT
+  useEffect(() => {
+    if (check !== null) {
+      translateLanguage()
+    }
+  }, [check])
 
   // Função para traduzir o texto
-  const translateText = async () => {
+  const translateLanguage = async () => {
     try {
-      const response = await axios.get('https://api.mymemory.translated.net/get', {
-        params: {
-          q: text, // Texto a ser traduzido
-          langpair: `${sourceLang}|${targetLang}`, // Par de línguas para tradução
-        },
-      });
-      setTranslatedText(response.data.responseData.translatedText); // Armazena o texto traduzido no estado translatedText
+      if (check) {
+        const response = await axios.get('https://api.mymemory.translated.net/get', {
+          params: {
+            q: text, // Texto a ser traduzido
+            langpair: `${sourceLang}|${targetLang}`, // Par de línguas para tradução
+          },
+        });
+
+        if (response.data.matches === "") {
+          setTranslatedText('*No text inserted*'); //Armazena a mensagem de "nenhum texto inserido" no estado translatedText
+        } else {
+          setTranslatedText(response.data.responseData.translatedText); // Armazena o texto traduzido no estado translatedText
+        }
+        console.log(response.data)
+      }
     } catch (error) {
       console.error("Error translating text:", error); // Exibe um erro no console em caso de falha
     }
+    setCheck(null) //Reseta o estado da validação
+    setToken(null) //Reseta o estado do token atual
   };
 
+  //Efeito colateral para estabelecer o estado de página carregada
+  useEffect(() => {
+    setPageLoaded(true)
+  }, [])
+
+  //Conteúdo principal da página
   return (
     <Container>
       <Title>Language Translator</Title>
@@ -145,7 +189,11 @@ const LanguageTranslator = () => {
         onChange={(e) => setText(e.target.value)} // Atualiza o estado text conforme o usuário digita
         placeholder="Enter text to translate" // Placeholder do campo de entrada
       />
-      <Button onClick={translateText}>Translate</Button> {/* Botão que chama a função translateText quando clicado */}
+      <Button onClick={() => {
+        setToken({
+          headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` }// Formata os JWT enviados para validação
+        });
+      }}>Translate</Button> {/* Botão que chama a função translateText quando clicado */}
       {translatedText && <TranslatedText>{translatedText}</TranslatedText>} {/* Condicional que exibe o texto traduzido se translatedText não for vazio */}
     </Container>
   );
