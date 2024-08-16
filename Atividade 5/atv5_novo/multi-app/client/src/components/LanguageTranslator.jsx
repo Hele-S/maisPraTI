@@ -2,7 +2,7 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import styled from 'styled-components'; // Importa styled-components para estilizar os componentes
-import useVerifyJWT from '../assets/hooks/useVerifyJWT';
+import useVerifyJWT from '../assets/hooks/useVerifyJWT'; // Hook para fazer validação do JWT
 
 // Define o estilo do container principal
 const Container = styled.div`
@@ -100,17 +100,18 @@ const TranslatedText = styled.p`
 
 const LanguageTranslator = () => {
   const verifyJWT = useVerifyJWT(); // Recebe a função updateToken do hook
-  const [text, setText] = useState('');
-  const [translatedText, setTranslatedText] = useState('');
-  const [sourceLang, setSourceLang] = useState('en');
-  const [targetLang, setTargetLang] = useState('es');
+  const [text, setText] = useState(''); // Armazena o texto do prompt
+  const [translatedText, setTranslatedText] = useState(''); // Armazena o texto traduzido da API
+  const [sourceLang, setSourceLang] = useState('en'); // Idioma de entrada
+  const [targetLang, setTargetLang] = useState('es'); // Idioma de saída
 
+  //Função para trauzir o texto
   const translateLanguage = async () => {
     const tokenStatus = await verifyJWT(); // Verifica o token
 
-    if (tokenStatus !== true) {location.reload()} // Se o token for inválido, não procede com a tradução
+    if (tokenStatus !== true) { location.reload() } // Se o token for inválido, não procede com a tradução
 
-    try {
+    try { // Tenta fazer a requisição para a API
       const response = await axios.get('https://api.mymemory.translated.net/get', {
         params: {
           q: text,
@@ -118,13 +119,14 @@ const LanguageTranslator = () => {
         },
       });
 
-      if (response.data.matches === "") {
+      if (response.data.matches === "") { // Verifica a ausência de texto no prompt
         setTranslatedText('*No text inserted*');
       } else {
-        setTranslatedText(response.data.responseData.translatedText);
+        setTranslatedText(response.data.responseData.translatedText); // Mostra o texto traduzido na tela
       }
     } catch (error) {
-      console.error("Error translating text:", error);
+      console.error("Error translating text:", error); // Mostra o erro da API no console
+      alert("Error translating text:", error); // Mostra o erro da API na tela
     }
   };
 
@@ -132,8 +134,9 @@ const LanguageTranslator = () => {
   //Conteúdo principal da página
   return (
     <Container>
-      <Title>Language Translator</Title>
+      <Title>Language Translator</Title> {/*Título do componente*/}
       <div>
+        {/*Selecionar idioma de entrada*/}
         <Label>Source Language:</Label>
         <Select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
           <option value="en">English</option>
@@ -145,6 +148,7 @@ const LanguageTranslator = () => {
         </Select>
       </div>
       <div>
+        {/*Selecionar idioma de saída*/}
         <Label>Target Language:</Label>
         <Select value={targetLang} onChange={(e) => setTargetLang(e.target.value)}>
           <option value="en">English</option>
