@@ -27,7 +27,7 @@ app.post('/login', (req, res) => {
     const user = users.find(u => u.username === username && u.password === password);
 
     if (user) {
-        const token = jwt.sign({id: user.id, username: user.username}, SECRET_KEY, { expiresIn: '300s'});
+        const token = jwt.sign({id: user.id, username: user.username}, SECRET_KEY, { expiresIn: '3000s'});
         res.json({message: 'Login successful', token});
     }   else {
         res.status(401).json({message: 'Invalid username or password'});
@@ -60,12 +60,38 @@ app.listen(PORT, () => {
 // Requisições do TodoAPP
 let tasks = []
 
+const updateIps = () => {
+    for (i of tasks) {
+        i['id'] = tasks.indexOf(i)
+    }
+}
+
 app.get('/tasks', (req, res) => {
+    updateIps()
     res.json(tasks)
 });
 
 app.post('/tasks', (req, res) => {
     tasks.push(req.body)
-    console.log(tasks)
+    updateIps()
+    res.json(req.body)
 });
 
+app.delete('/tasks/:id', (req, res) => {
+    const taskId = req.params.id;
+    const initialLength = tasks.length;
+    // Filtrando as tarefas para remover a que tem o id correspondente
+    tasks = tasks.filter(task => task.id != taskId);
+    if (tasks.length < initialLength) {
+        updateIps()
+        res.json({ message: 'Task deleted successfully!', tasks });
+    } else {
+        res.status(404).json({ message: 'Task not found!' });
+    }
+});
+
+app.put('/tasks/:id', (req, res) => {
+    const taskId = req.params.id;
+    tasks[taskId].text = req.body.text
+    res.json( { message: 'Task edited successfully!', tasks} )
+});

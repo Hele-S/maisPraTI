@@ -1,8 +1,12 @@
 Lembretes:
+Aprender a preparar as requisições da ToDo no server.js
+Ver se tem mais lugares que poderia encaixar Try & Catch
+Usar a Internet pra testar mais a IPAddress e a MovieSearchEngine
 O botão "Return" fica escondido atrás do rodapé
-Talvez usar Navigate nos StyledLink do Carousel???
+A seta pra direita do carosel só funciona se clicar em outra coisa antes
+
 
 Dúvidas:
-É obrigado a usar o navigate? tem problema todos os componentes no mesmo path?
-Que tipo de situação poderia usar o useLocation?
+É obrigado a usar todos os componentes que foram importados para o app inicialmente?
 Como estabelecer um "processo de revisão de código"?
+O servidor que gera os JWT pode ser o mesmo da ToDo?
