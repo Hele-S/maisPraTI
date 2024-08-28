@@ -126,6 +126,10 @@ const Paragraph = styled.p`
     margin: 0 auto;
     color: #ffffffb2;
     font-family:Arial, Helvetica, sans-serif;
+    &.SignIn{
+        margin:unset;
+        margin-right:auto;
+    }
 `
 
 const Link = styled.a`
@@ -133,6 +137,7 @@ const Link = styled.a`
     font-family:Arial, Helvetica, sans-serif;
     &:hover {
         text-decoration:underline;
+        cursor:pointer;
     }
     &.ForgotPassword{
         color:#FFFF;
@@ -141,6 +146,12 @@ const Link = styled.a`
         &:hover{
             color:#c3c3c3;
         }
+    }
+    &.SignIn{
+        color:#FFFF;
+        margin: 0 auto;
+        font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight:bold;
     }
 `
 
@@ -191,6 +202,7 @@ const CheckboxLabel = styled.label`
   align-items: center;
   margin-top: 20px;
   margin-right: auto;
+  margin-bottom:16px;
   color: #fff;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   cursor: pointer;
@@ -268,6 +280,7 @@ const LoginSection = () => {
                         />
                         Lembre-se de mim
                     </CheckboxLabel>
+                    <Paragraph className='SignIn'>Novo por aqui? <Link className='SignIn'>Assine agora</Link></Paragraph>
                 </Container>
             </Background>
         </>
