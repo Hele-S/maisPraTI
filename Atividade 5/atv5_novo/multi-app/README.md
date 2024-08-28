@@ -70,34 +70,44 @@ Para acessar qualquer uma das ferramentas, é necessário realizar um **login**.
 2. **Acesse o diretório do projeto:**
 
    ```bash
-   cd "Atividade 5\atv5_novo\multi-app"
+   cd "maisPraTI\Atividade 5\atv5_novo\multi-app"
    ```
 
-3. **Instale as dependências:**
+3. **Instale as dependências gerais:**
 
    ```bash
    npm install
    ```
 
-   ou
+4. **Instale as dependencias do servidor front end:**
+
+    ```bash
+    cd client
+    npm install vite --save-dev
+    ```
+
+5. **Instale as dependencias do servidor back end:**
 
    ```bash
-   yarn install
+   cd ../server
+   npm install nodemon --save-dev
    ```
 
-4. **Execute ambos os servidores client e server:**
+    
+6. **Execute ambos os servidores client e server:**
 
    ```bash
+   cd ../
    npm run dev
    ```
-   
-5. **Inicie a aplicação:**
+
+7. **Inicie a aplicação:**
 
 Abra http://localhost:5173 no seu navegador.
 
 ## Uso
 
-1. **Cadastro/Login:**
+1. **Login:**
    - Acesse a página de login e autentique-se com o Username "admin" e a senha "password".
 
 2. **Navegação:**
