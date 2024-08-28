@@ -75,41 +75,61 @@ const InputLabel = styled.label`
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
     color: #B7B7B7;
-    opacity: ${(props) => (props.show ? 1 : 0)};
     font-size: 0.7rem;
     margin-right: auto;
     transform: translateY(130%);
     z-index: 1;
+
+    opacity: ${(props) => (props.show ? 1 : 0)};
 `;
 
 const LoginSection = () => {
-    // Verifica o estado de foco do input
-    const [isFocused, setIsFocused] = useState(false);
+    const [emailFocused, setemailFocused] = useState(false);
+    const [passwordFocused, setPasswordFocused] = useState(false);
+    const [inputStates, setInputStates] = useState({
+        'Email':0,
+        'Password':0
+    });
 
-    // Verifica o comprimento do texto do input
-    const [inputLength, setInputLength] = useState(0);
-
-    // Lida com a mudança de valor do input
     const handleChange = (e) => {
-        setInputLength(e.target.value.length);
+        const {name, value} = e.target
+        setInputStates((prevStates) => ({
+            ...prevStates,
+            [name]: value.length
+        }));
+        console.log(inputStates)
     };
 
-    const showLabel = isFocused || inputLength > 0;
+    const showEmailLabel = emailFocused || inputStates.Email > 0;
+    const showPasswordLabel = passwordFocused || inputStates.Password > 0;
 
     return (
         <>
             <Background>
                 <Container>
                     <Title>Entrar</Title>
-                    <InputLabel show={showLabel}>
+                    <InputLabel show={showEmailLabel}>
                         Email ou número de celular
                     </InputLabel>
                     <Input
-                        show={showLabel}
+                        name='Email'
+                        show={showEmailLabel}
                         type='text'
-                        placeholder={showLabel ? "" : 'Email ou número de celular'}
-                        onFocus={() => setIsFocused(true)}
-                        onBlur={() => setIsFocused(false)}
+                        placeholder={showEmailLabel ? "" : "Email ou número de celular"}
+                        onFocus={() => setemailFocused(true)}
+                        onBlur={() => setemailFocused(false)}
+                        onChange={handleChange}
+                    />
+                    <InputLabel show={showPasswordLabel}>
+                        Senha
+                    </InputLabel>
+                    <Input
+                        name="Password"
+                        show={showPasswordLabel}
+                        type='password'
+                        placeholder={showPasswordLabel ? "" : "Senha"}
+                        onFocus={() => setPasswordFocused(true)}
+                        onBlur={() => setPasswordFocused(false)}
                         onChange={handleChange}
                     />
                 </Container>
