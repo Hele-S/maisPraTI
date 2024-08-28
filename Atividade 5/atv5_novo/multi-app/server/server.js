@@ -27,7 +27,7 @@ app.post('/login', (req, res) => {
     const user = users.find(u => u.username === username && u.password === password);
 
     if (user) {
-        const token = jwt.sign({id: user.id, username: user.username}, SECRET_KEY, { expiresIn: '3000s'});
+        const token = jwt.sign({id: user.id, username: user.username}, SECRET_KEY, { expiresIn: '180s'});
         res.json({message: 'Login successful', token});
     }   else {
         res.status(401).json({message: 'Invalid username or password'});

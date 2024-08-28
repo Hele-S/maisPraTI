@@ -19,7 +19,7 @@ import {
 const NavBarComponent = ( {/*Redirect*/ logOut} ) => {
   // Constante que retorna o estado da barra de navegação
     const [isNavBarOpen, setIsNavBarOpen] = useState(false);
-    // Atribuição do Hook autenticação à verifyJWT
+    // Recebe a função updateToken do hook
     const verifyJWT = useVerifyJWT()
     // Atribuição do Hook de navegação à navigate
     const navigate = useNavigate()

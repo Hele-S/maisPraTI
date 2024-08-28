@@ -4,7 +4,6 @@ import { useState } from 'react';
 import QRCode from 'qrcode.react';
 // Importa os componentes estilizados para renderizar
 import { Container, Title, Input, QRCodeContainer } from '../assets/styles/QRCodeGenerator-styling';
-
 // Define o componente funcional QRCodeGenerator.
 const QRCodeGenerator = () => {
   // Usa o hook useState para criar uma variável de estado chamada 'text' e uma função para atualizá-la.

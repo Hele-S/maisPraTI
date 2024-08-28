@@ -1,20 +1,27 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
 import { Container, Title, Input, Button, MoviesContainer, MovieCard } from '../assets/styles/MovieSearchEngine-styling'
+import useVerifyJWT from "../assets/hooks/useVerifyJWT"; // Importando o Hook para verificar o JWT
 
 // Componente principal MovieSearchEngine
 const MovieSearchEngine = () => {
   const [query, setQuery] = useState(''); // Define o estado para a consulta de busca
   const [movies, setMovies] = useState([]); // Define o estado para armazenar os filmes
-
+ const verifyJWT = useVerifyJWT()  // Recebe a função updateToken do hook
   // Função para buscar filmes
   const searchMovies = async () => {
-    try {
-      const response = await axios.get(`http://www.omdbapi.com/?s=${query}&apikey=403abbfe`); // Faz uma requisição GET para a API OMDB
-      setMovies(response.data.Search); // Armazena os dados dos filmes no estado movies
-    } catch (error) {
-      console.error("Error fetching movie data:", error); // Exibe um erro no console em caso de falha
-    }
+    const tokenStatus = await verifyJWT() // Verifica o token
+    if (tokenStatus !== true) {
+      location.reload() // Se o token for inválido, não procede com a tradução
+     } else {
+      try {
+        const response = await axios.get(`http://www.omdbapi.com/?s=${query}&apikey=403abbfe`); // Faz uma requisição GET para a API OMDB
+        setMovies(response.data.Search); // Armazena os dados dos filmes no estado movies
+      } catch (error) {
+        console.error("Error fetching movie data:", error); // Exibe um erro no console em caso de falha
+      }   
+     }
+    
   };
 
   return (

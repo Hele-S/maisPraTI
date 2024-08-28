@@ -2,8 +2,7 @@
 // import { Carousel } from "react-responsive-carousel";
 import { useNavigate } from "react-router-dom"; 
 import { CarouselContainer, CustomCarousel, CarouselItem } from "../assets/styles/Carousel-styling";
-import useVerifyJWT from "../assets/hooks/useVerifyJWT"; // Importando o Hook para verificar o JWT
-
+import useVerifyJWT from "../assets/hooks/useVerifyJWT"; // Hook para fazer validação do JWT
 /* eslint-disable react/prop-types */
 // Componente Caroousel trazendo a função "handleAccess" do App.jsx com nome de "componentSelected"
 const CarouselComponent = ({ newIndex }) => {

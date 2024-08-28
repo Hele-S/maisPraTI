@@ -1,16 +1,16 @@
 import { useState } from 'react'; // Importa o hook useState do React
 import axios from 'axios'; // Importa a biblioteca axios para fazer requisições HTTP
-import useVerifyJWT from '../assets/hooks/useVerifyJWT';
+import useVerifyJWT from '../assets/hooks/useVerifyJWT'; // Hook para fazer validação do JWT
 import { Container, Title, Input, Button, ResultsContainer} from '../assets/styles/IPAddressFinder'
 
 // Componente principal IPAddressFinder
 const IPAddressFinder = () => {
   const [ip, setIp] = useState(''); // Define o estado para o IP digitado pelo usuário
   const [ipData, setIpData] = useState(null); // Define o estado para armazenar os dados do IP
-  const verifyJWT = useVerifyJWT()
+  const verifyJWT = useVerifyJWT() // Recebe a função updateToken do hook
   // Função para buscar os dados do IP
   const findIP = async () => {
-    const tokenStatus = await verifyJWT();
+    const tokenStatus = await verifyJWT(); // Verifica o token
 
     if (tokenStatus !== true) {
       location.reload() // Se o token for inválido, não procede com a tradução
