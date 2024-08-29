@@ -2,40 +2,43 @@ import { useState } from 'react'
 import styled from 'styled-components'
 
 const Background = styled.div`
-  position:relative;
+  display:flex;
+  flex-direction:column;
+  position:fixed;
   width: 100%;
-  height: 100vh; /* Altura do contêiner */
-  background-color: rgba(0, 0, 0, 0.5);
-  background-image: url('./src/assets/imgs/Login_Background.jpg');
-  background-repeat: no-repeat; /* Impede a repetição da imagem */
-  background-size: cover; /* Faz a imagem cobrir o contêiner */
-  background-position: baseline; /* Centraliza a imagem */
+  height: 100%; /*Altura do contêiner*/
+  top:0;
+  left:0;
   overflow:hidden;
-  background-size:112%;
+  background-image: url('./src/assets/imgs/Login_Background.jpg'); /* Altere para a URL da sua imagem */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* Ajusta para cobrir toda a área */
+  transition: transform 0.3s ease; /* Transição suave, opcional */
+  z-index: -1; /* Coloca a imagem de fundo atrás de todo o conteúdo */
   &::before {
   content: "";
+  transform:scale(1.12);
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade */
-  /* Ajuste o valor da opacidade conforme necessário */
-  pointer-events: none; /* Permite interações através do pseudo-elemento */
+  
 }
 `
 const Container = styled.div`
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 4px;
-    box-sizing: border-box;
+    box-sizing: flex;
     display: flex;
     flex-direction: column;
     margin:0 auto;
-    width: 402px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 314px;
+    height: 641px;
+    position: relative;
+    
     align-items: center;
     padding:48px 68px;
     z-index:0;
@@ -130,6 +133,11 @@ const Paragraph = styled.p`
         margin:unset;
         margin-right:auto;
     }
+    &.Captcha{
+        margin:13px 0 13px;
+        font-size:13px;
+        color:#8c8c8c;
+    }
 `
 
 const Link = styled.a`
@@ -152,6 +160,9 @@ const Link = styled.a`
         margin: 0 auto;
         font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         font-weight:bold;
+    }
+    &.Captcha{
+        color:#0071eb;
     }
 `
 
@@ -208,9 +219,25 @@ const CheckboxLabel = styled.label`
   cursor: pointer;
   
   input {
-    margin-right: 8px; /* Espaço entre o checkbox e o texto */
+    margin-right: 8px; 
   }
 `;
+
+const CaptchaDiv = styled.div`
+    display: flex;
+    width:100%;
+    height:162px;
+    margin-top:11px;
+`
+const Logo = styled.img`
+height:42px;
+width:144px;
+`
+
+const Header = styled.header`
+padding: 24px 48px;
+z-index:1;
+`
 const LoginSection = () => {
     const [emailFocused, setemailFocused] = useState(false);
     const [passwordFocused, setPasswordFocused] = useState(false);
@@ -234,6 +261,9 @@ const LoginSection = () => {
     return (
         <>
             <Background>
+            <Header>
+                <Link href="#"><Logo src="https://www.edigitalagency.com.au/wp-content/uploads/netflix-logo-png-large.png" alt="Logo Netflix" /></Link>
+            </Header>
                 <Container>
                     <Title>Entrar</Title>
                     <Form>
@@ -281,6 +311,9 @@ const LoginSection = () => {
                         Lembre-se de mim
                     </CheckboxLabel>
                     <Paragraph className='SignIn'>Novo por aqui? <Link className='SignIn'>Assine agora</Link></Paragraph>
+                    <CaptchaDiv>
+                        <Paragraph className='Captcha'>Esta página é protegida pelo Google reCAPTCHA para garantir que você não é um robô. <Link className='Captcha'>Saiba mais.</Link></Paragraph>
+                    </CaptchaDiv>
                 </Container>
             </Background>
         </>
