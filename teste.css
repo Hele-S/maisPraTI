@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #141414;
+    color: white;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: black;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e50914;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+header nav ul li {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+header .search-icon {
+    width: 24px;
+    height: 24px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.hero {
+    position: relative;
+    padding: 60px;
+    background-image: url('/mnt/data/nflix.webp');
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    color: white;
+}
+
+.hero-text {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+}
+
+.series {
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+}
+
+.title {
+    font-size: 60px;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.description {
+    max-width: 400px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+}
+
+.play-btn, .my-list-btn {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.my-list-btn {
+    background-color: rgba(109, 109, 110, 0.7);
+    color: white;
+}
+
+.popular {
+    padding: 20px;
+}
+
+.popular h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.movies-list {
+    display: flex;
+    gap: 10px;
+}
+
+.movie {
+    background-color: #333;
+    width: 150px;
+    height: 225px;
+    border-radius: 4px;
+}
