@@ -1,31 +1,31 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
+// import LoginFooter from './LoginFooter'
+
 
 const Background = styled.div`
   display:flex;
   flex-direction:column;
-  position:fixed;
-  width: 100%;
-  height: 100%; /*Altura do contêiner*/
+  position:relative;
+  width: 100vw;
+  height:100vh;
   top:0;
   left:0;
-  overflow:hidden;
   background-image: url('./src/assets/imgs/Login_Background.jpg'); /* Altere para a URL da sua imagem */
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover; /* Ajusta para cobrir toda a área */
   transition: transform 0.3s ease; /* Transição suave, opcional */
-  z-index: -1; /* Coloca a imagem de fundo atrás de todo o conteúdo */
   &::before {
   content: "";
-  transform:scale(1.12);
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Cor preta com 50% de opacidade */
-  
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index:0;
 }
 `
 const Container = styled.div`
@@ -100,7 +100,7 @@ const InputLabel = styled.label`
     z-index: 1;
 
     display: ${(props) => (props.show ? 'block' : 'none')};
-`;
+`
 
 const Button = styled.button`
     width:100%;
@@ -164,6 +164,10 @@ const Link = styled.a`
     &.Captcha{
         color:#0071eb;
     }
+    &.footer{
+        color:#ffffffb2;
+        text-decoration:underline;
+    }
 `
 
 const Checkbox = styled.input`
@@ -175,13 +179,10 @@ const Checkbox = styled.input`
   cursor: pointer;
   position: relative;
   outline: none;
-  
-
-  &:checked {
+    &:checked {
     border-color: #FFF;
     background-color: #FFF;
   }
-
   &:checked::before {
     content: '✔';
     position: absolute;
@@ -232,13 +233,52 @@ const CaptchaDiv = styled.div`
 const Logo = styled.img`
 height:42px;
 width:144px;
+z-index:3;
 `
 
 const Header = styled.header`
 padding: 24px 48px;
 z-index:1;
+width:calc(100vw-48px);
 `
+
+const FooterPadd = styled.div`
+background: linear-gradient(to top, black, rgba(0, 0, 0, 0.7));
+position:absolute;
+width:100vw;
+height:6rem;
+display:flex;
+left:0;
+transform:translateY(-6rem);
+width:calc(100vw-50px);
+/* align-items:baseline; */
+`
+const FooterContainer = styled.footer`
+background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/71/Black.png');
+background-size:cover;
+background-repeat: no-repeat;
+background-clip: padding-box;
+padding-top: 20px;
+padding-left: 50px;
+position: relative;
+bottom:0;
+
+z-index: 1;
+`
+const FooterLinks = styled.ul`
+padding: 0 48px;
+list-style:none;
+display: grid;
+grid-template-columns: repeat( auto-fill, minmax(250px, 1fr) );
+grid-template-rows: 1fr 1fr 1fr;
+`
+
+const FooterItem = styled.li`
+margin: 16px 0 5px 12px;
+`
+
 const LoginSection = () => {
+    const navigate = useNavigate();
     const [emailFocused, setemailFocused] = useState(false);
     const [passwordFocused, setPasswordFocused] = useState(false);
     const [inputStates, setInputStates] = useState({
@@ -258,12 +298,15 @@ const LoginSection = () => {
     const showEmailLabel = emailFocused || inputStates.Email > 0;
     const showPasswordLabel = passwordFocused || inputStates.Password > 0;
 
+    const handleSubmit = () => {
+        navigate('/Home')
+    }
     return (
         <>
             <Background>
-            <Header>
-                <Link href="#"><Logo src="https://www.edigitalagency.com.au/wp-content/uploads/netflix-logo-png-large.png" alt="Logo Netflix" /></Link>
-            </Header>
+                <Header>
+                    <Link href="#"><Logo src="https://www.edigitalagency.com.au/wp-content/uploads/netflix-logo-png-large.png" alt="Logo Netflix" /></Link>
+                </Header>
                 <Container>
                     <Title>Entrar</Title>
                     <Form>
@@ -295,7 +338,7 @@ const LoginSection = () => {
                                 onChange={handleChange}
                             />
                         </InputContainer>
-                        <Button>Entrar</Button>
+                        <Button onClick={handleSubmit} >Entrar</Button>
                         <Paragraph>OU</Paragraph>
                         <Button className='AccessCode'>Usar um código de acesso</Button>
                         <Link
@@ -316,6 +359,21 @@ const LoginSection = () => {
                     </CaptchaDiv>
                 </Container>
             </Background>
+
+            <FooterContainer>
+                <FooterPadd>
+                </FooterPadd>
+                <Paragraph>Dúvidas? Ligue <Link>0800 591 2876</Link></Paragraph>
+                <FooterLinks>
+                    <FooterItem><Link className='footer'>Perguntas frequentes</Link></FooterItem>
+                    <FooterItem><Link className='footer'>Central de Ajuda</Link></FooterItem>
+                    <FooterItem><Link className='footer'>Termos de Uso</Link></FooterItem>
+                    <FooterItem><Link className='footer'>Privacidade</Link></FooterItem>
+                    <FooterItem><Link className='footer'>Preferências de cookies</Link></FooterItem>
+                    <FooterItem><Link className='footer'>Informações corporativas</Link></FooterItem>
+                </FooterLinks>
+            </FooterContainer>
+
         </>
     );
 };
