@@ -175,7 +175,7 @@ const Featured = ({ ApiKey }) => {
     <Container>
       {pop.length > 0 && (
         <>
-          <SectionTitle onClick={() => navigate('/')}>Filmes Populares</SectionTitle>
+          <SectionTitle>Filmes Populares</SectionTitle>
           <CarouselRow {...settings}>
             {pop.slice(listStart, (listStart + 8)).map((item) => (
               <Slide key={item.id} item={item} onClick={handleClick} />

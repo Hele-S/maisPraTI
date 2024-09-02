@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 const Title = styled.h1`
     font-size: 2.5rem;
@@ -68,22 +69,39 @@ const Overview = styled(Paragraph)`
     margin-top: 1rem;
     text-align: center;
 `;
+const GoBack = styled.button`
+all:unset;
+position:absolute;
+right:.5rem;
+top:.3rem;
+padding:.8rem;
+border: 1px solid #ddd;
+color:#ddd;
+border-radius:100%;
+font-weight:bold;
+scale:.8;
+background-color: #333;
+&:hover {
+    cursor:pointer;
+}
+`
 
 const Pages = () => {
     const Local = JSON.parse(localStorage.getItem('response'))
     const Name = Local.original_title ? (Local.original_title) : (Local.name)
     const Launch = Local.first_air_date ? (Local.first_air_date.split('-')) : (Local.release_date.split('-'))
     const PosterLink = `https://image.tmdb.org/t/p/w500${Local.poster_path}`
-
+    const navigate = useNavigate()
     return (
         <>
             {Local && (
                 <Container>
+                    <GoBack onClick={() => {navigate('/Home')}}>X</GoBack>
                     <Title>{Name}</Title>
                     <ReleaseDate>{`Data de lançamento: ${Launch[1]} / ${Launch[2]} / ${Launch[0]}`}</ReleaseDate>
                     <Poster src={PosterLink} alt={`${Name} Poster`} />
-                    <Overview>{Local.overview}</Overview>
-                    <Rating>{(Local.vote_average).toFixed(1)}</Rating>
+                    <Overview>{Local.overview != "" ? (Local.overview):("Sinopse indisponível.")}</Overview>
+                    <Rating>{Local.vote_count != 0 ? (`Avalição média: ${(Local.vote_average).toFixed(1)} ★`):("Avaliações indisponíveis.")}</Rating>
                 </Container>
             )}
         </>

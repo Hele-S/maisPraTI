@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -66,16 +67,11 @@ const SectionTitle = styled.h1`
     padding-left:3rem;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `
-const Featured = (ApiKey) => {
+// eslint-disable-next-line react/prop-types
+const Featured = ({ApiKey}) => {
     const [pop, setPop] = useState();
     const [drama, setDrama] = useState();
     const [horror, setHorror] = useState();
-
-    useEffect(() => {
-        if (pop !== undefined) {
-            console.log((pop[0].poster_path), "----------------------");
-        }
-    }, [pop]);
     useEffect(() => {
         setFeatured()
     }, []);
@@ -84,7 +80,7 @@ const Featured = (ApiKey) => {
         try {
             const popResponse = await axios.get(
                 "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&sort_by=popularity.desc&with_genres=28",
-                ApiKey
+                {headers: ApiKey['headers']}
             );
             setPop(popResponse.data.results);
         } catch (error) {
@@ -111,15 +107,15 @@ const Featured = (ApiKey) => {
     };
 
     const settings = {
-        dots: false, // Desativa os dots
+        dots: false, 
         infinite: true,
         speed: 400,
         slidesToShow: 8,
         slidesToScroll: 1,
         centerMode: true,
         centerPadding: "0",
-        prevArrow: <div className="slick-prev">◄</div>, // Personaliza a seta esquerda
-        nextArrow: <div className="slick-next">►</div>, // Personaliza a seta direita
+        prevArrow: <div className="slick-prev">◄</div>, 
+        nextArrow: <div className="slick-next">►</div>,
         responsive: [
             {
                 breakpoint: 1800,

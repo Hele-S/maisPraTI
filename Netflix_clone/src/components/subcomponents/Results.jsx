@@ -40,8 +40,6 @@ const GridItem = styled.div`
     flex-direction:column;
     &:hover .child{
         opacity: 1;
-        /* scale:3; */
-        /* background-color:red; */
     }
 `
 const Child = styled.div`
@@ -93,7 +91,7 @@ const Results = () => {
                 <h1>Resultados da Busca</h1>
                 <Grid>
                     {foundResults.results.map((movie) => (
-                        <GridItem key={movie.id} onClick={() => { localStorage.setItem('response', JSON.stringify(movie)), navigate('/Page') }}>
+                        <GridItem key={movie.id} onClick={() => { localStorage.setItem('response', JSON.stringify(movie)), navigate(`/Page`) }}>
                             <Child className='child'>{movie.title}</Child>
                             <Poster src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
                         </GridItem>
