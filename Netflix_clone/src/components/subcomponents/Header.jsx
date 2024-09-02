@@ -16,6 +16,10 @@ const Logo = styled.div`
   font-weight: bold;
   color: #e50914;
   font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  user-select:none;
+  &:hover {
+    cursor:pointer;
+  }
 `;
 
 
@@ -67,7 +71,13 @@ const Header = ({ ApiKey }) => {
     const [query, setQuery] = useState('');
     const [movies, setMovies] = useState([]);
 
+    // useEffect(() => {
+    //     if (movies.length > 0) {
+    //         CallOuterFunction(movies)
+    //     }
+    // }, [CallOuterFunction,])
     // Função para buscar filmes
+
     const searchMovies = async (searchQuery) => {
         if (searchQuery.trim() === '') {
             setMovies([]); // Limpa a lista se a pesquisa estiver vazia
@@ -82,17 +92,19 @@ const Header = ({ ApiKey }) => {
                     language: 'pt-BR'  // Inclua o idioma se necessário
                 }
             });
-            setMovies(response.data.results);
+            setMovies(response.data);
         } catch (error) {
             console.error('Erro ao buscar filmes:', error);
         }
     };
 
     // Função chamada ao mudar o valor do input
-    const handleInputChange = (e) => {
+    const handleInputChange = async (e) => {
         const searchTerm = e.target.value;
         setQuery(searchTerm);
-        searchMovies(searchTerm);
+        await searchMovies(searchTerm);
+        // CallOuterFunction(movies)
+        localStorage.setItem('Search', JSON.stringify(movies))
     };
 
     const searchStateSwitch = () => {
@@ -102,7 +114,7 @@ const Header = ({ ApiKey }) => {
     return (
         <>
             <HeaderDiv>
-                <Logo>NETFLIX</Logo>
+                <Logo onClick={() => {localStorage.setItem('Search', "")}}>NETFLIX</Logo>
                 <InputContainer>
                     <InputSearch
                         show={searchState}
@@ -119,11 +131,6 @@ const Header = ({ ApiKey }) => {
                     src="\src\assets\imgs\searhIcon.svg"
                 />
             </HeaderDiv>
-            <ul>
-                {movies.map((movie) => (
-                    <li key={movie.id}>{movie.title}</li>
-                ))}
-            </ul>
         </>
     );
 };
