@@ -67,72 +67,66 @@ const InputSearch = styled.input`
 
 // eslint-disable-next-line react/prop-types
 const Header = ({ ApiKey }) => {
-    const [searchState, setSearchState] = useState(false);
-    const [query, setQuery] = useState('');
-    const [movies, setMovies] = useState([]);
+  const [searchState, setSearchState] = useState(false);
+  const [query, setQuery] = useState('');
+  const [movies, setMovies] = useState([]);
 
-    // useEffect(() => {
-    //     if (movies.length > 0) {
-    //         CallOuterFunction(movies)
-    //     }
-    // }, [CallOuterFunction,])
-    // Função para buscar filmes
+  const searchMovies = async (searchQuery) => {
+    if (searchQuery.trim() === '') {
+      setMovies([]); // Limpa a lista se a pesquisa estiver vazia
+      return;
+    }
 
-    const searchMovies = async (searchQuery) => {
-        if (searchQuery.trim() === '') {
-            setMovies([]); // Limpa a lista se a pesquisa estiver vazia
-            return;
+    try {
+      const response = await axios.get('https://api.themoviedb.org/3/search/movie', {
+        ...ApiKey,
+        params: {
+          query: searchQuery, // Inclui o termo de busca
+          language: 'pt-BR'  // Inclua o idioma se necessário
         }
+      });
+      setMovies(response.data);
+    } catch (error) {
+      console.error('Erro ao buscar filmes:', error);
+    }
+  };
 
-        try {
-            const response = await axios.get('https://api.themoviedb.org/3/search/movie', {
-                ...ApiKey,
-                params: {
-                    query: searchQuery, // Inclui o termo de busca
-                    language: 'pt-BR'  // Inclua o idioma se necessário
-                }
-            });
-            setMovies(response.data);
-        } catch (error) {
-            console.error('Erro ao buscar filmes:', error);
-        }
-    };
+  // Função chamada ao mudar o valor do input
+  const handleInputChange = async (e) => {
+    const searchTerm = e.target.value;
+    setQuery(searchTerm);
+    await searchMovies(searchTerm);
+    // CallOuterFunction(movies)
+    localStorage.setItem('Search', JSON.stringify(movies))
+  };
 
-    // Função chamada ao mudar o valor do input
-    const handleInputChange = async (e) => {
-        const searchTerm = e.target.value;
-        setQuery(searchTerm);
-        await searchMovies(searchTerm);
-        // CallOuterFunction(movies)
-        localStorage.setItem('Search', JSON.stringify(movies))
-    };
+  const searchStateSwitch = () => {
+    setSearchState(!searchState);
+  };
 
-    const searchStateSwitch = () => {
-        setSearchState(!searchState);
-    };
-
-    return (
-        <>
-            <HeaderDiv>
-                <Logo onClick={() => {localStorage.setItem('Search', "")}}>NETFLIX</Logo>
-                <InputContainer>
-                    <InputSearch
-                        show={searchState}
-                        placeholder="Buscar filmes e séries"
-                        onBlur={searchStateSwitch}
-                        type="text"
-                        value={query}
-                        onChange={handleInputChange}
-                    />
-                </InputContainer>
-                <SearchIcon 
-                    show={!searchState}
-                    onClick={searchStateSwitch} 
-                    src="\src\assets\imgs\searhIcon.svg"
-                />
-            </HeaderDiv>
-        </>
-    );
+  return (
+    <>
+      <HeaderDiv>
+        <Logo onClick={() => { document.getElementById('Input').value = "" }}>NETFLIX</Logo>
+        <InputContainer>
+          <InputSearch
+            id='Input'
+            show={searchState}
+            placeholder="Buscar filmes e séries"
+            onBlur={searchStateSwitch}
+            type="text"
+            value={query}
+            onChange={handleInputChange}
+          />
+        </InputContainer>
+        <SearchIcon
+          show={!searchState}
+          onClick={searchStateSwitch}
+          src="\src\assets\imgs\searhIcon.svg"
+        />
+      </HeaderDiv>
+    </>
+  );
 };
 
 export default Header;

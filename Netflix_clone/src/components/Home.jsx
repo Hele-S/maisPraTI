@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import Header from './subcomponents/Header'
-// import Featured from './subcomponents/Featured'
+import Featured from './subcomponents/Featured'
 import Results from './subcomponents/Results';
 // import { useState } from 'react'
 const options = {
@@ -16,7 +16,9 @@ const Home = () => {
     return (
         <>
             <Header ApiKey={options} />
+
             <Results />
+            <Featured ApiKey={options}/>
         </>
     );
 };
