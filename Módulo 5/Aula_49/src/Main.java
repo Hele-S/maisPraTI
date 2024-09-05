@@ -1,3 +1,4 @@
+import util.Utilitários;
 public class Main {
     public static void main(String[] args) {
         // Classe para calcular área do retângulo
@@ -13,5 +14,6 @@ public class Main {
         conta.depositar(1000);
         System.out.println("Valor do saldo: " + conta.consultaSaldo());
 
+        Utilitários.print("Olá mundo");
     }
 }
