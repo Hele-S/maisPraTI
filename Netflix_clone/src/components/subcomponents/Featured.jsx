@@ -48,6 +48,7 @@ const CarouselRow = styled(Slider)`
 
   .slick-prev,
   .slick-next {
+    position:relative;
     z-index: 1;
     width: 30px;
     height: 30px;
@@ -61,13 +62,13 @@ const CarouselRow = styled(Slider)`
     }
   }
 
-  .slick-prev {
+  /* .slick-prev {
     left: 10px;
   }
 
   .slick-next {
     right: 10px;
-  }
+  } */
 `;
 
 const SectionTitle = styled.h1`
