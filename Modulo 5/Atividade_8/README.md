@@ -1,5 +1,5 @@
 
-# Projeto de Programação Orientada a Objetos em Java
+# Atividade de Programação Orientada a Objetos em Java
 
 Este repositório contém um conjunto de 8 exercícios de programação orientada a objetos (POO) em Java. Cada exercício explora diferentes aspectos da POO, como encapsulamento, herança, polimorfismo e abstração. Os exercícios estão organizados em pacotes distintos, onde cada pacote contém as classes necessárias para a implementação dos respectivos exercícios.
 
